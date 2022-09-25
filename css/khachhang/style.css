@@ -1,0 +1,13 @@
+.dropdown-item:hover {
+    color: #112f6b!important;
+}
+
+.canhgiua {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ul-profile li {
+    margin: 30px 0 30px 10px;
+}

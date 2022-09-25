@@ -1,0 +1,9 @@
+.canhgiua {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-dichvu {
+    border: 2px solid #40c4ff;
+}
