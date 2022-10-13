@@ -3,6 +3,12 @@ include("./config.php");
 include("./ham.php");
 session_start();
 
+
+if(!$_SESSION['khachhang']) {
+    header("location:./index.php");
+}
+
+
 if (isset($_POST['register'])) {
   $uname = $_POST['uname'];
   $passwd = $_POST['passwd'];
@@ -39,9 +45,12 @@ if (isset($_POST['register'])) {
               if (mysqli_num_rows($checkPhone) == 0) {
                 if($gioitinhkh != null) {
                     $passwd_md5 = md5($passwd);
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $ngaytao_tk = date("y-m-d H:i:s");
+                    echo ''.$char.''.$row_bs['id_bs'].'';
 
                     //Table khachhang: maKH,tenKH,hotenKH,sodienthoai,email,AnhDaiDien,username,password
-                    $sqlAddUser = "INSERT into khachhang value(null,'$uname','$passwd_md5','$hotenkh','$sdtkh','$emailkh','$gioitinhkh','$tuoikh',0,'$diachikh','pngtree-flat-default-avatar-png-image_2848906.jpg')";
+                    $sqlAddUser = "INSERT into khachhang value(null,'$uname','$passwd_md5','$hotenkh','$sdtkh','$emailkh','$gioitinhkh',$tuoikh,0,'$diachikh','pngtree-flat-default-avatar-png-image_2848906.jpg','$ngaytao_tk')";
                     $mysqli->query($sqlAddUser);
 
                     NotificationAndGoto("Đăng ký thành công, mời đăng nhập!","dangnhap.php");

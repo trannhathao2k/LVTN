@@ -7,3 +7,11 @@
 .table-dichvu {
     border: 2px solid #40c4ff;
 }
+
+.ul-profile li {
+    margin: 30px 0 30px 10px;
+}
+
+.dropdown-item:hover {
+    color: #112f6b!important;
+}

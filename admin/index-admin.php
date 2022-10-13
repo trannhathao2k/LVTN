@@ -3,25 +3,20 @@
   include("../autoload.php");
   // include("./xacdinhdangnhap.php");
   session_start();
-  $MaBS = $_SESSION['bacsi']['id_bs'];
 
   //table dienthoai:      MaDT,TenDT,GiaGoc,GiaKhuyenMai,TrangThaiKM,TenTTKM,MoTa,SoLuong,DaBan,MaHang
   //table dathang:        MaDH,MaKH,LoiNhan,NgayDH,NgayGH,TrangThaiDH
   //table chitietdathang: MaDHChiTiet,MaDH,MaDT,SoLuong,GiaDonHang
   //table khachhang:      MaKH,HoTenKH,SoDienThoai,Email,Username,Password
 
-  $sql_bs = "SELECT * FROM `bacsi` WHERE `bacsi`.id_bs='$MaBS'";
-  $result_bs = mysqli_query($mysqli, $sql_bs);
-  $row_bs = mysqli_fetch_array($result_bs);
-
-  if (isset($_GET['dangxuat-bs'])) {
-    unset($_SESSION['bacsi']);
+  if (isset($_GET['dangxuat-admin'])) {
+    unset($_SESSION['admin']);
     header("location:../index.php");
   } 
 
-  if(!$_SESSION['bacsi']) {
-    header("location:../index.php");
-  }
+  // if(!$_SESSION['admin']) {
+  //   header("location:../index.php");
+  // }
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +26,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Xin chào bác sĩ</title>
+  <title>Xin chào admin</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -41,14 +36,13 @@
   <link rel="stylesheet" type="text/css" href="../css/dangky/addons/datatables.min.css">
   <link rel="stylesheet" href="../css/dangky/addons/datatables-select.min.css">
   <link rel="stylesheet" href="../css/dangky/style.css">
-  <script src="https://kit.fontawesome.com/00537c301f.js" crossorigin="anonymous"></script>
   <!-- Your custom styles (optional) -->
   <style>
 
   </style>
 </head>
 
-<body class="fixed-sn white-skin" onload="reset02()">
+<body class="fixed-sn white-skin">
 
   <!-- Main Navigation -->
   <header>
@@ -60,7 +54,7 @@
         <!-- Logo -->
         <li class="logo-sn waves-effect py-3">
           <div class="text-center">
-            <a href="index-bs.php?route=trangcanhan" class="pl-0"><img src="../img/TQueen-logo-removebg-preview.png"></a>
+            <a href="index-admin.php?route-admin=trangchu" class="pl-0"><img src="../img/nha-khoa-ident-logo.png"></a>
           </div>
         </li>
 
@@ -70,10 +64,13 @@
 
             <!-- Simple link -->
             <li>
-              <a href="index-bs.php?route=trangcanhan" class="collapsible-header waves-effect">Phiếu khám bệnh</a>
+              <a href="index-admin.php?route-admin=thongtinbacsi" class="collapsible-header waves-effect">Thông tin bác sĩ</a>
             </li>
             <li>
-              <a href="index-bs.php?route=khachhang" class="collapsible-header waves-effect">Thông tin khách hàng</a>
+              <a href="#" class="collapsible-header waves-effect">Thông tin nhân viên</a>
+            </li>
+            <li>
+              <a href="#" class="collapsible-header waves-effect">Tài khoản khách hàng</a>
             </li>
 
           </ul>
@@ -95,7 +92,7 @@
 
       <!-- Breadcrumb -->
       <div class="breadcrumb-dn mr-auto">
-        <p>Xin chào bác sĩ <b><?php echo $row_bs['hoten_bs'] ?></b></p>
+        <p>Xin chào <b>Admin</b></p>
       </div>
 
       <!-- Navbar links -->
@@ -103,7 +100,7 @@
 
         <!-- Dropdown -->
         <li class="nav-item">
-          <a href="index-bs.php?dangxuat-bs" class="nav-link">Đăng xuất</a>
+          <a href="index-admin.php?dangxuat-admin" class="nav-link">Đăng xuất</a>
         </li>
 
       </ul>
@@ -115,9 +112,34 @@
   </header>
   <!-- Main Navigation -->
 
-  <main>
-    <?php include('./router-bs.php') ?>
-  </main>
+  <?php
+    if(isset($_GET['route-admin'])) {
+      $route = $_GET['route-admin'];
+      if($route == "thembacsi") {
+        ?>
+          <main style="background-image: url(./img/Images/doctor.jpg);">
+            <?php include('./router-admin.php') ?>
+          </main>
+        <?php
+      }
+      else {
+        ?>
+          <main>
+            <?php include('./router-admin.php') ?>
+          </main>
+        <?php
+      }
+    }
+    else {
+        ?>
+          ?>
+            <main>
+              <?php include('./router-admin.php') ?>
+            </main>
+          <?php
+    }
+  ?>
+  
 
   <!-- Footer -->
   <footer class="page-footer pt-0 mt-5">
@@ -173,9 +195,9 @@
       $('input').removeClass('form-control-sm');
     });
     $('#dtMaterialDesignExample_wrapper .dataTables_length, #dt-material-checkbox_wrapper .dataTables_length').addClass(
-      'd-flex flex-row');
+      'd-flex flex-row mb-5 mt-0');
     $('#dtMaterialDesignExample_wrapper .dataTables_filter, #dt-material-checkbox_wrapper .dataTables_filter').addClass(
-      'md-form');
+      'md-form mt-search');
     // $('#dtMaterialDesignExample_wrapper select, #dt-material-checkbox_wrapper select').removeClass(
     //   'custom-select custom-select-sm form-control form-control-sm');
     // $('#dtMaterialDesignExample_wrapper select, #dt-material-checkbox_wrapper select').addClass('mdb-select');
@@ -187,29 +209,6 @@
     $(document).ready(function () {
       $('.mdb-select').material_select();
     });
-
-    // Time Picker Initialization
-    $('#input_starttime').pickatime({
-      twelvehour: true
-    });
-    $('#input_endtime').pickatime({
-      // 12 or 24 hour
-      twelvehour: false,
-      // Light or Dark theme
-      darktheme: true
-    });
-
-    function reset02() {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("reset").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-        }
-      };
-      xmlhttp.open("GET", "reset.php", true);
-      xmlhttp.send();
-    }
-
   </script>
 </body>
 

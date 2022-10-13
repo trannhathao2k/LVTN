@@ -49,7 +49,7 @@ session_start();
     </script>
 </head>
 
-<body class="fixed-sn white-skin" style="background-image: url(./img/Images/doctor.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<body class="fixed-sn white-skin" style="background-image: url(./img/Images/doctor.jpg); ">
 
   <!-- Main Navigation -->
   <header>
@@ -60,7 +60,7 @@ session_start();
         <div class="row">
           <div class="col-md-5">
             <a class="navbar-brand font-weight-bold title" href="./index.php">
-              <img src="./img/nha-khoa-ident-logo.png" alt="logo">
+              <img src="./img/TQueen-logo-removebg-preview.png" alt="logo">
             </a>
           </div>
           <div class="col-md-7" style="display: flex; align-items: center;">

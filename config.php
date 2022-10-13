@@ -11,4 +11,5 @@ if ($mysqli->connect_error) {
     die("Kết nối CSDL thất bại!<br>--> ".$mysqli->connect_error."<br>");
     exit();
 }
+
 ?>

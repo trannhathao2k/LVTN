@@ -1,3 +1,9 @@
+<?php
+    if(!$_SESSION['bacsi']) {
+        header("location:../index.php");
+    }
+?>
+
 <div class="container-fluid mb-5">
 
       <!-- Section: Basic examples -->
@@ -12,25 +18,25 @@
                   <a href="./index-bs.php?route=phieukhambenh">
                     <button type="button" class="btn btn-primary">Tạo phiếu khám bệnh</button>
                   </a>
-                  <table id="dtMaterialDesignExample" class="table table-striped table-responsive" cellspacing="0" width="100%">
+                  <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                     <colgroup>
                       <col width="10%" span="1">
                       <col width="20%" span="4">
                       <col width="10%" span="1">
                     </colgroup>
                       <thead>
-                      <tr>
-                        <th>Mã phiếu
+                      <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
+                        <th class="font-weight-bold">Mã phiếu
                         </th>
-                        <th>Tên khách hàng
+                        <th class="font-weight-bold">Tên khách hàng
                         </th>
-                        <th>Ngày khám bệnh
+                        <th class="font-weight-bold">Ngày khám bệnh
                         </th>
-                        <th>Tổng chi phí
+                        <th class="font-weight-bold">Tổng chi phí
                         </th>
-                        <th>Trạng thái thu phí
+                        <th class="font-weight-bold">Trạng thái thu phí
                         </th>
-                        <th>
+                        <th class="font-weight-bold">
                         </th>
                       </tr>
                     </thead>
@@ -48,10 +54,10 @@
                               <td class="red-text font-weight-bold"><?php echo number_format($row_phieu['tongchiphi'], 0, '', '.')?> VNĐ</td>                      
                               <td><?php
                                 if ($row_phieu['trangthaithuphi'] == 0) {
-                                  echo '<b class="text-danger font-weight-bold">Chờ thu phí</b>';
+                                  echo '<button type="button" class="btn btn-sm btn-outline-deep-orange waves-effect mt-0 mb-0" style="width: 120px">Chờ thu phí</button>';;
                                 }
                                 else {
-                                  echo '<b class="text-success font-weight-bold">Đã thu phí</b>';
+                                  echo '<button type="button" class="btn btn-sm btn-outline-success waves-effect mt-0 mb-0" style="width: 120px">Đã thu phí</button>';
                                 }
                               ?></td>
                               <td>

@@ -2,6 +2,10 @@
 include("../config.php");
 include("../autoload.php");
 
+if(!$_SESSION['bacsi']) {
+    header("location:./index.php");
+}
+
 if (isset($_GET['mabs']) && isset($_GET['ngaylap']) && isset($_GET['maphieu']) && isset($_GET['tenkh'])) {
     $mabs = $_GET['mabs'];
     $ngaylap = $_GET['ngaylap'];

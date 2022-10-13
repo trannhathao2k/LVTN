@@ -1,9 +1,15 @@
+<?php
+    if(!$_SESSION['bacsi']) {
+        header("location:./index.php");
+    }
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body" >
                 <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">THÔNG TIN KHÁCH HÀNG</h5>
-                <table id="dtMaterialDesignExample" class="table table-striped table-responsive" cellspacing="0" width="100%">
+                <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                     <colgroup>
                         <col width="10%" span="1">
                         <col width="20%" span="1">
@@ -12,21 +18,21 @@
                         <col width="10%" span="2">
                         <col width="20%" span="1">
                     </colgroup>
-                        <thead>
-                            <tr>
-                            <th>Ảnh đại diện
+                    <thead>
+                        <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
+                            <th class="font-weight-bold">Ảnh đại diện
                             </th>
-                            <th>Tên khách hàng
+                            <th class="font-weight-bold">Tên khách hàng
                             </th>
-                            <th>Giới tính
+                            <th class="font-weight-bold">Giới tính
                             </th>
-                            <th>Tuổi
+                            <th class="font-weight-bold">Tuổi
                             </th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ
+                            <th class="font-weight-bold">Email</th>
+                            <th class="font-weight-bold">Số điện thoại</th>
+                            <th class="font-weight-bold">Địa chỉ
                             </th>
-                            <th>Hạng thành viên
+                            <th class="font-weight-bold">Hạng thành viên
                             </th>
                             <th>
                             </th>

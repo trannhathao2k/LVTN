@@ -6,6 +6,10 @@ $sql_bs = "SELECT * FROM `bacsi` WHERE `bacsi`.id_bs='$MaBS'";
 $result_bs = mysqli_query($mysqli, $sql_bs);
 $row_bs = mysqli_fetch_array($result_bs);
 
+if(!$_SESSION['bacsi']) {
+    header("location:./index.php");
+}
+
 ?>
 
 <div class="container-fluid">

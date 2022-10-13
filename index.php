@@ -6,6 +6,56 @@
 
   if (isset($_GET['dangxuat'])) unset($_SESSION['khachhang']);
   if (isset($_GET['dangxuat-bs'])) unset($_SESSION['bacsi']);
+  if (isset($_GET['dangxuat-nv'])) unset($_SESSION['nhanvien']);
+  if (isset($_GET['dangxuat-admin'])) unset($_SESSION['admin']);
+
+  date_default_timezone_set('Asia/Ho_Chi_Minh');
+  $today = date("Y-m-d");
+  $check = "SELECT * FROM luottruycap WHERE ngay_truycap = '$today'";
+  $query_check = mysqli_query($mysqli, $check);
+  
+  if (mysqli_num_rows($query_check) == 0) {
+      $CountFile = "./index.log";
+      $CF = fopen ($CountFile, "r");
+      $Views = fread ($CF, filesize ($CountFile));
+      fclose ($CF);
+      $Views = 1;
+      $luottruycap = "INSERT INTO luottruycap VALUES (null,'$today', $Views)";
+      $mysqli->query($luottruycap);
+  }
+  else {
+      $CountFile = "./index.log";
+      $CF = fopen ($CountFile, "r");
+      $Views = fread ($CF, filesize ($CountFile));
+      fclose ($CF);
+      $Views++; 
+      $luottruycap = "UPDATE luottruycap SET soluot_truycap = $Views WHERE ngay_truycap = '$today'";
+      $mysqli->query($luottruycap);
+  }      
+
+  $CF = fopen ($CountFile, "w");
+  fwrite ($CF, $Views); 
+  fclose ($CF);
+
+  if(isset($_POST["unamekh"]) && isset($_POST["passwdkh"])){
+
+    $passwdkh = $_POST["passwdkh"];
+    $passwdkh_md5 = md5($passwdkh);
+    
+    $sql_kh = "select * from khachhang where username_kh = '".$_POST["unamekh"]."' and password_kh = '$passwdkh_md5'";
+    $kt = mysqli_fetch_all(mysqli_query($mysqli, $sql_kh), MYSQLI_ASSOC);
+    
+    if( is_null($kt) || !isset($kt) || empty($kt)) {
+        $_SESSION["error"] = "Tên tài khoản hoặc mật khẩu sai";
+      }
+      else {
+        $_SESSION["khachhang"] = $kt[0];
+        
+        // header("location:./index.php");
+      }
+    
+    }
+  
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +71,16 @@
   <!-- Bootstrap core CSS -->
   <link href="./css/khachhang/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"> -->
+  <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
   <link href="./css/khachhang/mdb.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/khachhang/style.css">
+  <link rel="stylesheet" href="./css/khachhang/modules/animations-extended.min.css">
+
   <style type="text/css">
     html,
     body,
@@ -43,7 +101,7 @@
       <div class="container">
         <div class="smooth-scroll">
           <a class="navbar-brand" href="#home">
-            <img src="./img/nha-khoa-ident-logo.png">
+            <img src="./img/TQueen-logo-removebg-preview.png">
           </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -164,6 +222,38 @@
                   </li>
                 <?php
               }
+              else if (isset($_SESSION['nhanvien'])) {
+                ?>
+                  <li class="nav-item dropdown notifications-nav">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown01" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">
+                        Xin chào <?php echo $_SESSION['nhanvien']['hoten_nv'] ?>
+                      </span></a>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown01">
+                      <a class="dropdown-item" href="./nhanvien/index-nv.php">Đến giao diện làm việc của nhân viên</a>
+                      <a class="dropdown-item" href="index.php?dangxuat-nv">Đăng xuất</a>
+                    </div>
+                  </li>
+                <?php
+              }
+              else if (isset($_SESSION['admin'])) {
+                ?>
+                  <li class="nav-item dropdown notifications-nav">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown01" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">
+                        Xin chào Admin
+                      </span></a>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown01">
+                      <a class="dropdown-item" href="./admin/index-admin.php">Đến giao diện làm việc của admin</a>
+                      <a class="dropdown-item" href="index.php?dangxuat-admin">Đăng xuất</a>
+                    </div>
+                  </li>
+                <?php
+              }
               else {
                 ?>
                   <li class="nav-item">
@@ -189,9 +279,9 @@
       <div class="mask">
         <div class="container h-100 d-flex justify-content-center align-items-center">
           <div class="row pt-5 mt-3">
-            <div class="col-12 col-md-6 text-center text-md-left">
+            <div class="col-12 col-md-6 text-center text-md-left p-2">
               <div class="white-text">
-                <h1 class="h1-responsive font-weight-bold mt-md-5 mt-0 wow fadeInLeft" data-wow-delay="0.3s">NHA KHOA IMPLANT I-DENT</h1>
+                <h1 class="h1-responsive font-weight-bold mt-md-5 mt-0 wow fadeInLeft" data-wow-delay="0.3s">NHA KHOA IMPLANT TQUEEN</h1>
                 <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
                 <p class="wow fadeInLeft mb-3" data-wow-delay="0.3s">
                 Nha khoa I-dent là một địa chỉ nha khoa uy tín hàng đầu về kỹ thuật cấy ghép implant hiện nay. 
@@ -611,13 +701,13 @@
               </div>
               <ul class="nav md-pills pills-primary flex-center" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active " data-toggle="tab" href="#panel31" role="tab">TS - BS<br/>Nguyễn Hiếu Tùng</a>
+                  <a class="nav-link active " data-toggle="tab" href="#panel31" role="tab">TS - BS<br/>Lee Ji-eun</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#panel32" role="tab">Tiến sĩ - Bác sĩ<br/>Trần Thị Nguyên Ny</a>
+                  <a class="nav-link" data-toggle="tab" href="#panel32" role="tab">Tiến sĩ - Bác sĩ<br/>Tiêu Chiến</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#panel33" role="tab">Thạc sĩ - Bác sĩ<br/>Lê Thị Phương Linh</a>
+                  <a class="nav-link" data-toggle="tab" href="#panel33" role="tab">Thạc sĩ - Bác sĩ<br/>Vương Nhất Bác</a>
                 </li>
               </ul>
 
@@ -638,7 +728,7 @@
 
                     <!--Featured image-->
                     <div class="view overlay z-depth-1 z-depth-2">
-                      <img src="./img/Images/tien-si-bac-si-nguyen-hieu-tung.jpg" class="img-fluid">
+                      <img src="./img/AnhDaiDien/IU.jpg" class="img-fluid">
                     </div>
                   </div>
                   <!--/First column-->
@@ -647,7 +737,7 @@
                   <div class="col-lg-6 col-md-12 text-left">
 
                     <!--Title-->
-                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ NGUYỄN HIẾU TÙNG</h4>
+                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ LEE JI-EUN</h4>
 
                     <!--Description-->
                     <ul class="ul-profile" align="justify">
@@ -677,7 +767,7 @@
 
                     <!--Featured image-->
                     <div class="view overlay z-depth-1 z-depth-2">
-                      <img src="./img/Images/tien-si-bac-si-tran-thi-nguyen-ni.jpg" class="img-fluid">
+                      <img src="./img/AnhDaiDien/tieu-chien-02.jpg" class="img-fluid">
                     </div>
                   </div>
                   <!--/First column-->
@@ -686,7 +776,7 @@
                   <div class="col-lg-6 col-md-12 text-left">
 
                     <!--Title-->
-                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ TRẦN THỊ NGUYÊN NY</h4>
+                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ TIÊU CHIẾN</h4>
 
                     <!--Description-->
                     <ul class="ul-profile" align="justify">
@@ -716,7 +806,7 @@
 
                     <!--Featured image-->
                     <div class="view overlay z-depth-1 z-depth-2">
-                      <img src="./img/Images/bs-linh.jpg" class="img-fluid">
+                      <img src="./img/AnhDaiDien/vuong-nhat-bac.jpg" class="img-fluid">
                     </div>
                   </div>
                   <!--/First column-->
@@ -725,7 +815,7 @@
                   <div class="col-lg-6 col-md-12 text-left">
 
                     <!--Title-->
-                    <h4 class="mb-3">THẠC SĨ - BÁC SĨ LÊ THỊ PHƯƠNG LINH</h4>
+                    <h4 class="mb-3">THẠC SĨ - BÁC SĨ VƯƠNG NHẤT BÁC</h4>
 
                     <!--Description-->
                     <ul class="ul-profile" align="justify">
@@ -848,105 +938,507 @@
 
             <!-- Grid column -->
             <div class="col-lg-12">
-
-              <div class="card-body form">
+              
+                <div class="card-body form">
 
                 <!-- Header -->
                 <h3 class="text-center mb-3 mt-3 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">ĐẶT LỊCH THĂM KHÁM CÙNG BÁC SĨ I-DENT</h3>
 
-                <!-- Grid row -->
-                <div class="row">
+                
+                  <?php
+                    if (isset($_SESSION['khachhang'])) {
+                      $MaKH = $_SESSION['khachhang']['id_kh'];
+                      $thongtinkh = "SELECT * FROM khachhang WHERE id_kh = $MaKH";
+                      $query_thongtinkh = mysqli_query($mysqli, $thongtinkh);
+                      $row_thongtinkh = mysqli_fetch_array($query_thongtinkh);
+                      ?>
+                      <form action="./themlichhen.php" name="themlich" method="POST">
+                        <div class="row">
 
-                  <!-- Grid column -->
-                  <div class="col-md-6">
-                    <div class="md-form mb-0">
-                      <input type="text" id="form-contact-name" class="form-control">
-                      <label for="form-contact-name" class="">Họ tên khách hàng</label>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
+                          <div class="col-md-6">
+                            <div class="md-form mb-0">
+                              <input type="text" id="hotenbs" name="hotenkh" class="form-control" value="<?php echo $row_thongtinkh['hoten_kh'] ?>" readonly disabled>
+                              <label for="hotenbs" class="">Họ tên khách hàng</label>
+                            </div>
+                          </div>
 
-                  <!-- Grid column -->
-                  <div class="col-md-6">
-                    <div class="md-form mb-0">
-                      <input type="text" id="form-contact-email" class="form-control">
-                      <label for="form-contact-email" class="">Địa chỉ email</label>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
+                          <div class="col-md-6">
+                            <div class="md-form mb-0">
+                              <input type="text" id="form-contact-email" name="emailkh" class="form-control" value="<?php echo $row_thongtinkh['email_kh'] ?>" readonly disabled>
+                              <label for="form-contact-email" class="">Địa chỉ email</label>
+                            </div>
+                          </div>
 
-                </div>
-                <!-- Grid row -->
+                        </div>
 
-                <!-- Grid row -->
-                <div class="row">
+                        <div class="row">
 
-                  <!-- Grid column -->
-                  <div class="col-md-6">
-                    <div class="md-form mb-0">
-                      <input type="text" id="form-contact-phone" class="form-control">
-                      <label for="form-contact-phone" class="">Số điện thoại</label>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
+                          <!-- Grid column -->
+                          <div class="col-md-6">
+                            <div class="md-form">
+                              <input type="text" id="form-contact-phone" name="sdtkh" class="form-control" value="<?php echo $row_thongtinkh['sdt_kh'] ?>" readonly disabled>
+                              <label for="form-contact-phone" class="">Số điện thoại</label>
+                            </div>
+                          </div>
+                          <!-- Grid column -->
 
-                  <!-- Grid column -->
-                  <div class="col-md-4">
-                    <div class="md-form mb-0">
-                      <input type="text" id="form-contact-company" class="form-control">
-                      <label for="form-contact-company" class="">Chọn bác sĩ</label>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
-                  <div class="col-md-2">
-                    <div class="md-form mb-0">
-                      <button type="button" class="btn btn-sm btn-primary">Danh sách bác sĩ</button>
-                    </div>
-                  </div>
+                          <!-- Grid column -->
+                          <div class="col-md-4">
+                            <div class="md-form mb-0 mt-0">
+                              <p class="m-0 p-0" style="font-size: 12px;color: #757575;">Chọn bác sĩ</p>
+                              <select id="dsbacsi" name="bacsi" class="form-select-sm form-select form-control md-form" onchange="chonbacsi()">
+                                <option value="0">Bác sĩ bất kỳ</option>
+                                  <?php
+                                    $dsbacsi = "SELECT * FROM bacsi";
+                                    $query_ds = mysqli_query($mysqli, $dsbacsi);
+                                    while($row_ds = mysqli_fetch_array($query_ds)) {
+                                      ?>
+                                        <option value="<?php echo $row_ds['id_bs'] ?>"><?php echo $row_ds['hoten_bs'] ?></option>
+                                      <?php
+                                    }                                 
+                                  ?>
+                              </select>
+                            </div>
+                            
+                          </div>
+                          <!-- Grid column -->
+                          <div class="col-md-2">
+                            <div class="md-form mt-3">
+                              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-info">Xem thông tin bác sĩ</button>
+                              <div class="modal fade modal-ext" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">DANH SÁCH BÁC SĨ NHA KHOA I-DENT</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <div class="modal-body text-center" style="font-size: 14px;">
+                                      <?php
+                                        $bs = "SELECT * FROM bacsi";
+                                        $query_bs = mysqli_query($mysqli, $bs);
+                                        while($row_bs = mysqli_fetch_array($query_bs)) {
+                                          ?>
+                                            <div class="row">
+                                              <div class="col-md-4">
+                                                <img src="./img/AnhDaiDien/<?php echo $row_bs['anhdaidien_bs'] ?>" width="100%">
+                                              </div>
+                                              <div class="col-md-8">
+                                                <ul style="text-align: left;">
+                                                  <li><b>Họ tên:</b> <?php echo $row_bs['hoten_bs'] ?>.</li>
+                                                  <li><b>Năm sinh:</b> <?php echo $row_bs['namsinh_bs'] ?>.</li>
+                                                  <li><b>Chuyên môn:</b> <?php echo $row_bs['chuyenmon'] ?>.</li>
+                                                  <li><b>Kinh nghiệm:</b> <?php echo $row_bs['kinhnghiem'] ?>.</li>
+                                                  <li><b>Giới thiệu:</b> <?php echo $row_bs['gioithieu'] ?>.</li>
+                                                </ul>
+                                              </div>
+                                            </div>
+                                            <hr>
+                                          <?php
+                                        }
+                                      ?>
+                                    </div>
+                                    <!--Footer-->
+                                    <div class="modal-footer">                                                               
+                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
+                                    </div>
+                                    </div>
+                                    <!--/Content-->
+                                </div>
+                              </div>
 
-                </div>
-                <!-- Grid row -->
+                              <!--Footer-->
 
-                <div class="row">
-                  <!-- Grid column -->
-                  <div class="col-md-6">
-                    <div class="md-form">
-                      <input placeholder="Chọn ngày" type="text" id="from" class="form-control datepicker">
-                      <label for="date-picker-example">Chọn ngày khám</label>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
-                  <!-- Grid column -->
-                  <div class="col-md-6">
+                            </div>
+                          </div>
 
-                  <div class="md-form">
-                    <input placeholder="Selected time" type="text" id="input_endtime" class="form-control timepicker">
-                    <label for="input_starttime" class="active">Dark version, 24 hours</label>
-                  </div>
+                        </div>
 
-                  </div>
-                  <!-- Grid column -->
-                </div>
+                        <div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="md-form">
+                                <input type="text" id="from" name="ngaykham" class="form-control" data-toggle="modal" data-target="#modal-info-new" required readonly>
+                                <label for="date-picker-example">Chọn ngày khám</label>
+                              </div>
+                              <div class="modal fade modal-ext" id="modal-info-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">LỊCH LÀM VIỆC CỦA BÁC SĨ</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <div id="ngaygiokham">
+                                      <h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ khám để có thể chọn ngày theo lịch làm việc của bác sĩ</h6>
+                                    </div>
+                                    <!-- <script language="javascript">
+                                      var ds = document.getElementById("dsbacsi");
+                                      var ds = document.getElementById('form-contact-phone');
+                                       
+                                      change.onchange = function() {
+                                        change.innerHTML = "Xin chao";
+                                      }
+                                    </script> -->
+                                    
+                                    <div class="container-new ">
+                                      <a class="btn btn-floating aqua-gradient btn-prev-calender mr-3 ml-3">
+                                        <span><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                                      </a>
+                                      <div class="calendar-new mt-3 mb-3">
+                                          <div class="row mb-3">
+                                            <div class="col-md-4" id="thang" style="display: flex;align-items: center;justify-content: left;">
+                                              <p class="month-calender info-calender" ><?php
+                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                $month = date("m");
+                                                echo 'Tháng '.$month;
+                                              ?></p>
+                                            </div>
+                                            <div class="col-md-4" style="display: flex;align-items: center;justify-content: center;">
+                                              <a class="btn-today btn aqua-gradient m-auto" >HÔM NAY</a>
+                                            </div>
+                                            <div class="col-md-4" id="nam" style="display: flex;align-items: center;justify-content: right;">
+                                              <p class="year-calender info-calender"><?php
+                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                $year = date("Y");
+                                                echo $year;
+                                              ?></p>
+                                            </div>                                            
+                                              
+                                          </div>
+                                          <div class="date-calender white-text font-weight-bold bg-primary">
+                                              <div class="day-name-calender">CN</div>
+                                              <div class="day-name-calender">T2</div>
+                                              <div class="day-name-calender">T3</div>
+                                              <div class="day-name-calender">T4</div>
+                                              <div class="day-name-calender">T5</div>
+                                              <div class="day-name-calender">T6</div>
+                                              <div class="day-name-calender">T7</div>
+                                          </div>
+                                          <div class="date-calender date-container" id="lich">
+                                              <?php
+                                                $day = date("d");
+                                                $str = "$year-$month-1";
+                                                $date = new DateTime($str);
+                                                $w = (int)$date->format('w');
+                                                for($i = 0; $i < $w; $i++) {
+                                                  echo '<div class="day-calender"></div>';
+                                                }
 
-                <!-- Grid row -->
-                <div class="row">
+                                                function lastday($month_ld = '', $year_ld = '') {
+                                                  if (empty($month_ld)) {
+                                                     $month_ld = date('m');
+                                                  }
+                                                  if (empty($year_ld)) {
+                                                     $year_ld = date('Y');
+                                                  }
+                                                  $result = strtotime("{$year_ld}-{$month_ld}-01");
+                                                  $result = strtotime('-1 second', strtotime('+1 month', $result));
+                                                  return date('d', $result);
+                                                }
+                                                $lastday = lastday(''.$month.'',''.$year.'');
 
-                  <!-- Grid column -->
-                  <div class="col-md-12">
-                    <div class="md-form mb-0">
-                      <textarea type="text" id="form-contact-message" class="form-control md-textarea" rows="3"></textarea>
-                      <label for="form-contact-message">Lời nhắn</label>
-                      <a class="btn-floating btn-lg blue">
-                        <i class="far fa-paper-plane"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <!-- Grid column -->
+                                                for($i=0; $i < $lastday; $i++) {
+                                                  if (($i+1) == $day) {
+                                                    echo '<a class="day-calender red-text font-weight-bold" id="'.($i+1).'-'.$month.'">'.($i+1).'</a>';
+                                                  }
+                                                  else {
+                                                    echo '<a class="day-calender" id="'.($i+1).'-'.$month.'">'.($i+1).'</a>';
+                                                  }
+                                                  
+                                                }
+                                                // echo $str;
+                                                // echo $w;
+                                              ?>
+                                          </div>
+                                      </div>
+                                      <div id="right">
+                                        <a class="btn btn-floating aqua-gradient btn-next-calender">
+                                          <span><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                                      </a>
+                                      </div>
+                                      
+                                    </div>
+                                    <!--Footer-->
+                                    <div class="modal-footer">                                                               
+                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
+                                    </div>
+                                    </div>
+                                    <!--/Content-->
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
 
-                </div>
-                <!-- Grid row -->
+                            <div class="md-form">  
+                              <!-- <input type="text" id="appt" name="giokham" class="form-control p-0 m-0" required>
+                              <label for="appt">Chọn giờ khám:</label> -->
+                              <input type="text" id="giokham" name="giokham" class="form-control" data-toggle="modal" data-target="#modal-info-giokham" required readonly>
+                              <label for="giokham">Chọn giờ khám</label>
+                              <div class="modal fade modal-ext" id="modal-info-giokham" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">CHỌN GIỜ KHÁM</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <div id="gio">
+                                      
+                                    </div>
+
+                                    <div id="chongiokham">
+                                      <h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>
+                                    </div>
+                                    <!-- <script language="javascript">
+                                      var ds = document.getElementById("dsbacsi");
+                                      var ds = document.getElementById('form-contact-phone');
+                                       
+                                      change.onchange = function() {
+                                        change.innerHTML = "Xin chao";
+                                      }
+                                    </script> -->
+                                    
+                                    <!-- <div class="row p-5">
+
+                                      <div class="col-lg-4 col-md-6">
+
+                                        <div class=" overlay z-depth-1 z-depth-2 canhgiua">
+                                          <img src="./img/Images/tien-si-bac-si-nguyen-hieu-tung.jpg" class="img-fluid">
+                                        </div>
+                                        <h6 class="mb-3 text-center mt-3 font-weight-bold">BS. NGUYỄN HIẾU TÙNG</h6>
+                                      </div>
+
+                                      <div class="col-lg-8 col-md-12 text-left">
+                                        <div>
+                                          <div class="div canhgiua" style="width: 100%;">
+                                            <h6 class="font-weight-bold text-center">CA SÁNG</h6>
+                                          </div>
+                                          
+                                          <div style="display: flex; justify-content: space-between;">
+                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
+                                              7h00 - 8h30<br/>
+                                              CÒN TRỐNG
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
+                                              8h30 - 10h00<br/>
+                                              ĐÃ ĐƯỢC CHỌN
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
+                                              10h00 - 11h30<br/>
+                                              ĐÃ ĐƯỢC CHỌN
+                                            </a>
+                                          </div>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                          <div class="div canhgiua" style="width: 100%;">
+                                            <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
+                                          </div>
+                                          
+                                          <div style="display: flex; justify-content: space-between;">
+                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
+                                              13h00 - 14h30<br/>
+                                              CÒN TRỐNG
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
+                                              14h30 - 16h00<br/>
+                                              CÒN TRỐNG
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
+                                              16h00 - 17h30<br/>
+                                              CÒN TRỐNG
+                                            </a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div> -->
+                                    <div class="modal-footer">                                                               
+                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
+                                    </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            </div>
+                          </div>
+                          <!-- <div class="container-new">
+                            <a class="btn-calender btn-prev-calender">
+                              <span><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                            </a>
+                            <div class="calendar-new">
+                                <h3>LỊCH LÀM VIỆC CỦA BÁC SĨ</h3>
+                                <div class="info-calender">
+                                    <p class="month-calender">September</p>
+                                    <p class="year-calender">2020</p>
+                                </div>
+                                <div class="date-calender">
+                                    <div class="day-name-calender">CN</div>
+                                    <div class="day-name-calender">T2</div>
+                                    <div class="day-name-calender">T3</div>
+                                    <div class="day-name-calender">T4</div>
+                                    <div class="day-name-calender">T5</div>
+                                    <div class="day-name-calender">T6</div>
+                                    <div class="day-name-calender">T7</div>
+                                </div>
+                                <div class="date-calender date-container">
+                                    <div class="day-calender"></div>
+                                    <div class="day-calender"></div>
+                                    <div class="day-calender">1</div>
+                                    <div class="day-calender">2</div>
+                                    <div class="day-calender">3</div>
+                                    <div class="day-calender">4</div>
+                                    <div class="day-calender">5</div>
+                                    <div class="day-calender">6</div>
+                                    <div class="day-calender">7</div>
+                                    <div class="day-calender">8</div>
+                                    <div class="day-calender">9</div>
+                                    <div class="day-calender active">10</div>
+                                    <div class="day-calender">11</div>
+                                    <div class="day-calender">12</div>
+                                    <div class="day-calender">13</div>
+                                    <div class="day-calender">14</div>
+                                    <div class="day-calender">15</div>
+                                    <div class="day-calender">16</div>
+                                    <div class="day-calender">17</div>
+                                    <div class="day-calender">18</div>
+                                    <div class="day-calender">19</div>
+                                    <div class="day-calender">20</div>
+                                    <div class="day-calender">21</div>
+                                    <div class="day-calender">22</div>
+                                    <div class="day-calender">23</div>
+                                    <div class="day-calender">24</div>
+                                    <div class="day-calender">25</div>
+                                    <div class="day-calender">26</div>
+                                    <div class="day-calender">27</div>
+                                    <div class="day-calender">28</div>
+                                    <div class="day-calender">29</div>
+                                    <div class="day-calender">30</div>
+                                    <div class="day-calender">31</div>
+                                </div>
+                            </div>
+                            <a class="btn-calender btn-next-calender">
+                                <span><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                            </a>
+                          </div> -->
+                          
+                        </div>
+                        
+
+                        <div class="row">
+
+                          <!-- Grid column -->
+                          <div class="col-md-12">
+                            <div class="md-form mb-0">
+                              <textarea type="text" id="form-contact-message" name="loinhan" class="form-control md-textarea" rows="3"></textarea>
+                              <label for="form-contact-message">Lời nhắn (có thể để trống)</label>
+                            </div>
+                          </div>
+                          <div class="col-md-12" id="test-giokham">
+
+                          </div>
+                          <!-- Grid column -->
+
+                        </div>
+                        <div style="text-align: center;" class="mt-3">
+                          <input type="submit" name="themlichhen" id="themlichhen" class="btn btn-primary btn-rounded" value="THÊM LỊCH HẸN">
+                        </div>
+                      </form>
+                      <?php
+                    }
+                    else {
+                    // ?>
+                      <p class="grey-text" style="text-align: center;">Quý khách vui lòng đăng nhập để có thể đặt lịch hẹn khám</p>
+                      <div class="canhgiua">
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLRFormDemo">ĐĂNG NHẬP</a>
+                      </div>
+
+                      <div class="modal fade" id="modalLRFormDemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog cascading-modal" role="document">
+                          <!-- Content -->
+                          <div class="modal-content">
+
+                            <!-- Modal cascading tabs -->
+                            <div class="modal-c-tabs">
+
+                              <!-- Nav tabs -->
+                              <ul class="nav md-tabs tabs-2 light-blue darken-3">
+                                <li class="nav-item">
+                                  <a class="nav-link active"><i class="fas fa-user mr-1"></i>
+                                    ĐĂNG NHẬP</a>
+                                </li>
+                              </ul>
+
+                              <!-- Tab panels -->
+                              <div class="tab-content">
+                                <!-- Panel 17 -->
+                                <!-- <div class="tab-pane fade in show active" id="panel17" role="tabpanel"> -->
+
+                                <form action="" method="POST">
+                                  <!-- Body -->
+                                  <div class="modal-body mb-1">
+                                    <div class="md-form form-sm">
+                                      <i class="fas fa-envelope prefix"></i>
+                                      <input type="text" id="unamekh" name="unamekh" class="form-control form-control-sm">
+                                      <label for="unamekh">Tên đăng nhập</label>
+                                    </div>
+
+                                    <div class="md-form form-sm">
+                                      <i class="fas fa-lock prefix"></i>
+                                      <input type="password" id="passwdkh" name="passwdkh" class="form-control form-control-sm">
+                                      <label for="passwdkh">Mật khẩu</label>
+                                    </div>
+                                    <div class="mb-1 wow fadeIn mt-3" style="text-align: center;">
+                                      <b style="color: red">
+                                        <?php if (isset($_SESSION["error"])) {echo $_SESSION["error"]; unset($_SESSION["error"]);} ?> 
+                                      </b>
+                                      
+                                    </div>
+                                    <div class="text-center mt-2">
+                                      <button type="submit" class="btn btn-info">ĐĂNG NHẬP <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                    </div>
+                                    <hr>
+                                    <p class="mb-0" style="text-align: center;">Chưa có tài khoản ? <a href="./dangky.php">Đăng ký ngay</a></p>
+                                  </div>
+                                  <!-- Footer -->
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">ĐÓNG</button>
+                                  </div>
+                                </form>
+                                  
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>                 
+                    <?php
+                  }
+                ?>
+                
 
               </div>
+
+
+              
 
             </div>
             <!-- Grid column -->
@@ -1074,11 +1566,11 @@
             <!--Controls-->
             <a class="carousel-control-prev left carousel-control" href="#carousel-example-1" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
+              <span class="sr-only">Trước đó</span>
             </a>
             <a class="carousel-control-next right carousel-control" href="#carousel-example-1" role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
+              <span class="sr-only">Kế tiếp</span>
             </a>
             <!--/.Controls-->
           </div>
@@ -1215,6 +1707,7 @@
 
   </footer>
   <!--/.Footer-->
+  <?php include("./simple_html_dom.php") ?>
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
@@ -1226,6 +1719,7 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="./js/khachhang/mdb.min.js"></script>
 
+  <!-- <script src="./js/khachhang/datepicker.js"></script> -->
   <!-- Custom scripts -->
   <script>
 
@@ -1249,11 +1743,6 @@
 
   </script>
   <script>
-    // Data Picker Initialization
-    $('.datepicker').pickadate();
-
-  </script>
-  <script>
     // SideNav Initialization
     $(".button-collapse").sideNav();
 
@@ -1264,17 +1753,257 @@
       minScrollbarLength: 20
     });
 
-    // Time Picker Initialization
-    $('#input_starttime').pickatime({
-      twelvehour: true
+    $(document).ready(function () {
+      $('.mdb-select').materialSelect();
     });
-    $('#input_endtime').pickatime({
-      // 12 or 24 hour
-      twelvehour: false,
-      // Light or Dark theme
-      darktheme: true
-    });
+    
+    function chonbacsi() {
+      // var mabs = document.getElementById("dsbacsi").value;
 
+      // var xmlhttp = new XMLHttpRequest();
+      // xmlhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //       document.getElementById("ngaygiokham").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+      //   }
+      // };
+      // xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs, true);
+      // xmlhttp.send();
+      
+      var x =  document.getElementById("dsbacsi").value;
+      if (x == 0) {       
+        document.getElementById("ngaygiokham").innerHTML = `<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ khám để có thể chọn ngày theo lịch làm việc của bác sĩ</h6>`;     
+        document.getElementById("chongiokham").innerHTML = `<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>`;     
+        document.getElementById("from").value = "";
+        document.getElementById("giokham").value = "";
+      }
+      else {
+        document.getElementById("ngaygiokham").innerHTML = "";
+      }
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+    }
+    
+    // function chonbacsi02() {
+    //   var x =  document.getElementById("dsbacsi").value;
+    //   // document.getElementById("form-contact-phone").value = 
+    //   // <php
+    //   //   $tong = 0;
+    //   //   for($i=0;$i<10;$i++) {
+    //   //     $tong += $i;
+    //   //   }
+    //   //   echo $tong;
+    //   // ?>;
+    //   // if (x != 0) {
+    //     document.getElementById("ngaygiokham").innerHTML = "";
+
+    //   // }  
+    // }
+  </script>
+  <script>
+
+  let monthEle = document.querySelector('.month-calender');
+  let yearEle = document.querySelector('.year-calender');
+  let btnNext = document.querySelector('.btn-next-calender');
+  let btnPrev = document.querySelector('.btn-prev-calender');
+  let btnToday = document.querySelector('.btn-today');
+  let dateEle = document.querySelector('.date-container');
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  // function displayInfo() {
+  //     // Hiển thị tên tháng
+  //     // let currentMonthName = new Date(
+  //     //     currentYear,
+  //     //     currentMonth
+  //     // ).toLocaleString('en-us', { month: 'long' });
+
+  //     monthEle.innerText = 'Tháng ' + (currentMonth + 1);
+
+  //     // Hiển thị năm
+  //     yearEle.innerText = currentYear;
+      
+  //     // Hiển thị ngày trong tháng
+  //     renderDate();
+  // }
+
+  // Lấy số ngày của 1 tháng
+  function getDaysInMonth() {
+      return new Date(currentYear, currentMonth + 1, 0).getDate();
+  }
+
+  // Lấy ngày bắt đầu của tháng
+  function getStartDayInMonth() {
+      return new Date(currentYear, currentMonth, 1).getDay();
+  }
+
+  // Active current day
+  function activeCurrentDay(day) {
+      let day1 = new Date().toDateString();
+      let day2 = new Date(currentYear, currentMonth, day).toDateString();
+      return day1 == day2 ? 1 : 0;
+  }
+
+  // Hiển thị ngày trong tháng lên trên giao diện
+  // function renderDate() {
+  //     let daysInMonth = getDaysInMonth();
+  //     let startDay = getStartDayInMonth();
+
+  //     dateEle.innerHTML = '';
+
+  //     for (let i = 0; i < startDay; i++) {
+  //         dateEle.innerHTML += `
+  //             <div class="day-calender"></div>
+  //         `;
+  //     }
+
+  //     for (let i = 0; i < daysInMonth; i++) {
+  //         if (activeCurrentDay(i+1) == 0) {
+  //             dateEle.innerHTML += `
+  //                 <a class="day-calender" id="${i + 1}-${currentMonth}" onclick="chonngay(${i + 1}, ${currentMonth})">${i + 1}</a>
+  //             `;
+  //         }
+  //         else {
+  //             dateEle.innerHTML += `
+  //                 <a class="day-calender red-text font-weight-bold" id="${i + 1}-${currentMonth}" onclick="chonngay(${i + 1}, ${currentMonth})">
+  //                     ${i + 1}
+  //                 </a>
+  //             `;
+  //         }
+  //     }
+  // }
+
+  function chonngay(day) {
+    document.getElementById('from').value = `${currentYear}-${currentMonth+1}-${day}`;
+    var mabs = document.getElementById("dsbacsi").value;
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("chongiokham").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+      }
+    };
+    xmlhttp.open("GET", "giokham.php?mabs=" + mabs + "&day=" + day + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    xmlhttp.send();
+  }
+  
+  function test() {
+    var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("form-contact-message").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "themlichhen.php", true);
+      xmlhttp.send();
+  }
+
+  function chongio(thoigian) {
+    switch(thoigian) {
+      case 1:
+        document.getElementById('giokham').value = '7:00';
+        break;
+      case 2:
+        document.getElementById('giokham').value = '8:30';
+        break;
+      case 3:
+        document.getElementById('giokham').value = '10:00';
+        break;
+      case 4:
+        document.getElementById('giokham').value = '13:00';
+        break;
+      case 5:
+        document.getElementById('giokham').value = '14:30';
+        break;
+      case 6:
+        document.getElementById('giokham').value = '16:00';
+        break;
+    }
+    
+  }
+
+  // Xử lý khi ấn vào nút next month
+  btnNext.addEventListener('click', function () {
+      if (currentMonth == 11) {
+          currentMonth = 0;
+          currentYear++;
+      } else {
+          currentMonth++;
+      }
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  // Xử lý khi ấn vào nút previous month
+  btnPrev.addEventListener('click', function () {
+      if (currentMonth == 0) {
+          currentMonth = 11;
+          currentYear--;
+      } else {
+          currentMonth--;
+      }
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  btnToday.addEventListener('click', function () {
+      let d = new Date();
+      currentMonth = d.getMonth();
+      currentYear = d.getFullYear();
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  
+
+  window.onload = displayInfo;
   </script>
 
 </body>

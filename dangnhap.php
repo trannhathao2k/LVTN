@@ -14,7 +14,7 @@
     $admin = false;
     $uname_admin = $_POST['uname'];
     $passwd_admin = $_POST['passwd'];
-    if (($uname_admin == 'admin2410') && ($passwd_admin == '24102002')) {
+    if (($uname_admin == 'admin2410') && ($passwd_admin == '24102000')) {
       $admin = true;
     }
     
@@ -34,8 +34,8 @@
             $_SESSION["err"] = "Tên tài khoản hoặc mật khẩu sai";
           }
           else {
-            // $_SESSION["nv"] = $kt_bs[0];
-            header("location:index.php");
+            // $_SESSION["admin"] = true;
+            header("location:./admin/index-admin.php");
           }
         }
         else {
@@ -107,7 +107,7 @@
         <div class="row">
           <div class="col-md-5">
             <a class="navbar-brand font-weight-bold title" href="./index.php">
-              <img src="./img/nha-khoa-ident-logo.png" alt="logo">
+              <img src="./img/TQueen-logo-removebg-preview.png" alt="logo">
             </a>
           </div>
           <div class="col-md-7 col-sm-0" style="display: flex; align-items: center;">
@@ -159,7 +159,7 @@
 
                     <div class="mb-1 wow fadeIn mt-3" >
                       <b style="color: red">
-                        <?php if(isset($_SESSION["err"])) {echo $_SESSION["err"]; unset($_SESSION["err"]);} ?> 
+                        <?php if(isset($_SESSION["error"])) {echo $_SESSION["error"]; unset($_SESSION["error"]);} ?> 
                       </b>
                       
                     </div>

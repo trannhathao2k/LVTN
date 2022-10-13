@@ -11,3 +11,113 @@
 .ul-profile li {
     margin: 30px 0 30px 10px;
 }
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    color: #222;
+    /* font-family: 'Open Sans', sans-serif; */
+}
+
+.container-new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    /* height: 100vh;
+    overflow: hidden; */
+}
+
+.calendar-new {
+    width: 626px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 4px;
+}
+
+.calendar-new h3 {
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* .info-calender {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+} */
+
+.info-calender {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.date-calender {
+    border: 1px solid #ccc;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day-calender,
+.day-name-calender {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ccc;
+
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 80px;
+}
+
+.btn-calender {
+    display: inline-block;
+    width: 1rem;
+    height: 2rem;
+}
+
+.btn-calender {
+    background-image: linear-gradient(to right,
+            #aa076b 0%,
+            #61045f 51%,
+            #aa076b 100%);
+}
+
+.btn-calender {
+    background-size: 200% auto;
+    color: #fff;
+    box-shadow: 0 0 20px #eee;
+}
+
+.btn-calender:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* .btn-next-calender {
+    margin-left: 1rem;
+}
+
+.btn-prev-calender {
+    margin-right: 1rem;
+} */
+
+.day-calender.active {
+    background-image: linear-gradient(to right,
+            #aa076b 0%,
+            #61045f 51%,
+            #aa076b 100%);
+    color: #fff;
+}

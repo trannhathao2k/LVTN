@@ -1,4 +1,10 @@
 <?php
+
+
+    if(!$_SESSION['bacsi']) {
+        header("location:../index.php");
+    }
+
     if(isset($_GET['route'])) {
         $route = $_GET['route'];
     }
