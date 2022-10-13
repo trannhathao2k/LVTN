@@ -1707,7 +1707,6 @@
 
   </footer>
   <!--/.Footer-->
-  <?php include("./simple_html_dom.php") ?>
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
