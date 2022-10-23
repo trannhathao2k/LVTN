@@ -48,10 +48,20 @@ if (isset($_POST['themlichhen'])) {
         $sql_themlichhen = "INSERT INTO lichhentruoc VALUES (null,$MaKH,'$date', $bacsi,'$ngaykham','$giokham','$loinhan')";
         $mysqli->query($sql_themlichhen);
 
-        NotificationAndGoto("Dat lich hen thanh cong!","./trangcanhan-kh.php");
+        NotificationAndGoto("Đặt lịch hẹn thành công!","./trangcanhan-kh.php");
     }
     else {
-        NotificationAndGoto("Ban da dat lich hen, vui long vao trang ca nhan de cap nhat!","./trangcanhan-kh.php");
+        $sql_capnhatlichhen = "UPDATE lichhentruoc
+                SET ngaydatlich = '$date',
+                    id_bs = $bacsi,
+                    ngaydangky = '$ngaykham',
+                    giodangky = '$giokham',
+                    loinhan = '$loinhan'
+                WHERE id_kh = $MaKH";
+        $mysqli->query($sql_capnhatlichhen);
+
+        // echo $sql_capnhatlichhen;
+        NotificationAndGoto("Cập nhật lịch hẹn thành công!","./trangcanhan-kh.php");
     }
 
     

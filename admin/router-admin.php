@@ -1,8 +1,5 @@
 <?php
 
-    if(!$_SESSION['admin']) {
-        header("location:../index.php");
-    }
 
     if(isset($_GET['route-admin'])) {
         $route = $_GET['route-admin'];

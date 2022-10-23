@@ -48,7 +48,7 @@
   </style>
 </head>
 
-<body class="fixed-sn white-skin" onload="reset02()">
+<body class="fixed-sn mdb-skin" onload="reset02()">
 
   <!-- Main Navigation -->
   <header>

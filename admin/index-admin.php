@@ -42,7 +42,7 @@
   </style>
 </head>
 
-<body class="fixed-sn white-skin">
+<body class="fixed-sn mdb-skin">
 
   <!-- Main Navigation -->
   <header>
@@ -54,7 +54,7 @@
         <!-- Logo -->
         <li class="logo-sn waves-effect py-3">
           <div class="text-center">
-            <a href="index-admin.php?route-admin=trangchu" class="pl-0"><img src="../img/nha-khoa-ident-logo.png"></a>
+            <a href="index-admin.php?route-admin=trangchu" class="pl-0"><img src="../img/TQueen-logo-removebg-preview.png"></a>
           </div>
         </li>
 
@@ -147,7 +147,7 @@
     <!-- Copyright -->
     <div class="footer-copyright py-3 text-center">
       <div class="container-fluid">
-        © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+        © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> ©2022 - Nha khoa Implant TQueen </a>
 
       </div>
     </div>

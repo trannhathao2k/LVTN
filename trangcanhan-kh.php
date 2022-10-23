@@ -32,10 +32,12 @@
   <!-- Font Awesome  -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS  -->
-  <link rel="stylesheet" href="./css/dangky/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/khachhang/bootstrap.min.css">
   <!-- Material Design Bootstrap  -->
   <link rel="stylesheet" href="./css/dangky/mdb.min.css">
-  <link rel="stylesheet" href="./css/dangky/style.css">
+  <link rel="stylesheet" href="./css/khachhang/style.css">
+  <link rel="stylesheet" href="./css/khachhang/modules/animations-extended.min.css">
+
   <!-- DataTables.net  -->
   <link rel="stylesheet" type="text/css" href="./css/dangky/addons/datatables.min.css">
   <link rel="stylesheet" href="./css/dangky/addons/datatables-select.min.css">
@@ -139,7 +141,12 @@
                           <?php
                             $lichhen = "SELECT * FROM lichhentruoc, bacsi WHERE lichhentruoc.id_bs = bacsi.id_bs AND id_kh = $MaKH";
                             $query_lichhen = mysqli_query($mysqli, $lichhen);
-                            $row_lichhen = mysqli_fetch_array($query_lichhen);
+                            
+                            if (mysqli_num_rows($query_lichhen) == NULL) {
+                              ?><td colspan="6">Bạn chưa đặt lịch hẹn trước</td><?php
+                            }
+                            else {
+                              $row_lichhen = mysqli_fetch_array($query_lichhen);
                           ?>
                           <td><?php echo $row_lichhen['id_lichhen'] ?></td>
                           <td><?php echo $row_lichhen['ngaydangky'] ?></td>
@@ -147,16 +154,22 @@
                           <td><?php echo $row_lichhen['hoten_bs'] ?></td>
                           <td><?php echo $row_lichhen['loinhan'] ?></td>
                           <td class="canhgiua">
-                            <a class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="modal" data-target="#modal-info-<?php echo $row_ttphieu['maphieu'] ?>" data-placement="right" title="Cập nhật lịch hẹn">
+                            <a class="badge cyan canhgiua" style="width: 25px; height: 25px" onclick="capnhatlichhen(<?php echo $MaKH ?>)" data-placement="right" title="Cập nhật lịch hẹn">
                               <i class="far fa-edit"></i>
                             </a>
                           </td>
+                          <?php } ?>
                         </tr>
                       </tbody>
                     </table>
+                    <div class="mt-3" id="capnhat02"></div>                            
                   </div>
                 </div>
+                
               </div>
+              <!-- <div class="col-md-12">
+                
+              </div> -->
 
             <!-- Gird column -->
             <div class="col-md-12" >
@@ -201,8 +214,103 @@
                                 <a class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="modal" data-target="#modal-info-<?php echo $row_ttphieu['maphieu'] ?>" data-placement="right" title="Xem chi tiết">
                                   <i class="fas fa-arrow-right"></i>
                                 </a>
+                                <div class="modal fade modal-ext" id="modal-info-<?php echo $row_ttphieu['maphieu'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                              aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">THÔNG TIN CHI TIẾT</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <div class="modal-body text-center" style="font-size: 14px;">
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+                                                <p><b>Tên khách hàng: </b> <?php echo $row_ttphieu['tenkhachhang'] ?></p>
+                                                <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <p>Chọn tài khoản (nếu có)</p>
+                                            </div>                                 
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <?php
+                                              $maphieu = $row_ttphieu['maphieu'];
+                                              $ds_dichvu = "SELECT * FROM dichvuduocchidinh, dichvu, phieukhambenh WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND dichvuduocchidinh.maphieu = phieukhambenh.maphieu AND dichvuduocchidinh.maphieu = '$maphieu'";
+                                              $query_ds = mysqli_query($mysqli, $ds_dichvu);
+                                            ?>
+                                            <h6 class="title mb-3 font-weight-bold">Danh sách dịch vụ:</h6>
+                                            <ul class="striped list-unstyled waves-effect" style="background-color: #b9f6ca">
+                                              <?php
+                                                while($row_ds = mysqli_fetch_array($query_ds)) {
+                                                  ?>
+                                                    <li style="font-size: 14px;"><?php echo $row_ds['ten_dichvu'] ?> - <?php echo $row_ds['soluong']?> <?php echo $row_ds['donvitinh'] ?> - <b class="red-text"><?php echo number_format($row_ds['phihientai_dichvu'] * $row_ds['soluong'], 0, '', '.')?> VNĐ</b></li>
+                                                  <?php
+                                                }
+                                              ?>
+                                            </ul>
+                                            <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Tổng phí: <b class="red-text"><?php
+                                              $tongphi = "SELECT * FROM phieukhambenh WHERE maphieu = '$maphieu'";
+                                              $query_tong = mysqli_query($mysqli, $tongphi);
+                                              $row_tongchiphi = mysqli_fetch_array($query_tong);
+                                              echo number_format($row_tongchiphi['tongchiphi'], 0, '', '.');
+                                            ?> VNĐ</b></h6>
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                      <!--Footer-->
+                                        <div class="modal-footer">
+                                          <div id="xacnhan"></div>
+                                          <?php
+                                            if ($row_tongchiphi['trangthaithuphi'] == 0) {
+                                              ?>
+                                                <button type="button" class="btn btn-sm btn-rounded btn-success waves-effect" data-toggle="modal" data-target="#frameModalTopInfoDemo-<?php echo $maphieu ?>" data-backdrop="false" >Xác nhận đã thanh toán</button>
+                                              <?php
+                                            }
+                                            else {
+                                              ?>
+                                                <button type="button" class="btn btn-sm btn-rounded btn-primary waves-effect">In lại hóa đơn</button>
+                                              <?php
+                                            }
+                                          ?>
+                                          <section>
+                                            <div class="modal fade top" id="frameModalTopInfoDemo-<?php echo $maphieu ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                              aria-hidden="true" data-backdrop="false">
+                                              <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+                                                <!-- Content -->
+                                                <div class="modal-content">
+                                                  <!-- Body -->
+                                                  <div class="modal-body">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+
+                                                      <p class="pt-3 pr-2">Bạn chắc chắn đã nhận đủ tiền phí khám chữa răng ?</p>
+
+                                                      <a type="button" class="btn btn-info btn-sm" onclick='xacnhan("<?php echo $maphieu ?>", "<?php echo $MaNV ?>")'>Có, tôi đã nhận đủ</a>
+                                                      <a type="button" class="btn btn-outline-info btn-sm waves-effect" data-dismiss="modal">Không, tôi chưa nhận</a>
+
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <!-- Content -->
+                                              </div>
+                                            </div>
+                                          </section>                             
+                                          
+                                          <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
+                                        </div>
+                                      </div>
+                                    <!--/Content-->
+                                </div>
+                              </div>
                               </td>
-                            </tr>
+                            </tr>0
                           <?php
                         }
                       ?>
@@ -225,7 +333,7 @@
 
               <!-- Avatar -->
               <div class="avatar z-depth-1-half mb-4">
-                <img src="./img/AnhDaiDien/<?php echo $row_kh['anhdaidien_kh'] ?>" class="rounded-circle" alt="Avatar">
+                <img src="<?php echo $row_kh['anhdaidien_kh'] ?>" class="rounded-circle" style="overflow: hidden;" alt="Avatar" height="150px" width="150px">
               </div>
 
               <div class="card-body pt-0 mt-0">
@@ -263,7 +371,7 @@
                 </ul>
 
                 <div class="text-center">
-                  <button type="button" class="btn btn-sm btn-outline-primary btn-rounded waves-effect waves-light">CHỈNH SỬA TRANG CÁ NHÂN</button>
+                  <a href="./dangky.php" type="button" class="btn btn-sm btn-outline-primary btn-rounded waves-effect waves-light">CHỈNH SỬA TRANG CÁ NHÂN</a>
                 </div>
 
               </div>
@@ -365,6 +473,224 @@
       $('[data-toggle="tooltip"]').tooltip();
     });
 
+    function capnhatlichhen(makh) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("capnhat02").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "capnhat-lichhen.php?makh=" + makh, true);
+      xmlhttp.send();
+    }
+
+    function chonbacsi() {
+
+      var x =  document.getElementById("dsbacsi").value;
+      if (x == 0) {       
+        document.getElementById("ngaygiokham").innerHTML = `<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ khám để có thể chọn ngày theo lịch làm việc của bác sĩ</h6>`;     
+        document.getElementById("chongiokham").innerHTML = `<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>`;     
+        document.getElementById("from").value = "";
+        document.getElementById("giokham").value = "";
+      }
+      else {
+        document.getElementById("ngaygiokham").innerHTML = "";
+      }
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+    }
+
+    let monthEle = document.querySelector('.month-calender');
+  let yearEle = document.querySelector('.year-calender');
+  let btnNext = document.querySelector('.btn-next-calender');
+  let btnPrev = document.querySelector('.btn-prev-calender');
+  let btnToday = document.querySelector('.btn-today');
+  let dateEle = document.querySelector('.date-container');
+  // let closeForm = document.querySelector('.closeForm');
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  // Lấy số ngày của 1 tháng
+  function getDaysInMonth() {
+      return new Date(currentYear, currentMonth + 1, 0).getDate();
+  }
+
+  // Lấy ngày bắt đầu của tháng
+  function getStartDayInMonth() {
+      return new Date(currentYear, currentMonth, 1).getDay();
+  }
+
+  // Active current day
+  function activeCurrentDay(day) {
+      let day1 = new Date().toDateString();
+      let day2 = new Date(currentYear, currentMonth, day).toDateString();
+      return day1 == day2 ? 1 : 0;
+  }
+
+  // Hiển thị ngày trong tháng lên trên giao diện
+  // function renderDate() {
+  //     let daysInMonth = getDaysInMonth();
+  //     let startDay = getStartDayInMonth();
+
+  //     dateEle.innerHTML = '';
+
+  //     for (let i = 0; i < startDay; i++) {
+  //         dateEle.innerHTML += `
+  //             <div class="day-calender"></div>
+  //         `;
+  //     }
+
+  //     for (let i = 0; i < daysInMonth; i++) {
+  //         if (activeCurrentDay(i+1) == 0) {
+  //             dateEle.innerHTML += `
+  //                 <a class="day-calender" id="${i + 1}-${currentMonth}" onclick="chonngay(${i + 1}, ${currentMonth})">${i + 1}</a>
+  //             `;
+  //         }
+  //         else {
+  //             dateEle.innerHTML += `
+  //                 <a class="day-calender red-text font-weight-bold" id="${i + 1}-${currentMonth}" onclick="chonngay(${i + 1}, ${currentMonth})">
+  //                     ${i + 1}
+  //                 </a>
+  //             `;
+  //         }
+  //     }
+  // }
+
+  function chonngay(day) {
+    document.getElementById('from').value = `${currentYear}-${currentMonth+1}-${day}`;
+    var mabs = document.getElementById("dsbacsi").value;
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("chongiokham").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+      }
+    };
+    xmlhttp.open("GET", "giokham.php?mabs=" + mabs + "&day=" + day + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    xmlhttp.send();
+  }
+  
+  function test() {
+    var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("form-contact-message").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "themlichhen.php", true);
+      xmlhttp.send();
+  }
+
+  function chongio(thoigian) {
+    switch(thoigian) {
+      case 1:
+        document.getElementById('giokham').value = '7:00';
+        break;
+      case 2:
+        document.getElementById('giokham').value = '8:30';
+        break;
+      case 3:
+        document.getElementById('giokham').value = '10:00';
+        break;
+      case 4:
+        document.getElementById('giokham').value = '13:00';
+        break;
+      case 5:
+        document.getElementById('giokham').value = '14:30';
+        break;
+      case 6:
+        document.getElementById('giokham').value = '16:00';
+        break;
+    }
+    
+  }
+
+  // Xử lý khi ấn vào nút next month
+  btnNext.addEventListener('click', function () {
+      if (currentMonth == 11) {
+          currentMonth = 0;
+          currentYear++;
+      } else {
+          currentMonth++;
+      }
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  // Xử lý khi ấn vào nút previous month
+  btnPrev.addEventListener('click', function () {
+      if (currentMonth == 0) {
+          currentMonth = 11;
+          currentYear--;
+      } else {
+          currentMonth--;
+      }
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  btnToday.addEventListener('click', function () {
+      let d = new Date();
+      currentMonth = d.getMonth();
+      currentYear = d.getFullYear();
+      // displayInfo();
+      document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1}</p>`;
+      document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+      var mabs = document.getElementById("dsbacsi").value;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ngaygiokham.php?mabs=" + mabs + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+      xmlhttp.send();
+  });
+
+  // closeForm.addEventListener('click', function() {
+  //     document.getElementById('capnhat02').innerHTML = "";
+  // });
+  
+
+  window.onload = displayInfo;
   </script>
 </body>
 

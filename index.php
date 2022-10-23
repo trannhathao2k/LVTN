@@ -70,6 +70,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
   <link href="./css/khachhang/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="./img/Logo-Title-removebg-preview.png" type="image/x-icon">
   <!-- Material Design Bootstrap -->
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -284,8 +285,8 @@
                 <h1 class="h1-responsive font-weight-bold mt-md-5 mt-0 wow fadeInLeft" data-wow-delay="0.3s">NHA KHOA IMPLANT TQUEEN</h1>
                 <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
                 <p class="wow fadeInLeft mb-3" data-wow-delay="0.3s">
-                Nha khoa I-dent là một địa chỉ nha khoa uy tín hàng đầu về kỹ thuật cấy ghép implant hiện nay. 
-                Với TS-BS Nguyễn Hiếu Tùng với 10 năm kinh nghiệp trong lĩnh vực.
+                Nha khoa TQueen là một địa chỉ nha khoa uy tín hàng đầu về kỹ thuật cấy ghép implant hiện nay. 
+                Với TS-BS Lee Ji-eun với 10 năm kinh nghiệp trong lĩnh vực.
                 </p>
                 <br>
                 <!-- <a class="btn btn-unique btn-rounded font-weight-bold ml-lg-0 wow fadeInLeft" data-wow-delay="0.3s">Download</a> -->
@@ -373,7 +374,7 @@
 
         <!--Section heading-->
         <h3 class="text-center mb-5 mt-5 pt-5 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">
-          GIÁ TRỊ CỐT LỖI NHA KHOA IMPLANT I-DENT MANG LẠI
+          GIÁ TRỊ CỐT LỖI NHA KHOA IMPLANT TQUEEN MANG LẠI
         </h3>
 
         <!--First row-->
@@ -563,19 +564,19 @@
           <div class="col-md-7 mb-2 smooth-scroll wow fadeIn" data-wow-delay="0.2s">
 
             <!--Heading-->
-            <h2 class="mb-3 font-weight-bold">CÂU CHUYỆN CỦA I-DENT</h2>
+            <h2 class="mb-3 font-weight-bold">CÂU CHUYỆN CỦA TQUEEN</h2>
             <!--Description-->
             <!-- <h4 class="mb-5 dark-grey-text">Visit Our New Clinic in New York.</h4> -->
             <!--Content-->
             <p class="grey-text" align="justify">
               Với niềm đam mê và sự nhiệt huyết dành cho lĩnh vực Nha khoa, 
-              ngay từ khi còn theo học tại ĐH Y Dược TP HCM, <b>Tiến sĩ – Bác sĩ Nguyễn Hiếu Tùng</b> 
+              ngay từ khi còn theo học tại ĐH Y Dược TP HCM, <b>Tiến sĩ – Bác sĩ Lee Ji-eun</b> 
               đã thể hiện xuất sắc trong quá trình học tập và dành được học bổng nghiên cứu sinh 
               tại Đại Học Aix- Marseille, nước Pháp.
             </p>
 
             <p class="grey-text" align="justify">Trong hơn 10 năm tu nghiệp tại Pháp và được tiếp cận 
-              với những công nghệ hiện đại nhất, <b>Bác sĩ Nguyễn Hiếu Tùng</b> cảm thấy lo ngại trước những 
+              với những công nghệ hiện đại nhất, <b>Bác sĩ Lee Ji-eun</b> cảm thấy lo ngại trước những 
               kỹ thuật nha khoa đã quá cũ và không bắt kịp sự tiến bộ của nền Nha khoa thế giới tại nước ta. 
               Đồng thời, tại Việt Nam cũng thiếu đi những địa chỉ nha khoa tin cậy và các phương án 
               điều trị thích hợp cho người dân.
@@ -595,14 +596,14 @@
             </p>
 
             <p class="grey-text" align="justify">Với những trăn trở và mong muốn đó của Bác sĩ Tùng đã 
-              trở thành kim chỉ nam để thành lập và phát triển Nha khoa I-DENT. Thành lập năm 2014, 
-              sau hơn 6 năm đi vào hoạt động, với sự nỗ lực không ngừng của <b>Tiến sĩ – Bác sĩ Nguyễn Hiếu Tùng</b> 
-              cùng với đội ngũ cộng sự Bác sĩ, phụ tá, nhân viên tại nha khoa I-DENT đã thực hiện 
+              trở thành kim chỉ nam để thành lập và phát triển Nha khoa TQueen. Thành lập năm 2014, 
+              sau hơn 6 năm đi vào hoạt động, với sự nỗ lực không ngừng của <b>Tiến sĩ – Bác sĩ Lee Ji-eun</b> 
+              cùng với đội ngũ cộng sự Bác sĩ, phụ tá, nhân viên tại nha khoa TQueen đã thực hiện 
               thành công hơn 10,000 ca Implant, qua đó kiến tạo nụ cười hạnh phúc cho hàng ngàn bệnh nhân.
             </p>
 
             <p class="grey-text" align="justify">
-            Đưa I-DENT trở thành một địa chỉ nha khoa uy tín – chất lượng tại TP HCM, là lựa chọn hàng đầu 
+            Đưa TQueen trở thành một địa chỉ nha khoa uy tín – chất lượng tại TP HCM, là lựa chọn hàng đầu 
             của các bệnh nhân trong và ngoài nước.
             </p>
             <br>
@@ -616,7 +617,7 @@
           <div class="col-lg-4 flex-center ml-lg-auto col-md-5 mb-5 wow fadeIn" data-wow-delay="0.3s">
 
             <!--Image-->
-            <img src="./img/Images/BS-Tung.jpg" class="img-fluid z-depth-1">
+            <img src="./img/AnhDaiDien/IU.jpg" class="img-fluid z-depth-1">
 
           </div>
           <!--/Second column-->
@@ -701,10 +702,10 @@
               </div>
               <ul class="nav md-pills pills-primary flex-center" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active " data-toggle="tab" href="#panel31" role="tab">TS - BS<br/>Lee Ji-eun</a>
+                  <a class="nav-link active " data-toggle="tab" href="#panel31" role="tab">Tiến sĩ - Bác sĩ<br/>Lee Ji-eun</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#panel32" role="tab">Tiến sĩ - Bác sĩ<br/>Tiêu Chiến</a>
+                  <a class="nav-link" data-toggle="tab" href="#panel32" role="tab">Tiến sĩ - Bác sĩ<br/>Dương Mịch</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#panel33" role="tab">Thạc sĩ - Bác sĩ<br/>Vương Nhất Bác</a>
@@ -767,7 +768,7 @@
 
                     <!--Featured image-->
                     <div class="view overlay z-depth-1 z-depth-2">
-                      <img src="./img/AnhDaiDien/tieu-chien-02.jpg" class="img-fluid">
+                      <img src="./img/AnhDaiDien/duong-mich.jpg" class="img-fluid">
                     </div>
                   </div>
                   <!--/First column-->
@@ -776,7 +777,7 @@
                   <div class="col-lg-6 col-md-12 text-left">
 
                     <!--Title-->
-                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ TIÊU CHIẾN</h4>
+                    <h4 class="mb-3">TIẾN SĨ - BÁC SĨ DƯƠNG MỊCH</h4>
 
                     <!--Description-->
                     <ul class="ul-profile" align="justify">
@@ -942,426 +943,26 @@
                 <div class="card-body form">
 
                 <!-- Header -->
-                <h3 class="text-center mb-3 mt-3 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">ĐẶT LỊCH THĂM KHÁM CÙNG BÁC SĨ I-DENT</h3>
+                <h3 class="text-center mb-3 mt-3 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">ĐẶT LỊCH THĂM KHÁM CÙNG BÁC SĨ TQUEEN</h3>
 
                 
                   <?php
                     if (isset($_SESSION['khachhang'])) {
                       $MaKH = $_SESSION['khachhang']['id_kh'];
-                      $thongtinkh = "SELECT * FROM khachhang WHERE id_kh = $MaKH";
-                      $query_thongtinkh = mysqli_query($mysqli, $thongtinkh);
-                      $row_thongtinkh = mysqli_fetch_array($query_thongtinkh);
-                      ?>
-                      <form action="./themlichhen.php" name="themlich" method="POST">
-                        <div class="row">
+                    
 
-                          <div class="col-md-6">
-                            <div class="md-form mb-0">
-                              <input type="text" id="hotenbs" name="hotenkh" class="form-control" value="<?php echo $row_thongtinkh['hoten_kh'] ?>" readonly disabled>
-                              <label for="hotenbs" class="">Họ tên khách hàng</label>
-                            </div>
-                          </div>
+                      $ktra = "SELECT * FROM lichhentruoc WHERE id_kh = $MaKH";
+                      $query_ktra = mysqli_query($mysqli, $ktra);
+                      if(mysqli_num_rows($query_ktra) != 0) {
+                        echo '<p class="white-text text-center font-weight-bold green">BẠN ĐÃ ĐẶT LỊCH RỒI, VUI LÒNG CHỈNH SỬA NẾU CÓ THAY ĐỔI MỚI</p>';
+                      }
+                    }
+                    // else {
+                    //   echo $ktra;
+                    // }
 
-                          <div class="col-md-6">
-                            <div class="md-form mb-0">
-                              <input type="text" id="form-contact-email" name="emailkh" class="form-control" value="<?php echo $row_thongtinkh['email_kh'] ?>" readonly disabled>
-                              <label for="form-contact-email" class="">Địa chỉ email</label>
-                            </div>
-                          </div>
-
-                        </div>
-
-                        <div class="row">
-
-                          <!-- Grid column -->
-                          <div class="col-md-6">
-                            <div class="md-form">
-                              <input type="text" id="form-contact-phone" name="sdtkh" class="form-control" value="<?php echo $row_thongtinkh['sdt_kh'] ?>" readonly disabled>
-                              <label for="form-contact-phone" class="">Số điện thoại</label>
-                            </div>
-                          </div>
-                          <!-- Grid column -->
-
-                          <!-- Grid column -->
-                          <div class="col-md-4">
-                            <div class="md-form mb-0 mt-0">
-                              <p class="m-0 p-0" style="font-size: 12px;color: #757575;">Chọn bác sĩ</p>
-                              <select id="dsbacsi" name="bacsi" class="form-select-sm form-select form-control md-form" onchange="chonbacsi()">
-                                <option value="0">Bác sĩ bất kỳ</option>
-                                  <?php
-                                    $dsbacsi = "SELECT * FROM bacsi";
-                                    $query_ds = mysqli_query($mysqli, $dsbacsi);
-                                    while($row_ds = mysqli_fetch_array($query_ds)) {
-                                      ?>
-                                        <option value="<?php echo $row_ds['id_bs'] ?>"><?php echo $row_ds['hoten_bs'] ?></option>
-                                      <?php
-                                    }                                 
-                                  ?>
-                              </select>
-                            </div>
-                            
-                          </div>
-                          <!-- Grid column -->
-                          <div class="col-md-2">
-                            <div class="md-form mt-3">
-                              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-info">Xem thông tin bác sĩ</button>
-                              <div class="modal fade modal-ext" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <!--Content-->
-                                    <div class="modal-content">
-                                    <!--Header-->
-                                    <div class="modal-header text-center">
-                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">DANH SÁCH BÁC SĨ NHA KHOA I-DENT</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <!--Body-->
-                                    <div class="modal-body text-center" style="font-size: 14px;">
-                                      <?php
-                                        $bs = "SELECT * FROM bacsi";
-                                        $query_bs = mysqli_query($mysqli, $bs);
-                                        while($row_bs = mysqli_fetch_array($query_bs)) {
-                                          ?>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <img src="./img/AnhDaiDien/<?php echo $row_bs['anhdaidien_bs'] ?>" width="100%">
-                                              </div>
-                                              <div class="col-md-8">
-                                                <ul style="text-align: left;">
-                                                  <li><b>Họ tên:</b> <?php echo $row_bs['hoten_bs'] ?>.</li>
-                                                  <li><b>Năm sinh:</b> <?php echo $row_bs['namsinh_bs'] ?>.</li>
-                                                  <li><b>Chuyên môn:</b> <?php echo $row_bs['chuyenmon'] ?>.</li>
-                                                  <li><b>Kinh nghiệm:</b> <?php echo $row_bs['kinhnghiem'] ?>.</li>
-                                                  <li><b>Giới thiệu:</b> <?php echo $row_bs['gioithieu'] ?>.</li>
-                                                </ul>
-                                              </div>
-                                            </div>
-                                            <hr>
-                                          <?php
-                                        }
-                                      ?>
-                                    </div>
-                                    <!--Footer-->
-                                    <div class="modal-footer">                                                               
-                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
-                                    </div>
-                                    </div>
-                                    <!--/Content-->
-                                </div>
-                              </div>
-
-                              <!--Footer-->
-
-                            </div>
-                          </div>
-
-                        </div>
-
-                        <div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="md-form">
-                                <input type="text" id="from" name="ngaykham" class="form-control" data-toggle="modal" data-target="#modal-info-new" required readonly>
-                                <label for="date-picker-example">Chọn ngày khám</label>
-                              </div>
-                              <div class="modal fade modal-ext" id="modal-info-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <!--Content-->
-                                    <div class="modal-content">
-                                    <!--Header-->
-                                    <div class="modal-header text-center">
-                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">LỊCH LÀM VIỆC CỦA BÁC SĨ</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <!--Body-->
-                                    <div id="ngaygiokham">
-                                      <h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ khám để có thể chọn ngày theo lịch làm việc của bác sĩ</h6>
-                                    </div>
-                                    <!-- <script language="javascript">
-                                      var ds = document.getElementById("dsbacsi");
-                                      var ds = document.getElementById('form-contact-phone');
-                                       
-                                      change.onchange = function() {
-                                        change.innerHTML = "Xin chao";
-                                      }
-                                    </script> -->
-                                    
-                                    <div class="container-new ">
-                                      <a class="btn btn-floating aqua-gradient btn-prev-calender mr-3 ml-3">
-                                        <span><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                                      </a>
-                                      <div class="calendar-new mt-3 mb-3">
-                                          <div class="row mb-3">
-                                            <div class="col-md-4" id="thang" style="display: flex;align-items: center;justify-content: left;">
-                                              <p class="month-calender info-calender" ><?php
-                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                                $month = date("m");
-                                                echo 'Tháng '.$month;
-                                              ?></p>
-                                            </div>
-                                            <div class="col-md-4" style="display: flex;align-items: center;justify-content: center;">
-                                              <a class="btn-today btn aqua-gradient m-auto" >HÔM NAY</a>
-                                            </div>
-                                            <div class="col-md-4" id="nam" style="display: flex;align-items: center;justify-content: right;">
-                                              <p class="year-calender info-calender"><?php
-                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                                $year = date("Y");
-                                                echo $year;
-                                              ?></p>
-                                            </div>                                            
-                                              
-                                          </div>
-                                          <div class="date-calender white-text font-weight-bold bg-primary">
-                                              <div class="day-name-calender">CN</div>
-                                              <div class="day-name-calender">T2</div>
-                                              <div class="day-name-calender">T3</div>
-                                              <div class="day-name-calender">T4</div>
-                                              <div class="day-name-calender">T5</div>
-                                              <div class="day-name-calender">T6</div>
-                                              <div class="day-name-calender">T7</div>
-                                          </div>
-                                          <div class="date-calender date-container" id="lich">
-                                              <?php
-                                                $day = date("d");
-                                                $str = "$year-$month-1";
-                                                $date = new DateTime($str);
-                                                $w = (int)$date->format('w');
-                                                for($i = 0; $i < $w; $i++) {
-                                                  echo '<div class="day-calender"></div>';
-                                                }
-
-                                                function lastday($month_ld = '', $year_ld = '') {
-                                                  if (empty($month_ld)) {
-                                                     $month_ld = date('m');
-                                                  }
-                                                  if (empty($year_ld)) {
-                                                     $year_ld = date('Y');
-                                                  }
-                                                  $result = strtotime("{$year_ld}-{$month_ld}-01");
-                                                  $result = strtotime('-1 second', strtotime('+1 month', $result));
-                                                  return date('d', $result);
-                                                }
-                                                $lastday = lastday(''.$month.'',''.$year.'');
-
-                                                for($i=0; $i < $lastday; $i++) {
-                                                  if (($i+1) == $day) {
-                                                    echo '<a class="day-calender red-text font-weight-bold" id="'.($i+1).'-'.$month.'">'.($i+1).'</a>';
-                                                  }
-                                                  else {
-                                                    echo '<a class="day-calender" id="'.($i+1).'-'.$month.'">'.($i+1).'</a>';
-                                                  }
-                                                  
-                                                }
-                                                // echo $str;
-                                                // echo $w;
-                                              ?>
-                                          </div>
-                                      </div>
-                                      <div id="right">
-                                        <a class="btn btn-floating aqua-gradient btn-next-calender">
-                                          <span><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                                      </a>
-                                      </div>
-                                      
-                                    </div>
-                                    <!--Footer-->
-                                    <div class="modal-footer">                                                               
-                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
-                                    </div>
-                                    </div>
-                                    <!--/Content-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-
-                            <div class="md-form">  
-                              <!-- <input type="text" id="appt" name="giokham" class="form-control p-0 m-0" required>
-                              <label for="appt">Chọn giờ khám:</label> -->
-                              <input type="text" id="giokham" name="giokham" class="form-control" data-toggle="modal" data-target="#modal-info-giokham" required readonly>
-                              <label for="giokham">Chọn giờ khám</label>
-                              <div class="modal fade modal-ext" id="modal-info-giokham" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <!--Content-->
-                                    <div class="modal-content">
-                                    <!--Header-->
-                                    <div class="modal-header text-center">
-                                        <h4 class="modal-title w-100 py-3" id="myModalLabel">CHỌN GIỜ KHÁM</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <!--Body-->
-                                    <div id="gio">
-                                      
-                                    </div>
-
-                                    <div id="chongiokham">
-                                      <h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>
-                                    </div>
-                                    <!-- <script language="javascript">
-                                      var ds = document.getElementById("dsbacsi");
-                                      var ds = document.getElementById('form-contact-phone');
-                                       
-                                      change.onchange = function() {
-                                        change.innerHTML = "Xin chao";
-                                      }
-                                    </script> -->
-                                    
-                                    <!-- <div class="row p-5">
-
-                                      <div class="col-lg-4 col-md-6">
-
-                                        <div class=" overlay z-depth-1 z-depth-2 canhgiua">
-                                          <img src="./img/Images/tien-si-bac-si-nguyen-hieu-tung.jpg" class="img-fluid">
-                                        </div>
-                                        <h6 class="mb-3 text-center mt-3 font-weight-bold">BS. NGUYỄN HIẾU TÙNG</h6>
-                                      </div>
-
-                                      <div class="col-lg-8 col-md-12 text-left">
-                                        <div>
-                                          <div class="div canhgiua" style="width: 100%;">
-                                            <h6 class="font-weight-bold text-center">CA SÁNG</h6>
-                                          </div>
-                                          
-                                          <div style="display: flex; justify-content: space-between;">
-                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
-                                              7h00 - 8h30<br/>
-                                              CÒN TRỐNG
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                              8h30 - 10h00<br/>
-                                              ĐÃ ĐƯỢC CHỌN
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                              10h00 - 11h30<br/>
-                                              ĐÃ ĐƯỢC CHỌN
-                                            </a>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                        <div>
-                                          <div class="div canhgiua" style="width: 100%;">
-                                            <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
-                                          </div>
-                                          
-                                          <div style="display: flex; justify-content: space-between;">
-                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
-                                              13h00 - 14h30<br/>
-                                              CÒN TRỐNG
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
-                                              14h30 - 16h00<br/>
-                                              CÒN TRỐNG
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-warning" style="min-width: 130px;">
-                                              16h00 - 17h30<br/>
-                                              CÒN TRỐNG
-                                            </a>
-                                          </div>
-                                        </div>
-
-                                      </div>
-                                    </div> -->
-                                    <div class="modal-footer">                                                               
-                                      <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
-                                    </div>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            </div>
-                          </div>
-                          <!-- <div class="container-new">
-                            <a class="btn-calender btn-prev-calender">
-                              <span><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                            </a>
-                            <div class="calendar-new">
-                                <h3>LỊCH LÀM VIỆC CỦA BÁC SĨ</h3>
-                                <div class="info-calender">
-                                    <p class="month-calender">September</p>
-                                    <p class="year-calender">2020</p>
-                                </div>
-                                <div class="date-calender">
-                                    <div class="day-name-calender">CN</div>
-                                    <div class="day-name-calender">T2</div>
-                                    <div class="day-name-calender">T3</div>
-                                    <div class="day-name-calender">T4</div>
-                                    <div class="day-name-calender">T5</div>
-                                    <div class="day-name-calender">T6</div>
-                                    <div class="day-name-calender">T7</div>
-                                </div>
-                                <div class="date-calender date-container">
-                                    <div class="day-calender"></div>
-                                    <div class="day-calender"></div>
-                                    <div class="day-calender">1</div>
-                                    <div class="day-calender">2</div>
-                                    <div class="day-calender">3</div>
-                                    <div class="day-calender">4</div>
-                                    <div class="day-calender">5</div>
-                                    <div class="day-calender">6</div>
-                                    <div class="day-calender">7</div>
-                                    <div class="day-calender">8</div>
-                                    <div class="day-calender">9</div>
-                                    <div class="day-calender active">10</div>
-                                    <div class="day-calender">11</div>
-                                    <div class="day-calender">12</div>
-                                    <div class="day-calender">13</div>
-                                    <div class="day-calender">14</div>
-                                    <div class="day-calender">15</div>
-                                    <div class="day-calender">16</div>
-                                    <div class="day-calender">17</div>
-                                    <div class="day-calender">18</div>
-                                    <div class="day-calender">19</div>
-                                    <div class="day-calender">20</div>
-                                    <div class="day-calender">21</div>
-                                    <div class="day-calender">22</div>
-                                    <div class="day-calender">23</div>
-                                    <div class="day-calender">24</div>
-                                    <div class="day-calender">25</div>
-                                    <div class="day-calender">26</div>
-                                    <div class="day-calender">27</div>
-                                    <div class="day-calender">28</div>
-                                    <div class="day-calender">29</div>
-                                    <div class="day-calender">30</div>
-                                    <div class="day-calender">31</div>
-                                </div>
-                            </div>
-                            <a class="btn-calender btn-next-calender">
-                                <span><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                            </a>
-                          </div> -->
-                          
-                        </div>
-                        
-
-                        <div class="row">
-
-                          <!-- Grid column -->
-                          <div class="col-md-12">
-                            <div class="md-form mb-0">
-                              <textarea type="text" id="form-contact-message" name="loinhan" class="form-control md-textarea" rows="3"></textarea>
-                              <label for="form-contact-message">Lời nhắn (có thể để trống)</label>
-                            </div>
-                          </div>
-                          <div class="col-md-12" id="test-giokham">
-
-                          </div>
-                          <!-- Grid column -->
-
-                        </div>
-                        <div style="text-align: center;" class="mt-3">
-                          <input type="submit" name="themlichhen" id="themlichhen" class="btn btn-primary btn-rounded" value="THÊM LỊCH HẸN">
-                        </div>
-                      </form>
-                      <?php
+                    if (isset($_SESSION['khachhang'])) {
+                      include("./formlichhen.php");
                     }
                     else {
                     // ?>
@@ -1476,15 +1077,15 @@
                 <div class="testimonial text-center">
                   <!--Avatar-->
                   <div class="avatar mx-auto mb-4">
-                    <img src="./img/Images/khachhang/ChiThuYen.PNG" class="rounded-circle img-fluid">
+                    <img src="./img/AnhDaiDien/nick-young.jpg" class="rounded-circle img-fluid" style="overflow: hidden;" height="150px" width="150px">
                   </div>
                   <!--Content-->
                   <p><i class="fas fa-quote-left"></i>Nhờ người bạn đồng nghiệp giới thiệu, 
-                  chị biết đến I-Dent và thực hiện bọc răng sứ tại đây. Giờ chị có thể tự tin cười nói vui vẻ 
-                  mà không e ngại hàm răng ố vàng. Cảm ơn Bác sĩ Tùng, Bác sĩ Khanh và I-Dent rất nhiều.
+                  chị biết đến TQueen và thực hiện bọc răng sứ tại đây. Giờ chị có thể tự tin cười nói vui vẻ 
+                  mà không e ngại hàm răng ố vàng. Cảm ơn Bác sĩ Lee Ji-eun, Bác sĩ Dương Mịch và TQueen rất nhiều.
                   </p>
 
-                  <h4>Chị Thu Yến - Long An - 36 tuổi</h4>
+                  <h4>Anh Trương Tiểu Phàm - Long An - 37 tuổi</h4>
                   <p>Bọc 20 răng toàn sứ - <strong>Zirconia</strong></p>
 
                 </div>
@@ -1498,16 +1099,16 @@
                 <div class="testimonial text-center">
                   <!--Avatar-->
                   <div class="avatar mx-auto mb-4">
-                    <img src="./img/Images/khachhang/ChiUyen.PNG" class="rounded-circle img-fluid">
+                    <img src="./img/AnhDaiDien/meme-chong-nanh.jpg" class="rounded-circle" style="overflow: hidden" height="150px" width="150px">
                   </div>
                   <!--Content-->
                   <p><i class="fas fa-quote-left"></i>Mất răng, mà còn mất ngay răng cửa nên ảnh hưởng đến thẩm mỹ của chị lắm.
                    Chị chọn trồng Implant vì nhìn tự nhiên và giống với các răng thật còn lại nhất. 
                    Quá trình làm răng nhẹ nhàng, thoải mái và sau đó cũng không sưng đau gì nhiều.
-                   Nhờ bác Tùng và I-Dent mà chị có được răng mới bền đẹp, có thể tự tin cười nói như xưa.
+                   Nhờ bác Bác và TQueen mà chị có được răng mới bền đẹp, có thể tự tin cười nói như xưa.
                   </p>
 
-                  <h4>Chị Uyên – TP Hồ Chí Minh - 27 tuổi</h4>
+                  <h4>Anh Trần Ngọc Phong – TP Hồ Chí Minh - 27 tuổi</h4>
                   <p>Mất 1 răng – Trồng 1 trụ Implant Straumann</p>
 
                 </div>
@@ -1521,17 +1122,17 @@
                 <div class="testimonial text-center">
                   <!--Avatar-->
                   <div class="avatar mx-auto mb-4">
-                    <img src="./img/Images/khachhang/CoTam.PNG" class="rounded-circle img-fluid">
+                    <img src="./img/AnhDaiDien/nguyen-van-a.jpg" class="rounded-circle" style="overflow: hidden" height="150px" width="150px">
                   </div>
                   <!--Content-->
-                  <p><i class="fas fa-quote-left"></i> Lúc trước mất răng cô làm hàm tháo lắp, mà chỉ 1, 2 năm sau hàm nó lỏng lẻo, 
-                  thức ăn mắc vào rất khó chịu. Bất tiện không thể xài được nữa, nên cô quyết định cấy Implant luôn. 
-                  Đến I-Dent nhờ bác sĩ tư vấn rõ ràng và lên kế hoạch cho cô, nên cô quyết định làm Implant toàn hàm luôn. 
-                  Bác sĩ Tùng chích thuốc tê, rồi làm nhẹ nhàng, không đau. Có răng rồi cô ăn uống thoải mái hơn hàm tháo lắp nhiều, 
-                  sức khỏe cũng tốt hơn. Cô cám ơn I-Dent và bác Tùng nhiều.
+                  <p><i class="fas fa-quote-left"></i> Lúc trước mất răng tôi làm hàm tháo lắp, mà chỉ 1, 2 năm sau hàm nó lỏng lẻo, 
+                  thức ăn mắc vào rất khó chịu. Bất tiện không thể xài được nữa, nên tôi quyết định cấy Implant luôn. 
+                  Đến TQueen nhờ bác sĩ tư vấn rõ ràng và lên kế hoạch cho tôi, nên tôi quyết định làm Implant toàn hàm luôn. 
+                  Bác sĩ Tùng chích thuốc tê, rồi làm nhẹ nhàng, không đau. Có răng rồi tôi ăn uống thoải mái hơn hàm tháo lắp nhiều, 
+                  sức khỏe cũng tốt hơn. Tôi cám ơn TQueen và bác Lee Ji-eun nhiều.
                   </p>
 
-                  <h4>Cô Tâm - TP Hồ Chí Minh - 68 tuổi</h4>
+                  <h4>Anh Nguyễn Văn A - TP Hồ Chí Minh - 28 tuổi</h4>
                   <p>Mất răng toàn hàm – Trồng Implannt All on 4</p>
 
                 </div>
@@ -1545,16 +1146,16 @@
                 <div class="testimonial text-center">
                   <!--Avatar-->
                   <div class="avatar mx-auto mb-4">
-                    <img src="./img/Images/khachhang/Peter.PNG" class="rounded-circle img-fluid">
+                    <img src="./img/AnhDaiDien/meme-01.jpg" class="rounded-circle img-fluid">
                   </div>
                   <!--Content-->
-                  <p><i class="fas fa-quote-left"></i>Tôi rất ấn tượng với cơ sở vật chất và máy móc ở I-Dent, 
-                  hiện đại không thua kém gì ở nước ngoài. Và khi được biết bác sĩ Tùng cũng từng tu nghiệp ở 
-                  Pháp nên tôi càng yên tâm hơn. Sau khi cấy 2 răng Implant, tôi ăn uống dễ dàng hơn nhiều,
-                   khuôn mặt cũng cân đối và trẻ hơn trước. Tôi hoàn toàn yên tâm khi điều trị tại I-Dent.
+                  <p><i class="fas fa-quote-left"></i>Em rất ấn tượng với cơ sở vật chất và máy móc ở TQueen, 
+                  hiện đại không thua kém gì ở nước ngoài. Và khi được biết bác sĩ Lee Ji-eun cũng từng tu nghiệp ở 
+                  Pháp nên em càng yên tâm hơn. Sau khi cấy 2 răng Implant, em ăn uống dễ dàng hơn nhiều,
+                  . em hoàn toàn yên tâm khi điều trị tại TQueen.
                   </p>
 
-                  <h4>Mr. Peter Bush - Canada - 43 tuổi</h4>
+                  <h4>Em Mạc Phàm - Canada - 14 tuổi</h4>
                   <p>Mất 2 răng - Trồng 2 trụ Implant Mis C1</p>
 
                 </div>
@@ -1697,7 +1298,7 @@
     <div class="footer-copyright py-3 text-center">
       <div class="container-fluid">
         <p>
-          GPKD/MST/0312964786
+          GPKD/MST/0123456789
           <br/>
           Ngày cấp: 09/10/2014 bởi Sở Kế hoạch và Đầu tư Tp.Hồ Chí Minh
         </p>

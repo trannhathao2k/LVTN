@@ -98,8 +98,7 @@ if(!$_SESSION['bacsi']) {
 
                 <div class="row p-3">
                     <div class="col-lg-12 canhgiua" style="background-color: #40c4ff;height: 50px">
-                        <h5 class="font-weight-bold white-text">CHỌN DỊCH VỤ KHÁM CHỮA RĂNG</h5>
-                        
+                      <h5 class="font-weight-bold white-text">CHỌN DỊCH VỤ KHÁM CHỮA RĂNG</h5>                       
                     </div>
                     <div class="table-dichvu col-lg-12">
                         <table id="dt-material-checkbox" class="table table-striped" cellspacing="0" width="100%">
