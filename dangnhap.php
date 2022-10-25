@@ -34,7 +34,7 @@
             $_SESSION["err"] = "Tên tài khoản hoặc mật khẩu sai";
           }
           else {
-            // $_SESSION["admin"] = true;
+            $_SESSION["admin"] = true;
             header("location:./admin/index-admin.php");
           }
         }

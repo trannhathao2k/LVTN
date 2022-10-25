@@ -55,8 +55,8 @@ else {
       <script>
         //Check password == confirm_password != null
         var check = function() {
-            var pass = document.getElementById('passwd').value
-            var cf_pass = document.getElementById('confirmPass').value
+            var pass = document.getElementById('passwd').value;
+            var cf_pass = document.getElementById('confirmPass').value;
             var regex = /([a-zA-Z])[a-zA-Z0-9]{3,}/
 
             if (pass == cf_pass && pass != '' && pass.match(regex)) {

@@ -65,7 +65,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Nha khoa Implant I-Dent</title>
+  <title>Nha khoa Implant TQueen</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -182,16 +182,6 @@
 
           <!--Social Icons-->
           <ul class="nav navbar-nav nav-flex-icons ml-auto">
-            <!-- <li class="nav-item dropdown notifications-nav">
-              <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown01" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span></a>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown01">
-                <a class="dropdown-item" href="#">Log Out</a>
-                <a class="dropdown-item" href="#">My account</a>
-              </div>
-            </li> -->
             <?php if (isset($_SESSION['khachhang'])) { ?>
               <li class="nav-item dropdown notifications-nav">
                 <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown01" data-toggle="dropdown"
@@ -281,10 +271,10 @@
         <div class="container h-100 d-flex justify-content-center align-items-center">
           <div class="row pt-5 mt-3">
             <div class="col-12 col-md-6 text-center text-md-left p-2">
-              <div class="white-text">
+              <div class="white-text" style="margin-left: -20px;">
                 <h1 class="h1-responsive font-weight-bold mt-md-5 mt-0 wow fadeInLeft" data-wow-delay="0.3s">NHA KHOA IMPLANT TQUEEN</h1>
                 <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-                <p class="wow fadeInLeft mb-3" data-wow-delay="0.3s">
+                <p class="wow fadeInLeft mb-3" data-wow-delay="0.3s" >
                 Nha khoa TQueen là một địa chỉ nha khoa uy tín hàng đầu về kỹ thuật cấy ghép implant hiện nay. 
                 Với TS-BS Lee Ji-eun với 10 năm kinh nghiệp trong lĩnh vực.
                 </p>
@@ -302,64 +292,6 @@
         </div>
       </div>
     </section>
-
-    <!--Modal Info-->
-    <!-- <div class="modal fade modal-ext" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h4 class="modal-title w-100 py-3" id="myModalLabel">Information about clinic</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body text-center">
-
-            <h5 class="title mb-3 font-weight-bold">Opening hours:</h5>
-
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Monday - Friday:</td>
-                  <td>8 AM - 9 PM</td>
-                </tr>
-                <tr>
-                  <td>Saturday:</td>
-                  <td>9 AM - 6 PM</td>
-                </tr>
-                <tr>
-                  <td>Sunday:</td>
-                  <td>11 AM - 6 PM</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h5 class="title mb-4 font-weight-bold">Addresses:</h5>
-
-            <div class="row">
-
-              <div class="col-md-6">
-
-                <p>125 Street<br> New York, NY 10012</p>
-
-              </div>
-
-              <div class="col-md-5">
-
-                <p>Allen Street 5<br> New York, NY 10012</p>
-
-              </div>
-
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-rounded btn-info waves-effect" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
   </header>
   <!--/Navigation & Intro-->
@@ -634,7 +566,7 @@
     <div class="streak streak-photo streak-long-2" style="background-image: url('https://mdbootstrap.com/img/Others/doctor.jpg');">
       <div class="flex-center mask rgba-blue-strong">
         <div class="container text-center white-text">
-          <h3 class="text-center text-white text-uppercase font-weight-bold mt-5 mb-5 pt-3 wow fadeIn" data-wow-delay="0.2s">NHA KHOA I-DENT ĐIỂM ĐẾN TIN CẬY CỦA KHÁCH HÀNG TRONG VÀ NGOÀI NƯỚC</h3>
+          <h3 class="text-center text-white text-uppercase font-weight-bold mt-5 mb-5 pt-3 wow fadeIn" data-wow-delay="0.2s">NHA KHOA TQUEEN ĐIỂM ĐẾN TIN CẬY CỦA KHÁCH HÀNG TRONG VÀ NGOÀI NƯỚC</h3>
 
           <!--First row-->
           <div class="row text-white text-center wow fadeIn" data-wow-delay="0.2s">
@@ -681,9 +613,9 @@
       <section id="team" class="mt-4 mb-2">
 
         <!--Section heading-->
-        <h3 class="text-center mb-5 mt-5 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">GẶP GỠ CÁC TIẾN SĨ - BÁC SĨ CỦA I-DENT</h3>
+        <h3 class="text-center mb-5 mt-5 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">GẶP GỠ CÁC TIẾN SĨ - BÁC SĨ CỦA TQUEEN</h3>
         <!--Section description-->
-        <p class="text-center grey-text w-responsive mx-auto mb-5 wow fadeIn" data-wow-delay="0.2s">Nha khoa Implant I-DENT với Đội ngũ BS và Chuyên gia nhiều năm 
+        <p class="text-center grey-text w-responsive mx-auto mb-5 wow fadeIn" data-wow-delay="0.2s">Nha khoa Implant TQUEEN với Đội ngũ BS và Chuyên gia nhiều năm 
           kinh nghiệm trong lĩnh vực cấy ghép Implant, bọc răng sứ, dán sứ veneer,chỉnh hình niềng răng,...</p>
 
         <!--First row-->
@@ -863,7 +795,7 @@
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">VTV3</b> về Nha khoa I-Dent</p>
+            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">VTV3</b> về Nha khoa TQueen</p>
 
           </div>
           <!-- Grid column -->
@@ -876,7 +808,7 @@
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">HTV7</b> về Nha khoa I-Dent</p>
+            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">HTV7</b> về Nha khoa TQueen</p>
 
           </div>
           <!-- Grid column -->
@@ -888,7 +820,7 @@
       <!-- Section: Download -->
       <hr>
       <h3 class="text-center mb-3 mt-3 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">
-        VIDEOS CẢM NHẬN CỦA KHÁCH HÀNG VỀ NHA KHOA I-DENT
+        VIDEOS CẢM NHẬN CỦA KHÁCH HÀNG VỀ NHA KHOA TQUEEN
       </h3>
       <section id="services" class="mt-3 pb-3">
 
@@ -1060,7 +992,7 @@
 
         <!--Section heading-->
         <h3 class="text-center mb-5 mt-5 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">
-          CẢM NHẬN CỦA KHÁCH HÀNG SAU KHI SỬ DỤNG DỊCH VỤ TẠI NHA KHOA I-DENT
+          CẢM NHẬN CỦA KHÁCH HÀNG SAU KHI SỬ DỤNG DỊCH VỤ TẠI NHA KHOA TQUEEN
         </h3>
 
         <div class="wrapper-carousel-fix">
@@ -1225,7 +1157,7 @@
 
         <!--First column-->
         <div class="col-md-3 col-lg-4 col-xl-2 mb-4">
-          <h6 class="text-uppercase font-weight-bold"><strong>KẾT NỐI VỚI I-DENT</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>KẾT NỐI VỚI TQUEEN</strong></h6>
           <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <div class="row">
             <div class="col-sm-3">
@@ -1254,7 +1186,7 @@
 
         <!--Second column-->
         <div class="col-md-5 col-lg-4 col-xl-5 mx-auto mb-4">
-          <h6 class="text-uppercase font-weight-bold"><strong>NHA KHOA IMPLANT I-DENT</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>NHA KHOA IMPLANT TQUEEN</strong></h6>
           <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p><i class="fas fa-map-marker-alt"></i>  CS1: 19U-19V Nguyễn Hữu Cảnh, P.19, Q.Bình Thạnh, TP.HCM</p>
           <p><i class="fas fa-map-marker-alt"></i>  CS2: 193A-195 Hùng Vương, P.9, Q.5, TP.HCM</p>

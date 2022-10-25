@@ -2,7 +2,7 @@
 
       <!-- Section: Edit Account -->
       <section class="section">
-      <form method="POST" action="./action-thembacsi.php" enctype="multipart/form-data">
+      <form method="POST" action="./action-themnhanvien.php" enctype="multipart/form-data">
         <!-- First row -->
         <div class="row">
           <!-- First column -->
@@ -100,7 +100,7 @@
                 <div class="card-body card-body-cascade text-center">
 
                     <!-- Edit Form -->
-                    <form method="POST" action="./action-thembacsi.php">
+                    <form method="POST" action="./action-themnhanvien.php">
                     <!-- First row -->
 
                     <div class="row">
@@ -108,33 +108,33 @@
                         <!-- First column -->
                         <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" name="unamebs" id="unamebs" class="form-control validate" value="<?php
-                                $id_bs = "SELECT MAX(id_bs) id_max FROM bacsi";
-                                $query_id_bs = mysqli_query($mysqli, $id_bs);
-                                $row_id_bs = mysqli_fetch_array($query_id_bs);
-                                $id_bs_new = $row_id_bs['id_max'] + 1;
-                                if($row_id_bs['id_max'] < 10) {
-                                echo "bacsi0$id_bs_new";
+                            <input type="text" name="unamenv" id="unamenv" class="form-control validate" value="<?php
+                                $id_nv = "SELECT MAX(id_nv) id_max FROM nhanvien";
+                                $query_id_nv = mysqli_query($mysqli, $id_nv);
+                                $row_id_nv = mysqli_fetch_array($query_id_nv);
+                                $id_nv_new = $row_id_nv['id_max'] + 1;
+                                if($row_id_nv['id_max'] < 10) {
+                                echo "nhanvien0$id_nv_new";
                                 }
                                 else {
-                                    echo "bacsi$id_bs_new";
+                                    echo "nhanvien$id_nv_new";
                                 }
                             ?>" readonly disabled>
-                            <label for="unamebs" data-error="wrong" data-success="right">Tên đăng nhập</label>
+                            <label for="unamenv" data-error="wrong" data-success="right">Tên đăng nhập</label>
                         </div>
                         </div>
                         <!-- Second column -->
                         <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" name="passwdbs" id="passwdbs" class="form-control validate" value="<?php
-                                if($row_id_bs['id_max'] < 10) {
-                                    echo "bacsi0$id_bs_new";
+                            <input type="text" name="passwdnv" id="passwdnv" class="form-control validate" value="<?php
+                                if($row_id_nv['id_max'] < 10) {
+                                    echo "nhanvien0$id_nv_new";
                                 }
                                 else {
-                                    echo "bacsi$id_bs_new";
+                                    echo "nhanvien$id_nv_new";
                                 }
                             ?>" readonly disabled>
-                            <label for="passwdbs" data-error="wrong" data-success="right">Mật khẩu</label>
+                            <label for="passwdnv" data-error="wrong" data-success="right">Mật khẩu</label>
                         </div>
                         </div>
                     </div>
@@ -145,16 +145,16 @@
                         <!-- First column -->
                         <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" name="hotenbs" id="hotenbs" class="form-control validate" required>
-                            <label for="hotenbs" data-error="wrong" data-success="right">Họ tên bác sĩ</label>
+                            <input type="text" name="hotennv" id="hotennv" class="form-control validate" required>
+                            <label for="hotennv" data-error="wrong" data-success="right">Họ tên nhân viên</label>
                         </div>
                         </div>
 
                         <!-- Second column -->
                         <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="email" name="emailbs" id="emailbs" class="form-control validate">
-                            <label for="emailbs" data-error="wrong" data-success="right">Email</label>
+                            <input type="email" name="emailnv" id="emailnv" class="form-control validate">
+                            <label for="emailnv" data-error="wrong" data-success="right">Email</label>
                         </div>
                         </div>
                     </div>
@@ -166,16 +166,16 @@
                         <!-- First column -->
                         <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" name="sdtbs" id="sdtbs" class="form-control validate">
-                            <label for="sdtbs">Số điện thoại</label>
+                            <input type="text" name="sdtnv" id="sdtnv" class="form-control validate">
+                            <label for="sdtnv">Số điện thoại</label>
                         </div>
                         </div>
                         <!-- Second column -->
 
                         <div class="col-md-3">
                         <div class="md-form mb-0">
-                            <input type="text" name="tuoibs" id="tuoibs" class="form-control validate">
-                            <label for="tuoibs" data-error="wrong" data-success="right">Năm sinh</label>
+                            <input type="text" name="namsinhnv" id="namsinhnv" class="form-control validate">
+                            <label for="namsinhnv" data-error="wrong" data-success="right">Năm sinh</label>
                         </div>
                         </div>
                         <div class="col-md-3 ">
@@ -189,12 +189,8 @@
                     <!-- Second row -->
 
                     <div class="row">
-                        <div class="col-md-6">
-                        <div class="md-form mb-5">
-                            <textarea type="text" name="gioithieu" id="gioithieu" class="md-textarea form-control"></textarea>
-                            <label for="gioithieu">Giới thiệu</label>
-                        </div>
-                        </div>
+                        <!-- <div class="col-md-6">
+                        </div> -->
 
                         <div class="col-md-6">
                         <div class="row">
@@ -205,29 +201,13 @@
                             </div> 
                             <div class="col-md-6 mb-0">
                             <div class="md-form mb-0 ml-0 form-group">
-                                <input class="form-check-input" type="radio" id="nam" name="gioitinhbs" value="Nam">
+                                <input class="form-check-input" type="radio" id="nam" name="gioitinhnv" value="Nam">
                                 <label for="nam" class="form-check-label">Nam</label>
-                                <input class="form-check-input" type="radio" id="nu" name="gioitinhbs" value="Nu">
+                                <input class="form-check-input" type="radio" id="nu" name="gioitinhnv" value="Nu">
                                 <label for="nu" class="form-check-label">Nữ</label>
                             </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" name="chuyenmon" id="chuyenmon" class="form-control validate">
-                            <label for="chuyenmon">Chuyên môn</label>
-                        </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="md-form mb-0">
-                                <input type="text" name="kinhnghiem" id="kinhnghiem" class="form-control validate">
-                                <label for="kinhnghiem">Kinh nghiệm</label>
-                            </div>
                         </div>
                     </div>
 
@@ -237,13 +217,13 @@
                         <!-- First column -->
                         <div class="col-md-12">
                             <div class="md-form mb-0">
-                                <textarea type="text" name="diachibs" id="diachibs" class="md-textarea form-control" rows="3"></textarea>
-                                <label for="diachibs">Địa chỉ</label>
+                                <textarea type="text" name="diachinv" id="diachinv" class="md-textarea form-control" rows="3"></textarea>
+                                <label for="diachinv">Địa chỉ</label>
                             </div>
                         </div>
                         <div class="col-md-12" hidden>
                             <div class="md-form mb-0">
-                            <input id="avatarbs" name="avatarbs" value=""></input>     
+                            <input id="avatarnv" name="avatarnv" value=""></input>     
                             </div>
                         </div>
                     </div>
@@ -252,7 +232,7 @@
                     <!-- Fourth row -->
                     <div class="row">
                         <div class="col-md-12 text-center my-4">
-                        <input type="submit" name="registerbs" id="registerbs" value="TẠO TÀI KHOẢN" class="btn btn-info btn-rounded">
+                        <input type="submit" name="registernv" id="registernv" value="TẠO TÀI KHOẢN" class="btn btn-info btn-rounded">
                         </div>
                     </div>
                     <!-- Fourth row -->
@@ -279,4 +259,4 @@
 
     </div>
 
-    <script type="text/javascript" src="./js/uploadimage-bs.js"></script>
+    <script type="text/javascript" src="./js/uploadimage-nv.js"></script>

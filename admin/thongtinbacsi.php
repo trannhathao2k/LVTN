@@ -1,5 +1,5 @@
 <?php
-    if(!$_SESSION['admin']) {
+    if(isset($_SESSION['admin']) == false) {
         header("location:../index.php");
     }
 ?>
@@ -17,14 +17,14 @@
                         <div class="">
                             <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                                 <colgroup>
-                                    <col width="5%" span="1">
-                                    <col width="15%" span="1">
-                                    <col width="10%" span="4">
-                                    <col width="15%" span="1">
-                                    <col width="10%" span="1">
-                                    <col width="25%" span="1">
-                                    <col width="10%" span="1">
-                                    <col width="10%" span="2">
+                                    <col width="10" span="1">
+                                    <col width="50" span="1">
+                                    <col width="100" span="3">
+                                    <col width="150" span="2">
+                                    <col width="150" span="1">
+                                    <col width="50" span="1">
+                                    <col width="200" span="1">
+                                    <col width="50" span="1">
                                 </colgroup>
                                 <thead>
                                     <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
@@ -32,7 +32,7 @@
                                         <th class="font-weight-bold">Ảnh đại diện</th>
                                         <th class="font-weight-bold">Tên bác sĩ</th>
                                         <th class="font-weight-bold">Username</th>
-                                        <th class="font-weight-bold">Password</th>
+                                        <!-- <th class="font-weight-bold">Password</th> -->
                                         <th class="font-weight-bold">SĐT</th>
                                         <th class="font-weight-bold">Email</th>
                                         <th class="font-weight-bold">Địa chỉ</th>
@@ -50,10 +50,9 @@
                                             ?>
                                                 <tr>
                                                     <td><?php echo $row_bs['id_bs'] ?></td>
-                                                    <td><img src="../img/AnhDaiDien/<?php echo $row_bs['anhdaidien_bs']?>" width="40px" height="40px"></td>
+                                                    <td><img src="<?php echo $row_bs['anhdaidien_bs']?>" width="40px" height="40px"></td>
                                                     <td><?php echo $row_bs['hoten_bs'] ?></td>
-                                                    <td><?php echo $row_bs['username_bs'] ?></td>
-                                                    <td><?php echo $row_bs['password_bs'] ?></td>
+                                                    <td><?php echo $row_bs['username_bs'] ?></td>                                               
                                                     <td><?php echo $row_bs['sdt_bs'] ?></td>
                                                     <td><?php echo $row_bs['email_bs'] ?></td>
                                                     <td><?php echo $row_bs['diachi_bs'] ?></td>

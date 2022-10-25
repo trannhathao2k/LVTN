@@ -315,10 +315,24 @@
 
   </section>
 
+  <section>
+    
+    <div class="card card-cascade narrower">
+      <!-- <div style="height: 100px;">H</div> -->
+      <!-- Card image -->
+      <div class="view view-cascade gradient-card-header blue-gradient mb-5 mt-5">
+        <canvas id="sales"></canvas>
+      </div>
+      <!-- Card image -->
+
+
+    </div>
+  </section>
+
   <!-- <div class="default-color-dark ml-0 mr-0" style="height: 5px;width: 100%;margin-top: -50px;"></div> -->
   
   
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-lg-12">
         <div class="card card-cascade narrower">
           <div class="view view-cascade gradient-card-header light-blue lighten-1">
@@ -449,3 +463,151 @@
   
   
 </div>
+<script>
+  /*Global settings*/
+  Chart.defaults.global.defaultFontColor = '#fff';
+    $(function () {
+      var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+          label: "My First dataset",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(0,0,0,.15)",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          backgroundColor: "#4CAF50"
+        }, {
+          label: "My Second dataset",
+          fillColor: "rgba(255,255,255,.25)",
+          strokeColor: "rgba(255,255,255,.75)",
+          pointColor: "#fff",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(0,0,0,.15)",
+          data: [28, 48, 40, 19, 56, 27, 60]
+        }]
+      };
+
+      var dataOneLine = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+          label: "My First dataset",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(0,0,0,.15)",
+          data: [35, 55, 44, 58, 53, 55, 60],
+          backgroundColor: "#4CAF50"
+        }]
+      };
+
+      var option = {
+        responsive: true,
+        // set font color
+        scaleFontColor: "#fff",
+        // font family
+        defaultFontFamily: "'Roboto', sans-serif",
+        // background grid lines color
+        scaleGridLineColor: "rgba(255,255,255,.1)",
+        // hide vertical lines
+        scaleShowVerticalLines: false,
+      };
+
+      //line
+      var ctxL = document.getElementById("sales").getContext('2d');
+      var myLineChart = new Chart(ctxL, {
+        type: 'line',
+        data: {
+          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          datasets: [{
+              label: "My First dataset",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              backgroundColor: [
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)'
+              ],
+              borderWidth: 1,
+              data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+              label: "My Second dataset",
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              backgroundColor: [
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)',
+                'rgba(255, 255, 255, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)',
+                'rgba(255, 255, 255, 1)'
+              ],
+              borderWidth: 1,
+              data: [28, 48, 40, 19, 86, 27, 90]
+            }
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+
+
+      $('#dark-mode').on('click', function (e) {
+
+        e.preventDefault();
+
+        $('footer').toggleClass('mdb-color lighten-4 dark-card-admin');
+        $('body, .navbar').toggleClass('white-skin navy-blue-skin');
+        $(this).toggleClass('white text-dark btn-outline-black');
+        $('body').toggleClass('dark-bg-admin');
+        $('.card').toggleClass('dark-card-admin');
+        $('h6, .card, p, td, th, i, li a, h4, input, label').not(
+          '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+        $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+        $('.gradient-card-header').toggleClass('white black lighten-4');
+        $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+
+        for (let i = 0; i <= 5; i++) {
+
+          myLineChart.data.datasets[0].data[i] = (Math.random(i) * 90);
+          myLineChart.data.datasets[1].data[i] = (Math.random(i) * 90);
+        }
+        myLineChart.update();
+
+      });
+    });
+</script>

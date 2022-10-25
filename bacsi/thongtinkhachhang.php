@@ -1,6 +1,6 @@
 <?php
     if(!$_SESSION['bacsi']) {
-        header("location:./index.php");
+        header("location:../index.php");
     }
 ?>
 
@@ -45,7 +45,7 @@
                         while($row_kh = mysqli_fetch_array($query_kh)) {
                     ?>
                         <tr>
-                            <td class="canhgiua mt-0 mb-0"><img src="../img/AnhDaiDien/<?php echo $row_kh['anhdaidien_kh'] ?>" width="50px" height="50px"></td>
+                            <td class="canhgiua mt-0 mb-0"><img src="../<?php echo $row_kh['anhdaidien_kh'] ?>" width="50px" height="50px"></td>
                             <td><?php echo $row_kh['hoten_kh'] ?></td>
                             <td><?php echo $row_kh['gioitinh_kh'] ?></td>
                             <td><?php echo $row_kh['tuoi_kh'] ?></td>

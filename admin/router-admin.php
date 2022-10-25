@@ -20,6 +20,12 @@
         case "thembacsi":
             include("thembacsi.php");            
             break;
+        case "thongtinnhanvien":
+            include("thongtinnhanvien.php");            
+            break;
+        case "themnhanvien":
+            include("themnhanvien.php");            
+            break;
         default:
             include("trangchu-admin.php");            
     }

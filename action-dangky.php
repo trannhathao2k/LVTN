@@ -118,14 +118,11 @@ if (isset($_POST['register'])) {
                           $mysqli->query($sqlAddUser);
 
                           NotificationAndGoto("Đăng ký thành công, mời đăng nhập!","dangnhap.php");
-
                       }
                       else
                       {
                           echo NotificationAndGoback("Không upload được file ảnh");
-                      }
-                      
-                      
+                      }                     
 
                   }else NotificationAndGoback("Giới tính không được để trống");
 
