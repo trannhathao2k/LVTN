@@ -50,7 +50,7 @@
                                             ?>
                                                 <tr>
                                                     <td><?php echo $row_bs['id_bs'] ?></td>
-                                                    <td><img src="<?php echo $row_bs['anhdaidien_bs']?>" width="40px" height="40px"></td>
+                                                    <td><img src="../<?php echo $row_bs['anhdaidien_bs']?>" width="40px" height="40px"></td>
                                                     <td><?php echo $row_bs['hoten_bs'] ?></td>
                                                     <td><?php echo $row_bs['username_bs'] ?></td>                                               
                                                     <td><?php echo $row_bs['sdt_bs'] ?></td>

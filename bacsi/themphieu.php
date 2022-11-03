@@ -2,10 +2,6 @@
 include("../config.php");
 include("../autoload.php");
 
-if(!$_SESSION['bacsi']) {
-    header("location:./index.php");
-}
-
 if (isset($_GET['mabs']) && isset($_GET['ngaylap']) && isset($_GET['maphieu']) && isset($_GET['tenkh'])) {
     $mabs = $_GET['mabs'];
     $ngaylap = $_GET['ngaylap'];
@@ -19,7 +15,7 @@ else {
     $tenkh = 0;
 }
 
-$taophieu = "INSERT INTO phieukhambenh VALUES (null, '$maphieu', null, '$tenkh' ,$mabs, null, '$ngaylap', 0, 0)";
+$taophieu = "INSERT INTO phieukhambenh VALUES (null, '$maphieu', null, '$tenkh' ,$mabs, null, '$ngaylap', 0, 0, 'Đang khám')";
 $mysqli->query($taophieu);
 
 // echo $taophieu;
@@ -42,6 +38,7 @@ while($row_dichvu = mysqli_fetch_array($query_dichvu)) {
 
 $capnhat = "UPDATE phieukhambenh SET tongchiphi = $tongphi WHERE maphieu = '$maphieu'";
 $mysqli->query($capnhat);
+
 echo '<meta http-equiv="refresh" content="0;url=index-bs.php?route=trangcanhan">';
 
 ?>

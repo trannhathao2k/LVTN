@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="../css/dangky/bootstrap.min.css">
   <!-- Material Design Bootstrap -->
   <link rel="stylesheet" href="../css/dangky/mdb.min.css">
+  <link rel="stylesheet" href="../css/dangky/mdb.css">
   <link rel="stylesheet" type="text/css" href="../css/dangky/addons/datatables.min.css">
   <link rel="stylesheet" href="../css/dangky/addons/datatables-select.min.css">
   <link rel="stylesheet" href="../css/dangky/style.css">
@@ -140,22 +141,26 @@
                       </thead>
                       <tbody>
                       <?php
-                          $ttphieu = "SELECT * FROM phieukhambenh, bacsi WHERE phieukhambenh.id_bs = bacsi.id_bs ORDER BY phieukhambenh.ngaylapphieu DESC";
-                          $query_ttphieu = mysqli_query($mysqli, $ttphieu);
-                          while($row_ttphieu = mysqli_fetch_array($query_ttphieu)) {
+                        $ttphieu = "SELECT * FROM phieukhambenh, bacsi WHERE phieukhambenh.id_bs = bacsi.id_bs ORDER BY phieukhambenh.ngaylapphieu DESC";
+                        $query_ttphieu = mysqli_query($mysqli, $ttphieu);
+                        while($row_ttphieu = mysqli_fetch_array($query_ttphieu)) {
                       ?>
-                          <tr>
+                          <tr <?php
+                            // if ($row_ttphieu['trangthaithuphi'] != 0) {
+                            //   echo 'style="background-color: #84ffff"';
+                            // }
+                          ?>>
                               <td><?php echo $row_ttphieu['maphieu'] ?></td>
                               <td><?php echo $row_ttphieu['tenkhachhang'] ?></td>
                               <td><?php echo $row_ttphieu['hoten_bs'] ?></td>
                               <td><?php echo $row_ttphieu['ngaylapphieu'] ?></td>
                               <td class="font-weight-bold red-text"><?php echo number_format($row_ttphieu['tongchiphi'], 0, '', '.') ?> VNĐ</td>
-                              <td><?php
+                              <td class="text-center"><?php
                                   if($row_ttphieu['trangthaithuphi'] == 0) {
                                       echo '<button type="button" class="btn btn-sm btn-outline-deep-orange waves-effect mt-0 mb-0" style="width: 120px">Chờ thu phí</button>';
                                   }
                                   else {
-                                      echo '<button type="button" class="btn btn-sm btn-outline-success waves-effect mt-0 mb-0" style="width: 120px">Đã thu phí</button>';
+                                      echo '<a class="text-success mt-0 mb-0 font-weight-bold">Đã thu phí <i class="far fa-check-circle"></i></a>';
                                   }
                               ?></td>
                               <td>
@@ -184,7 +189,29 @@
                                                 <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p>Chọn tài khoản (nếu có)</p>
+                                              <section>
+                                                <select id="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-select md-form m-3" searchable="Tìm kiếm..">
+                                                  <option value="0">Chưa có tài khoản</option>
+                                                  <?php
+                                                    $sql_kh = "SELECT * FROM khachhang";
+                                                    $query_kh = mysqli_query($mysqli, $sql_kh);
+                                                    while($kh = mysqli_fetch_array($query_kh)){
+                                                      ?>
+                                                        <option value="<?php echo $kh['id_kh'] ?>" data-icon="../<?php echo $kh['anhdaidien_kh'] ?>"
+                                                          class="rounded-circle">
+                                                          <ul>
+                                                            <li><?php echo $kh['hoten_kh'] ?> - </li>
+                                                            <li><?php echo $kh['sdt_kh'] ?></li>
+                                                            <li> - <?php echo $kh['email_kh'] ?></li>
+                                                          </ul></option>
+                                                      <?php
+                                                    }
+                                                  ?>
+                                                </select>
+                                                <label for="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-main-label">Chọn tài khoản</label>
+                                              </section>
+                                              
+                                              
                                             </div>                                 
                                         </div>
                                         <hr>
@@ -226,7 +253,7 @@
                                         }
                                         else {
                                           ?>
-                                            <button type="button" class="btn btn-sm btn-rounded btn-primary waves-effect">In lại hóa đơn</button>
+                                            <button type="button" class="btn btn-sm btn-rounded btn-primary waves-effect" onclick='openPrint("<?php echo $maphieu ?>")'>In lại hóa đơn</button>
                                           <?php
                                         }
                                       ?>
@@ -242,8 +269,9 @@
 
                                                   <p class="pt-3 pr-2">Bạn chắc chắn đã nhận đủ tiền phí khám chữa răng ?</p>
 
-                                                  <a type="button" class="btn btn-info btn-sm" onclick='xacnhan("<?php echo $maphieu ?>", "<?php echo $MaNV ?>")'>Có, tôi đã nhận đủ</a>
-                                                  <a type="button" class="btn btn-outline-info btn-sm waves-effect" data-dismiss="modal">Không, tôi chưa nhận</a>
+                                                  <?php $maphieu02 = $row_ttphieu['id_phieu'] ?>
+                                                  <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#frameModalTopInfoDemo-02-<?php echo $maphieu ?>" data-backdrop="false" onclick='xacnhan("<?php echo $maphieu02 ?>", "<?php echo $MaNV ?>")'>Có, tôi đã nhận đủ</a>
+                                                  <a type="button" class="btn btn-outline-success btn-sm waves-effect" data-dismiss="modal">Không, tôi chưa nhận</a>
 
                                                 </div>
                                               </div>
@@ -251,7 +279,30 @@
                                             <!-- Content -->
                                           </div>
                                         </div>
-                                      </section>                             
+                                      </section>
+                                      
+                                      <section>
+                                        <div class="modal fade top" id="frameModalTopInfoDemo-02-<?php echo $maphieu ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                          aria-hidden="true" data-backdrop="false">
+                                          <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+                                            <!-- Content -->
+                                            <div class="modal-content">
+                                              <!-- Body -->
+                                              <div class="modal-body">
+                                                <div class="row d-flex justify-content-center align-items-center">
+
+                                                  <p class="pt-3 pr-2">Bạn có muốn in hóa đơn cho khách hàng ?</p>
+
+                                                  <?php $maphieu02 = $row_ttphieu['id_phieu'] ?>
+                                                  <a type="button" class="btn btn-info btn-sm" onclick='xacnhan("<?php echo $maphieu02 ?>", "<?php echo $MaNV ?>");openPrint("<?php echo $maphieu ?>");'>Có, giúp tôi in</a>
+                                                  <a type="button" class="btn btn-outline-info btn-sm waves-effect" data-dismiss="modal" onclick="location.reload()">Không cần in hóa đơn</a>                                             
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <!-- Content -->
+                                          </div>
+                                        </div>
+                                      </section>  
                                       
                                       <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
                                     </div>
@@ -304,15 +355,6 @@
   <script type="text/javascript" src="../js/dangky/addons/datatables-select.min.js"></script>
   <!-- Custom scripts -->
   <script>
-    // SideNav Initialization
-    $(".button-collapse").sideNav();
-
-    let container = document.querySelector('.custom-scrollbar');
-    var ps = new PerfectScrollbar(container, {
-      wheelSpeed: 2,
-      wheelPropagation: true,
-      minScrollbarLength: 20
-    });
 
     $('#dtMaterialDesignExample').DataTable();
 
@@ -337,21 +379,50 @@
     $('#dtMaterialDesignExample_wrapper .mdb-select, #dt-material-checkbox_wrapper .mdb-select').materialSelect();
     $('#dtMaterialDesignExample_wrapper .dataTables_filte, #dt-material-checkbox_wrapper .dataTables_filterr').find(
       'label').remove();
+  </script>
+  <script>
+    // Data Picker Initialization
+    $('.datepicker').pickadate();
 
-      // Material Select Initialization
-    $(document).ready(function () {
-      $('.mdb-select').material_select();
+
+    // Tooltips Initialization
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
     });
 
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    var container = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(container, {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+    // Material Select Initialization
+    $(document).ready(function () {
+      $('.mdb-select').materialSelect();
+    });
+
+  </script>
+  <script>
     function xacnhan(maphieu, manv) {
+      var taiKhoan = document.getElementById(maphieu).value;
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("xacnhan").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
         }
       };
-      xmlhttp.open("GET", "xacnhanthanhtoan.php?maphieu=" + maphieu + "&manv=" + manv, true);
+      xmlhttp.open("GET", "xacnhanthanhtoan.php?maphieu=" + maphieu + "&manv=" + manv + "&taikhoan=" + taiKhoan, true);
       xmlhttp.send();
+    }
+
+    function openPrint(id) {
+      windowChild = window.open('./hoadon.php?id=' + id, "windowChild", "width=1500, height=1000");
+      location.reload();
+      return false;
     }
 
   </script>

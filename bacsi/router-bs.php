@@ -24,6 +24,9 @@
         case "khachhang":
             include("thongtinkhachhang.php");
             break;
+        case "lichhenkham":
+            include("lichhenkham.php");
+            break;
         default:
             include("trangcanhan-bs.php");            
     }

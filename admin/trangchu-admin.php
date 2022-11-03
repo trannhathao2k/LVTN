@@ -5,7 +5,7 @@
 ?>
 
 <div class="container-fluid">
-  <section class="mt-md-4 pt-md-2 mb-5 pb-4">
+  <section class="mt-md-4 pt-md-2 mb-3 pb-4">
 
     <!-- Grid row -->
     <div class="row">
@@ -317,17 +317,109 @@
 
   <section>
     
-    <div class="card card-cascade narrower">
+    <div class="card card-cascade narrower mt-0">
       <!-- <div style="height: 100px;">H</div> -->
       <!-- Card image -->
-      <div class="view view-cascade gradient-card-header blue-gradient mb-5 mt-5">
+      <div class="row mt-5 mr-5 mb-0" style="display: flex;justify-content: right;">
+        <div class="col-lg-2 p-2">
+          <select id="chonloai" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+            <option value="doanhThu" selected>Doanh thu</option>
+            <option value="doanhThuBacSi">Doanh thu theo bác sĩ</option>
+            <option value="khachHang">Khách hàng</option>
+            <option value="taiKhoanMoi">Tài khoản mới</option>
+            <option value="luotTruyCap">Lượt truy cập</option>
+          </select>
+          <label for="chonloai" class="mdb-main-label">Chọn loại</label>
+        </div>
+        <div class="col-lg-3 p-2" id="selectDoctor" style="display: none;">
+          <select id="chonbacsi" class="mdb-select md-form" multiple searchable="Tìm kiếm.." onchange="thongke()">
+            <?php
+              $sql_bacsi = "SELECT * FROM bacsi";
+              $query_bacsi = mysqli_query($mysqli, $sql_bacsi);
+              while($bacsi = mysqli_fetch_array($query_bacsi)) {
+                ?>
+                  <option value="<?php echo $bacsi['id_bs'] ?>" data-icon="../<?php echo $bacsi['anhdaidien_bs'] ?>"
+                      class="rounded-circle">
+                    <?php echo $bacsi['hoten_bs'] ?></option>
+                <?php
+              }
+            ?>
+          </select>
+          <label for="chonbacsi" class="mdb-main-label">Chọn bác sĩ</label>
+        </div>
+        
+        <div class="col-lg-2 p-2">
+          <select id="thongke" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+            <option value="thongKeThang" selected>Tháng</option>
+            <option value="thongKeNam">Năm</option>
+            <option value="thongKeTatCa">Tất cả</option>
+          </select>
+          <label for="thongke" class="mdb-main-label">Thống kê theo</label>
+        </div>
+        <div class="col-lg-2 p-2" style="display: block" id="selectMonth">
+          <select id="chonThang" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+              <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $monthCurrent = date("m");
+                for($i = 1; $i <= 12; $i++) {                  
+                  if($i == $monthCurrent) {
+                    echo '<option value="'.$i.'" selected>Tháng '.$i.'</option>';
+                  }
+                  else {
+                    echo '<option value="'.$i.'">Tháng '.$i.'</option>';
+                  }
+                }
+              ?>
+          </select>
+          <label for="chonThang" class="mdb-main-label">Chọn tháng</label>
+        </div>
+        <!-- <div class="col-lg-2">
+          <p id="test"></p>
+        </div> -->
+        <div class="col-lg-2 p-2" style="display: block" id="selectYear">
+          <select id="chonNam" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+              <?php
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $yearCurrent = date("Y");
+                for($l = ($yearCurrent - 10); $l <= ($yearCurrent); $l++) {
+                  if($l == $yearCurrent) {
+                    echo '<option value="'.$l.'" selected>Năm '.$l.'</option>';
+                  }
+                  else {
+                    echo '<option value="'.$l.'">Năm '.$l.'</option>';
+                  }
+                }
+              ?>
+          </select>
+          <label for="chonNam" class="mdb-main-label">Chọn năm</label>
+        </div>
+      </div>
+      <div class="view view-cascade gradient-card-header blue-gradient mb-5" style="margin-top: -50px;">      
+        <h6 style="position: absolute; top: 15px; left: 20px; font-size: 12px;" id="donvitinh"></h6>
         <canvas id="sales"></canvas>
+        <h6 style="position: absolute; bottom: 0px; right: 20px; font-size: 12px;" id="donvithoigian"></h6>
       </div>
       <!-- Card image -->
 
-
     </div>
+    <p id="doanhthuthang1"></p>
   </section>
+  <div class="card">
+    <div class="card-body">
+      <input type="text" id="dataDoanhThuThang" value="105, 0, 0, 23, 63, 213, 109, 95, 162, 0, 284, 18, 21, 0, 2, 7, 28, 23, 0, 1, 113, 14, 25, 7, 4, 17, 0, 3, 8, 0, 0">
+      <input type="text" id="testDT" >
+      <textarea id="textareaDT"></textarea>
+      <!-- <script>
+        function dateLastMonth() {
+            let date = new Date("2022-08-20");
+            date.setDate(0);
+            return date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+        }
+        dateNew = dateLastMonth();
+        document.getElementById('testDT').innerHTML = dateNew;
+      </script> -->
+    </div>
+  </div>
 
   <!-- <div class="default-color-dark ml-0 mr-0" style="height: 5px;width: 100%;margin-top: -50px;"></div> -->
   
@@ -463,151 +555,3 @@
   
   
 </div>
-<script>
-  /*Global settings*/
-  Chart.defaults.global.defaultFontColor = '#fff';
-    $(function () {
-      var data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(0,0,0,.15)",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          backgroundColor: "#4CAF50"
-        }, {
-          label: "My Second dataset",
-          fillColor: "rgba(255,255,255,.25)",
-          strokeColor: "rgba(255,255,255,.75)",
-          pointColor: "#fff",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(0,0,0,.15)",
-          data: [28, 48, 40, 19, 56, 27, 60]
-        }]
-      };
-
-      var dataOneLine = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(0,0,0,.15)",
-          data: [35, 55, 44, 58, 53, 55, 60],
-          backgroundColor: "#4CAF50"
-        }]
-      };
-
-      var option = {
-        responsive: true,
-        // set font color
-        scaleFontColor: "#fff",
-        // font family
-        defaultFontFamily: "'Roboto', sans-serif",
-        // background grid lines color
-        scaleGridLineColor: "rgba(255,255,255,.1)",
-        // hide vertical lines
-        scaleShowVerticalLines: false,
-      };
-
-      //line
-      var ctxL = document.getElementById("sales").getContext('2d');
-      var myLineChart = new Chart(ctxL, {
-        type: 'line',
-        data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [{
-              label: "My First dataset",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              backgroundColor: [
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)'
-              ],
-              borderColor: [
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)'
-              ],
-              borderWidth: 1,
-              data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-              label: "My Second dataset",
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
-              backgroundColor: [
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)',
-                'rgba(255, 255, 255, 0.2)'
-              ],
-              borderColor: [
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)',
-                'rgba(255, 255, 255, 1)'
-              ],
-              borderWidth: 1,
-              data: [28, 48, 40, 19, 86, 27, 90]
-            }
-          ]
-        },
-        options: {
-          responsive: true
-        }
-      });
-
-
-      $('#dark-mode').on('click', function (e) {
-
-        e.preventDefault();
-
-        $('footer').toggleClass('mdb-color lighten-4 dark-card-admin');
-        $('body, .navbar').toggleClass('white-skin navy-blue-skin');
-        $(this).toggleClass('white text-dark btn-outline-black');
-        $('body').toggleClass('dark-bg-admin');
-        $('.card').toggleClass('dark-card-admin');
-        $('h6, .card, p, td, th, i, li a, h4, input, label').not(
-          '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
-        $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
-        $('.gradient-card-header').toggleClass('white black lighten-4');
-        $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
-
-        for (let i = 0; i <= 5; i++) {
-
-          myLineChart.data.datasets[0].data[i] = (Math.random(i) * 90);
-          myLineChart.data.datasets[1].data[i] = (Math.random(i) * 90);
-        }
-        myLineChart.update();
-
-      });
-    });
-</script>

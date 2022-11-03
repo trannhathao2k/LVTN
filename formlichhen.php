@@ -46,10 +46,10 @@
 
         <!-- Grid column -->
         <div class="col-md-6">
-        <div class="md-form">
-            <input type="text" id="form-contact-phone" name="sdtkh" class="form-control" value="<?php echo $row_thongtinkh['sdt_kh'] ?>" readonly>
-            <label for="form-contact-phone" class="">Số điện thoại</label>
-        </div>
+            <div class="md-form">
+                <input type="text" id="form-contact-phone" name="sdtkh" class="form-control" value="<?php echo $row_thongtinkh['sdt_kh'] ?>" readonly>
+                <label for="form-contact-phone" class="">Số điện thoại</label>
+            </div>
         </div>
         <!-- Grid column -->
 
@@ -103,7 +103,7 @@
                         ?>
                         <div class="row">
                             <div class="col-md-4">
-                            <img src="./img/AnhDaiDien/<?php echo $row_bs['anhdaidien_bs'] ?>" width="100%">
+                            <img src="<?php echo $row_bs['anhdaidien_bs'] ?>" width="100%">
                             </div>
                             <div class="col-md-8">
                             <ul style="text-align: left;">
@@ -330,248 +330,248 @@
             <label for="giokham">Chọn giờ khám</label>
             <div class="modal fade modal-ext" id="modal-info-giokham" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <!--Content-->
-                <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 py-3" id="myModalLabel">CHỌN GIỜ KHÁM</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div id="gio">
-                    
-                </div>
+                <div class="modal-dialog" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 py-3" id="myModalLabel">CHỌN GIỜ KHÁM</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Body-->
+                    <div id="gio">
+                        
+                    </div>
 
-                <div id="chongiokham">
-                    <?php
-                        $checkTime = 0;
-                        if($lich == 1) {
-                            if ($day < 10) {
-                                $day = '0'.$day;
-                            }
+                    <div id="chongiokham">
+                        <?php
+                            $checkTime = 0;
+                            if($lich == 1) {
+                                if ($day < 10) {
+                                    $day = '0'.$day;
+                                }
 
-                            $dateCreate = $lichhen['ngaydangky'];
-                            $date = date_create("$dateCreate");
-                            $day = date_format($date, "d");
-                            $month = date_format($date, "m");
-                            $year = date_format($date, "Y");
-                            $mabs = $lichhen['id_bs'];
-                            
-                            echo '<div class="row p-5">';
-                            
-                            $bacsi = "SELECT * FROM bacsi WHERE id_bs = $mabs";
-                            $query_bacsi = mysqli_query($mysqli, $bacsi);
-                            $row_bacsi = mysqli_fetch_array($query_bacsi);
-                            echo
-                                '<div class="col-lg-4 col-md-6">
-                                    <div class=" overlay z-depth-1 z-depth-2 canhgiua">
-                                        <img src="./img/AnhDaiDien/'.$row_bacsi['anhdaidien_bs'].'" class="img-fluid">
-                                    </div>
-                                    <h6 class="mb-3 text-center mt-3 font-weight-bold text-uppercase">BS. '.$row_bacsi['hoten_bs'].'</h6>
-                                </div>';
-                            
-                            $giokham = "SELECT * FROM lichhentruoc WHERE id_bs = $mabs AND ngaydangky = '$year-$month-$day'";
-                            $query_giokham = mysqli_query($mysqli, $giokham);
-                            $lich = array("F", "F", "F", "F", "F", "F");
-                            while($row_giokham = mysqli_fetch_array($query_giokham)) {
-                                // echo '<div>'.$row_giokham['giodangky'].'</div>';
-                                switch($row_giokham['giodangky']) {
-                                    case "07:00:00":
-                                        $lich[0] = "T";
-                                        break;
-                                    case "08:30:00":
-                                        $lich[1] = "T";
-                                        break;
-                                    case "10:00:00":
-                                        $lich[2] = "T";
-                                        break;
-                                    case "13:00:00":
-                                        $lich[3] = "T";
-                                        break;
-                                    case "14:30:00":
-                                        $lich[4] = "T";
-                                        break;
-                                    case "16:00:00":
-                                        $lich[5] = "T";
-                                        break;
-                                }
-                            }
-                            
-                            // foreach ($lich as $value) {
-                            //     echo '<p>'.$value.'</p>';
-                            // }
-                            
-                            echo '<div class="col-lg-8 col-md-12 text-left">
-                                    <div>
-                                        ';
-                            
-                            $ca_lv = "SELECT * FROM calamviecbs WHERE id_bs = $mabs AND ngaylamviec = '$year-$month-$day'";
-                            $query_calv = mysqli_query($mysqli, $ca_lv);
-                            $row_calv = mysqli_fetch_array($query_calv);
-                            
-                            // if($row_calv['calamviec'] === "A") {
-                            //     $casang = true;
-                            //     $cachieu = true;
-                            // }
-                            // else if ($row_calv['calamviec'] === "S") {
-                            //     $casang = true;
-                            //     $cachieu = false;
-                            // }
-                            // else {
-                            //     $casang = false;
-                            //     $cachieu = true;
-                            // }
-                            
-                            if ($row_calv['calamviec'] != "C") {
-                                echo '<div class="div canhgiua" style="width: 100%;">
-                                    <h6 class="font-weight-bold text-center">CA SÁNG</h6>
-                                </div>
-                            
-                                <div style="display: flex; justify-content: space-between;">';
-                                //Ô chọn giờ 1
-                                if ($lich[0] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                            7h00 - 8h30<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(1)" data-dismiss="modal" style="min-width: 130px;">
-                                            7h00 - 8h30<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                            
-                                //Ô chọn giờ 2
-                                if($lich[1] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                            8h30 - 10h00<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(2)" data-dismiss="modal" style="min-width: 130px;">
-                                            8h30 - 10h00<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                            
-                                //Ô chọn giờ 3
-                                if($lich[2] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                            10h00 - 11h30<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(3)" data-dismiss="modal" style="min-width: 130px;">
-                                            10h00 - 11h30<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                                echo '
-                                    </div>
-                                </div>';
-                            }
-                            
-                            if ($row_calv['calamviec'] !== "S") {
-                                echo '
-                                <hr>
-                                <div>
-                                <div class="div canhgiua" style="width: 100%;">
-                                    <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
-                                </div>
+                                $dateCreate = $lichhen['ngaydangky'];
+                                $date = date_create("$dateCreate");
+                                $day = date_format($date, "d");
+                                $month = date_format($date, "m");
+                                $year = date_format($date, "Y");
+                                $mabs = $lichhen['id_bs'];
                                 
-                                <div style="display: flex; justify-content: space-between;">
-                            ';
-                            
-                            //Ô chọn giờ 4
-                            if($lich[3] == "T") {
+                                echo '<div class="row p-5">';
+                                
+                                $bacsi = "SELECT * FROM bacsi WHERE id_bs = $mabs";
+                                $query_bacsi = mysqli_query($mysqli, $bacsi);
+                                $row_bacsi = mysqli_fetch_array($query_bacsi);
                                 echo
-                                    '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                       13h00 - 14h30<br/>
-                                        ĐÃ ĐƯỢC CHỌN
-                                    </a>';
-                            }
-                            else {
-                                echo '
-                                    <a class="btn btn-sm btn-outline-warning" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
-                                       13h00 - 14h30<br/>
-                                        CÒN TRỐNG
-                                    </a>
+                                    '<div class="col-lg-4 col-md-6">
+                                        <div class=" overlay z-depth-1 z-depth-2 canhgiua">
+                                            <img src="'.$row_bacsi['anhdaidien_bs'].'" class="img-fluid">
+                                        </div>
+                                        <h6 class="mb-3 text-center mt-3 font-weight-bold text-uppercase">BS. '.$row_bacsi['hoten_bs'].'</h6>
+                                    </div>';
+                                
+                                $giokham = "SELECT * FROM lichhentruoc WHERE id_bs = $mabs AND ngaydangky = '$year-$month-$day'";
+                                $query_giokham = mysqli_query($mysqli, $giokham);
+                                $lich = array("F", "F", "F", "F", "F", "F");
+                                while($row_giokham = mysqli_fetch_array($query_giokham)) {
+                                    // echo '<div>'.$row_giokham['giodangky'].'</div>';
+                                    switch($row_giokham['giodangky']) {
+                                        case "07:00:00":
+                                            $lich[0] = "T";
+                                            break;
+                                        case "08:30:00":
+                                            $lich[1] = "T";
+                                            break;
+                                        case "10:00:00":
+                                            $lich[2] = "T";
+                                            break;
+                                        case "13:00:00":
+                                            $lich[3] = "T";
+                                            break;
+                                        case "14:30:00":
+                                            $lich[4] = "T";
+                                            break;
+                                        case "16:00:00":
+                                            $lich[5] = "T";
+                                            break;
+                                    }
+                                }
+                                
+                                // foreach ($lich as $value) {
+                                //     echo '<p>'.$value.'</p>';
+                                // }
+                                
+                                echo '<div class="col-lg-8 col-md-12 text-left">
+                                        <div>
+                                            ';
+                                
+                                $ca_lv = "SELECT * FROM calamviecbs WHERE id_bs = $mabs AND ngaylamviec = '$year-$month-$day'";
+                                $query_calv = mysqli_query($mysqli, $ca_lv);
+                                $row_calv = mysqli_fetch_array($query_calv);
+                                
+                                // if($row_calv['calamviec'] === "A") {
+                                //     $casang = true;
+                                //     $cachieu = true;
+                                // }
+                                // else if ($row_calv['calamviec'] === "S") {
+                                //     $casang = true;
+                                //     $cachieu = false;
+                                // }
+                                // else {
+                                //     $casang = false;
+                                //     $cachieu = true;
+                                // }
+                                
+                                if ($row_calv['calamviec'] != "C") {
+                                    echo '<div class="div canhgiua" style="width: 100%;">
+                                        <h6 class="font-weight-bold text-center">CA SÁNG</h6>
+                                    </div>
+                                
+                                    <div style="display: flex; justify-content: space-between;">';
+                                    //Ô chọn giờ 1
+                                    if ($lich[0] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                                7h00 - 8h30<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(1)" data-dismiss="modal" style="min-width: 130px;">
+                                                7h00 - 8h30<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
+                                
+                                    //Ô chọn giờ 2
+                                    if($lich[1] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                                8h30 - 10h00<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(2)" data-dismiss="modal" style="min-width: 130px;">
+                                                8h30 - 10h00<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
+                                
+                                    //Ô chọn giờ 3
+                                    if($lich[2] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                                10h00 - 11h30<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(3)" data-dismiss="modal" style="min-width: 130px;">
+                                                10h00 - 11h30<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
+                                    echo '
+                                        </div>
+                                    </div>';
+                                }
+                                
+                                if ($row_calv['calamviec'] !== "S") {
+                                    echo '
+                                    <hr>
+                                    <div>
+                                    <div class="div canhgiua" style="width: 100%;">
+                                        <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between;">
                                 ';
-                            }
-                            
-                            //Ô chọn giờ 5
-                            if($lich[4] == "T") {
-                                echo
-                                    '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                        14h30 - 16h00<br/>
-                                        ĐÃ ĐƯỢC CHỌN
-                                    </a>';
-                            }
-                            else {
-                                echo '
-                                    <a class="btn btn-sm btn-outline-warning" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
-                                        14h30 - 16h00<br/>
-                                        CÒN TRỐNG
-                                    </a>
-                                ';
-                            }
-                            
-                            //Ô chọn giờ 6
-                            if($lich[5] == "T") {
-                                echo
-                                    '<a class="btn btn-sm btn-outline-success" style="min-width: 130px;">
-                                        16h00 - 17h30<br/>
-                                        ĐÃ ĐƯỢC CHỌN
-                                    </a>';
-                            }
-                            else {
-                                echo '
-                                    <a class="btn btn-sm btn-outline-warning" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
-                                        16h00 - 17h30<br/>
-                                        CÒN TRỐNG
-                                    </a>
-                                ';
-                            }
-                            
-                            // echo $year.'-'.$month.'-'.$day;
-                            
-                            echo '</div>
-                            </div>';
-                            
-                            }
-                            
-                            echo '</div>
-                            </div>';
+                                
+                                //Ô chọn giờ 4
+                                if($lich[3] == "T") {
+                                    echo
+                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                        13h00 - 14h30<br/>
+                                            ĐÃ ĐƯỢC CHỌN
+                                        </a>';
+                                }
+                                else {
+                                    echo '
+                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
+                                        13h00 - 14h30<br/>
+                                            CÒN TRỐNG
+                                        </a>
+                                    ';
+                                }
+                                
+                                //Ô chọn giờ 5
+                                if($lich[4] == "T") {
+                                    echo
+                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                            14h30 - 16h00<br/>
+                                            ĐÃ ĐƯỢC CHỌN
+                                        </a>';
+                                }
+                                else {
+                                    echo '
+                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
+                                            14h30 - 16h00<br/>
+                                            CÒN TRỐNG
+                                        </a>
+                                    ';
+                                }
+                                
+                                //Ô chọn giờ 6
+                                if($lich[5] == "T") {
+                                    echo
+                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                            16h00 - 17h30<br/>
+                                            ĐÃ ĐƯỢC CHỌN
+                                        </a>';
+                                }
+                                else {
+                                    echo '
+                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
+                                            16h00 - 17h30<br/>
+                                            CÒN TRỐNG
+                                        </a>
+                                    ';
+                                }
+                                
+                                // echo $year.'-'.$month.'-'.$day;
+                                
+                                echo '</div>
+                                </div>';
+                                
+                                }
+                                
+                                echo '</div>
+                                </div>';
 
-                            $checkTime = 1;
-                        }
-                        if ($checkTime == 0) {
-                            echo '<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>';
-                        }
-                    ?>
-                    
-                </div>
+                                $checkTime = 1;
+                            }
+                            if ($checkTime == 0) {
+                                echo '<h6 class="mt-3 mb-3 red-text d-flex align-items-center justify-content-center">Vui lòng chọn bác sĩ và ngày làm việc để chọn giờ khám đặt trước</h6>';
+                            }
+                        ?>
+                        
+                    </div>
 
-                <div class="modal-footer">                                                               
-                    <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
+                    <div class="modal-footer">                                                               
+                        <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect ml-3 mr-3" data-dismiss="modal">ĐÓNG</button>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
 

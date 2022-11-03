@@ -9,18 +9,20 @@ if(!$_SESSION['nhanvien']) {
 }
 
 
-if (isset($_GET['maphieu']) && isset($_GET['manv'])) {
+if (isset($_GET['maphieu']) && isset($_GET['manv']) && isset($_GET['taikhoan'])) {
     $maphieu = $_GET['maphieu'];
     $manv = $_GET['manv'];
+    $taikhoan = $_GET['taikhoan'];
 }
 else {
     $maphieu = 0;
     $manv = null;
+    $taikhoan = null;
 }
 
-$xacnhan = "UPDATE phieukhambenh SET trangthaithuphi = 1, id_nv = $manv WHERE maphieu = '$maphieu'";
+$xacnhan = "UPDATE phieukhambenh SET trangthaithuphi = 1, id_nv = $manv, id_kh = $taikhoan WHERE id_phieu = '$maphieu'";
 $mysqli->query($xacnhan);
-echo '<meta http-equiv="refresh" content="0;url=index-nv.php">';
+// echo '<meta http-equiv="refresh" content="0;url=index-nv.php">';
 // echo $xacnhan;
 
 ?>

@@ -35,12 +35,12 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="../css/dangky/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bacsi/bootstrap.min.css">
   <!-- Material Design Bootstrap -->
-  <link rel="stylesheet" href="../css/dangky/mdb.min.css">
-  <link rel="stylesheet" type="text/css" href="../css/dangky/addons/datatables.min.css">
-  <link rel="stylesheet" href="../css/dangky/addons/datatables-select.min.css">
-  <link rel="stylesheet" href="../css/dangky/style.css">
+  <link rel="stylesheet" href="../css/bacsi/mdb.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/bacsi/addons/datatables.min.css">
+  <link rel="stylesheet" href="../css/bacsi/addons/datatables-select.min.css">
+  <link rel="stylesheet" href="../css/bacsi/style.css">
   <script src="https://kit.fontawesome.com/00537c301f.js" crossorigin="anonymous"></script>
   <!-- Your custom styles (optional) -->
   <style>
@@ -207,6 +207,17 @@
         }
       };
       xmlhttp.open("GET", "reset.php", true);
+      xmlhttp.send();
+    }
+
+    function ketthuc(maphieu) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("ketthuc").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        }
+      };
+      xmlhttp.open("GET", "ketthucphienlamviec.php?maphieu=" + maphieu, true);
       xmlhttp.send();
     }
 

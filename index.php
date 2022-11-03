@@ -1424,7 +1424,7 @@
           document.getElementById("chongiokham").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
       }
     };
-    xmlhttp.open("GET", "giokham.php?mabs=" + mabs + "&day=" + day + "&month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    xmlhttp.open("GET", "giokham.php?mabs=" + mabs + "&day=" + day + "&month=" + (currentMonth + 1) + "&year=" + currentYear + "&thaotac=khachhang", true);
     xmlhttp.send();
   }
   
