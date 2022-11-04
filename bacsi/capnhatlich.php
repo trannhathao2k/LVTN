@@ -78,8 +78,8 @@ echo '
                     <div class="modal-body">
                     <div class="row d-flex justify-content-center align-items-center">
                         <p class="pt-3 pr-2">Bạn chắc chắn muốn xóa lịch hẹn khám này ?</p>
-                        <a type="button" class="btn btn-primary btn-sm" onclick="xoalich(<?php echo $dulieu['id_lichtaikham'] ?>)">Có, tôi chắc chắn</a>
-                        <a type="button" class="btn btn-outline-primary btn-sm waves-effect" data-dismiss="modal">Không, tôi không muốn xóa</a>
+                        <a type="button" class="btn btn-danger btn-sm" onclick="xoalich(<?php echo $dulieu['id_lichtaikham'] ?>)">Có, tôi chắc chắn</a>
+                        <a type="button" class="btn btn-outline-danger btn-sm waves-effect" data-dismiss="modal">Không, tôi không muốn xóa</a>
                     </div>
                     </div>
                 </div>

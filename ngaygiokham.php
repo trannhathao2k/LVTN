@@ -15,12 +15,6 @@
         $year = date("y");
     }
 
-    // $taophieu = "DELETE FROM temp02";
-    // $mysqli->query($taophieu);
-
-    // $taophieu02 = "INSERT INTO temp02 VALUES (null, $mabs)";
-    // $mysqli->query($taophieu02);
-
     if($mabs != 0) {
         $day = date("d");
         $str = "$year-$month-1";

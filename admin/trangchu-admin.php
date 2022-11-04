@@ -4,7 +4,7 @@
     // }
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid" onload="thongke()">
   <section class="mt-md-4 pt-md-2 mb-3 pb-4">
 
     <!-- Grid row -->
@@ -322,17 +322,25 @@
       <!-- Card image -->
       <div class="row mt-5 mr-5 mb-0" style="display: flex;justify-content: right;">
         <div class="col-lg-2 p-2">
-          <select id="chonloai" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
-            <option value="doanhThu" selected>Doanh thu</option>
-            <option value="doanhThuBacSi">Doanh thu theo bác sĩ</option>
-            <option value="khachHang">Khách hàng</option>
-            <option value="taiKhoanMoi">Tài khoản mới</option>
-            <option value="luotTruyCap">Lượt truy cập</option>
+          <select id="chonloai" class="mdb-select colorful-select dropdown-primary md-form" onchange="loadPage()">
+            <?php
+              if(isset($_GET['chonloai'])) {
+                $loai = $_GET['chonloai'];
+              }
+              else {
+                $loai = "doanhThu";
+              }
+            ?>
+            <option value="doanhThu" <?php if ($loai == "doanhThu") {echo 'selected';} ?>>Doanh thu</option>
+            <option value="doanhThuBacSi" <?php if ($loai == "doanhThuBacSi") {echo 'selected';} ?>>Doanh thu theo bác sĩ</option>
+            <option value="khachHang" <?php if ($loai == "khachHang") {echo 'selected';} ?>>Khách hàng</option>
+            <option value="taiKhoanMoi" <?php if ($loai == "taiKhoanMoi") {echo 'selected';} ?>>Tài khoản mới</option>
+            <option value="luotTruyCap" <?php if ($loai == "luotTruyCap") {echo 'selected';} ?>>Lượt truy cập</option>
           </select>
           <label for="chonloai" class="mdb-main-label">Chọn loại</label>
         </div>
         <div class="col-lg-3 p-2" id="selectDoctor" style="display: none;">
-          <select id="chonbacsi" class="mdb-select md-form" multiple searchable="Tìm kiếm.." onchange="thongke()">
+          <select id="chonbacsi" class="mdb-select md-form" multiple searchable="Tìm kiếm..">
             <?php
               $sql_bacsi = "SELECT * FROM bacsi";
               $query_bacsi = mysqli_query($mysqli, $sql_bacsi);
@@ -345,24 +353,46 @@
               }
             ?>
           </select>
+          <button class="btn-save btn btn-primary btn-sm" onclick ="loadPage()">LƯU</button>
           <label for="chonbacsi" class="mdb-main-label">Chọn bác sĩ</label>
         </div>
         
         <div class="col-lg-2 p-2">
-          <select id="thongke" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
-            <option value="thongKeThang" selected>Tháng</option>
-            <option value="thongKeNam">Năm</option>
-            <option value="thongKeTatCa">Tất cả</option>
+          <select id="thongke" class="mdb-select colorful-select dropdown-primary md-form" onchange="loadPage()">
+            <?php
+              if(isset($_GET['thongke'])) {
+                $thongke = $_GET['thongke'];
+              }
+              else {
+                $thongke = "thongKeThang";
+              }
+            ?>
+            <option value="thongKeThang" <?php if ($thongke == "thongKeThang") {echo 'selected';} ?>>Tháng</option>
+            <option value="thongKeNam" <?php if ($thongke == "thongKeNam") {echo 'selected';} ?>>Năm</option>
+            <option value="thongKeTatCa" <?php if ($thongke == "thongKeTatCa") {echo 'selected';} ?>>Tất cả</option>
           </select>
           <label for="thongke" class="mdb-main-label">Thống kê theo</label>
         </div>
-        <div class="col-lg-2 p-2" style="display: block" id="selectMonth">
-          <select id="chonThang" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+        <div class="col-lg-2 p-2" <?php
+              if(isset($_GET['thang'])) {
+                echo 'style="display: block"';
+              }
+              else {
+                echo 'style="display: none"';
+              }
+            ?> id="selectMonth">
+          <select id="chonThang" class="mdb-select colorful-select dropdown-primary md-form" onchange="loadPage()">
               <?php
               date_default_timezone_set('Asia/Ho_Chi_Minh');
               $monthCurrent = date("m");
+              if(isset($_GET['thang'])) {
+                $thang = $_GET['thang'];
+              }
+              else {
+                $thang = $monthCurrent;
+              }
                 for($i = 1; $i <= 12; $i++) {                  
-                  if($i == $monthCurrent) {
+                  if($i == $thang) {
                     echo '<option value="'.$i.'" selected>Tháng '.$i.'</option>';
                   }
                   else {
@@ -376,13 +406,26 @@
         <!-- <div class="col-lg-2">
           <p id="test"></p>
         </div> -->
-        <div class="col-lg-2 p-2" style="display: block" id="selectYear">
-          <select id="chonNam" class="mdb-select colorful-select dropdown-primary md-form" onchange="thongke()">
+        <div class="col-lg-2 p-2" <?php
+              if(isset($_GET['nam'])) {
+                echo 'style="display: block"';
+              }
+              else {
+                echo 'style="display: none"';
+              }
+            ?> id="selectYear">
+          <select id="chonNam" class="mdb-select colorful-select dropdown-primary md-form" onchange="loadPage()">
               <?php
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                 $yearCurrent = date("Y");
+                if(isset($_GET['nam'])) {
+                  $nam = $_GET['nam'];
+                }
+                else {
+                  $nam = $yearCurrent;
+                }
                 for($l = ($yearCurrent - 10); $l <= ($yearCurrent); $l++) {
-                  if($l == $yearCurrent) {
+                  if($l == $nam) {
                     echo '<option value="'.$l.'" selected>Năm '.$l.'</option>';
                   }
                   else {
@@ -404,22 +447,6 @@
     </div>
     <p id="doanhthuthang1"></p>
   </section>
-  <div class="card">
-    <div class="card-body">
-      <input type="text" id="dataDoanhThuThang" value="105, 0, 0, 23, 63, 213, 109, 95, 162, 0, 284, 18, 21, 0, 2, 7, 28, 23, 0, 1, 113, 14, 25, 7, 4, 17, 0, 3, 8, 0, 0">
-      <input type="text" id="testDT" >
-      <textarea id="textareaDT"></textarea>
-      <!-- <script>
-        function dateLastMonth() {
-            let date = new Date("2022-08-20");
-            date.setDate(0);
-            return date.getDate().toString() + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
-        }
-        dateNew = dateLastMonth();
-        document.getElementById('testDT').innerHTML = dateNew;
-      </script> -->
-    </div>
-  </div>
 
   <!-- <div class="default-color-dark ml-0 mr-0" style="height: 5px;width: 100%;margin-top: -50px;"></div> -->
   
@@ -555,3 +582,6 @@
   
   
 </div>
+
+<script>
+</script>

@@ -24,7 +24,24 @@
                     <i>&nbsp;Chưa hoàn thành</i>
                 </div>
                 <div class="col-lg-12 canhgiua mt-3">
-                    <a class="btn btn-sm success-color-dark">ÁP DỤNG LỊCH TRÌNH NIỀNG RĂNG</a>
+                    <?php
+                        $sql_check = "SELECT * FROM lichtaikham WHERE maphieu = '$maphieu' AND tieude = 'Tái khám định kỳ lần 24'";
+                        $query_check = mysqli_query($mysqli, $sql_check);
+                        if (mysqli_num_rows($query_check) == 0) {
+                            ?>
+                                <button class="btn btn-sm success-color-dark white-text" id="btn-apDungLT" onclick="niengrang('<?php echo $maphieu ?>');">ÁP DỤNG LỊCH TRÌNH NIỀNG RĂNG</button>
+                            <?php
+                        }
+
+                        $sql_check02 = "SELECT * FROM lichtaikham WHERE maphieu = '$maphieu'";
+                        $query_check02 = mysqli_query($mysqli, $sql_check02);
+                        if (mysqli_num_rows($query_check02) != 0) {
+                        ?>
+                            <button class="btn btn-sm danger-color-dark white-text" id="btn-xoaLT" onclick="xoatatca('<?php echo $maphieu ?>');">XÓA TẤT CẢ LỊCH KHÁM</button>
+                        <?php
+                        }
+                    ?>
+                    
                 </div>
                 
             </div>
@@ -68,13 +85,19 @@
                             } ?>" id="dulieu-<?php echo $lichtaikham['id_lichtaikham'] ?>" style="display: block;">
                                 <a>
                                     <span class="circle"><?php echo $stt; ?></span>
-                                    <span class="label"><?php echo $lichtaikham['tieude'] ?> &nbsp;&nbsp;<i style="font-size: 14px;font-weight: 400;"><?php echo date("d-m-Y" ,strtotime($lichtaikham['ngaytaikham'])).' '.date("H:i:s",strtotime($lichtaikham['giohen'])) ?></i></span>
+                                    <span class="label"><?php echo $lichtaikham['tieude'] ?> &nbsp;&nbsp;<i style="font-size: 14px;font-weight: 400;"><?php if($lichtaikham['giohen'] != NULL) {
+                                        echo date("d-m-Y" ,strtotime($lichtaikham['ngaytaikham'])).' '.date("H:i:s",strtotime($lichtaikham['giohen']));
+                                        }
+                                        else {
+                                            echo date("d-m-Y" ,strtotime($lichtaikham['ngaytaikham']));
+                                        }
+                                    ?></i></span>
                                 </a>
 
                                 <?php
                                     if ($lichtaikham['noidung'] != NULL) {
                                         ?>
-                                            <div class="step-content grey lighten-3">
+                                            <div class="step-content grey lighten-3" style="width: 1000px;">
                                                 <p class="<?php
                                                 if ($lichtaikham['trangthai'] == 0) {
                                                     echo 'grey-text';
@@ -323,6 +346,28 @@
             }
         };
         xmlhttp.open("GET", "xoalich.php?idlich=" + idlich, true);
+        xmlhttp.send();
+    }
+
+    function niengrang(maphieu) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("loadPage").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/niengRang.php?maphieu=" + maphieu, true);
+        xmlhttp.send();
+    }
+
+    function xoatatca(maphieu) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("loadPage").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/xoaLichTrinh.php?maphieu=" + maphieu, true);
         xmlhttp.send();
     }
 

@@ -148,16 +148,16 @@
                             else {
                               $row_lichhen = mysqli_fetch_array($query_lichhen);
                           ?>
-                          <td><?php echo $row_lichhen['id_lichhen'] ?></td>
-                          <td><?php echo $row_lichhen['ngaydangky'] ?></td>
-                          <td><?php echo $row_lichhen['giodangky'] ?></td>
-                          <td><?php echo $row_lichhen['hoten_bs'] ?></td>
-                          <td><?php echo $row_lichhen['loinhan'] ?></td>
-                          <td class="canhgiua">
-                            <a class="badge cyan canhgiua" style="width: 25px; height: 25px" onclick="capnhatlichhen(<?php echo $MaKH ?>)" data-placement="right" title="Cập nhật lịch hẹn">
-                              <i class="far fa-edit"></i>
-                            </a>
-                          </td>
+                            <td><?php echo $row_lichhen['id_lichhen'] ?></td>
+                            <td><?php echo $row_lichhen['ngaydangky'] ?></td>
+                            <td><?php echo $row_lichhen['giodangky'] ?></td>
+                            <td><?php echo $row_lichhen['hoten_bs'] ?></td>
+                            <td><?php echo $row_lichhen['loinhan'] ?></td>
+                            <td class="canhgiua">
+                              <a class="badge cyan canhgiua" style="width: 25px; height: 25px" onclick="capnhatlichhen(<?php echo $MaKH ?>)" data-placement="right" title="Cập nhật lịch hẹn">
+                                <i class="far fa-edit"></i>
+                              </a>
+                            </td>
                           <?php } ?>
                         </tr>
                       </tbody>
@@ -172,17 +172,16 @@
               </div> -->
 
             <!-- Gird column -->
-            <div class="col-md-12" >
-
-              <div class="card" >
-                <div class="card-body" >
+            <div class="col-md-12">
+              <div class="card">            
+                <div class="card-body">                
                   <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%" style="border: 1px solid #01579b;">
                     <colgroup>
                       <col width="10%" span="1">
                       <col width="20%" span="4">
                       <col width="10%" span="1">
                     </colgroup>
-                      <thead>
+                    <thead>                      
                       <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
                         <th class="font-weight-bold">Mã phiếu
                         </th>
@@ -231,10 +230,9 @@
                                         <div class="row">
                                             <div class="col-md-6" style="text-align: left;">
                                                 <p><b>Tên khách hàng: </b> <?php echo $row_ttphieu['tenkhachhang'] ?></p>
-                                                <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p>Chọn tài khoản (nếu có)</p>
+                                              <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
                                             </div>                                 
                                         </div>
                                         <hr>
@@ -261,48 +259,119 @@
                                               $row_tongchiphi = mysqli_fetch_array($query_tong);
                                               echo number_format($row_tongchiphi['tongchiphi'], 0, '', '.');
                                             ?> VNĐ</b></h6>
+                                            <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Phí được giảm: <b class="red-text"><?php
+                                                if ($row_ttphieu['id_kh'] != NULL) {
+                                                  $sql_khachhang = "SELECT * FROM khachhang WHERE id_kh = $MaKH";
+                                                  $query_khachhang = mysqli_query($mysqli, $sql_khachhang);
+                                                  $row_khachhang = mysqli_fetch_array($query_khachhang);
+
+                                                  if ($row_khachhang['diemtichluy'] < 100) {
+                                                    echo "0 VNĐ";
+                                                    $giamgia = 0;
+                                                  }
+                                                  else if ($row_khachhang['diemtichluy'] >= 100 && $row_khachhang['diemtichluy'] < 300) {
+                                                    $giamgia = $row_tongchiphi['tongchiphi'] * 0.05;
+                                                    echo number_format($giamgia, 0, '', '.')." VNĐ";
+                                                  }
+                                                  else {
+                                                    $giamgia = $row_tongchiphi['tongchiphi'] * 0.1;
+                                                    echo number_format($giamgia, 0, '', '.')." VNĐ";
+                                                  }
+                                                }
+                                                
+                                                
+                                            ?></b></h6>
+                                            <h5 class="title mb-3 font-weight-bold" style="text-align: end;">THÀNH TIỀN: <b class="red-text"><?php
+                                              echo number_format($row_tongchiphi['tongchiphi'] - $giamgia, 0, '', '.')." VNĐ";
+                                            ?></b></h5>
+                                            
+                                          </div>                                         
+                                        </div>
+                                        <hr>
+                                        <h5>LỊCH TRÌNH KHÁM BỆNH</h5>
+                                        <div>
+                                          <div class="row">
+                                              <div class="col-md-12">
+
+                                                  <!-- Stepers Wrapper -->
+                                                  <ul class="stepper stepper-vertical mt-0">
+
+                                                  <!-- First Step -->
+                                                  <li class="completed">
+                                                      <a href="#!">
+                                                      <span class="circle">1</span>
+                                                      <span class="label">Chỉ định dịch vụ &nbsp;&nbsp;<i style="font-size: 14px;font-weight: 400;"><?php echo date("d-m-Y H:i:s" ,strtotime($row_ttphieu['ngaylapphieu'])) ?></i></span>
+                                                      </a>
+
+                                                      <div class="step-content grey lighten-3 text-left">
+                                                          <p>Chỉ định dịch vụ:</p>
+                                                          <ul><?php
+                                                              $sql_dsdichvu = "SELECT * FROM dichvuduocchidinh, dichvu WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND maphieu = '$maphieu'";
+                                                              $query_dsdichvu = mysqli_query($mysqli, $sql_dsdichvu);
+                                                              while($ds_dichvu = mysqli_fetch_array($query_dsdichvu)) {
+                                                                  ?>
+                                                                      <li><?php echo $ds_dichvu['ten_dichvu'] ?></li>
+                                                                  <?php
+                                                              }
+                                                          ?></ul>                         
+                                                      </div>
+                                                  </li>
+
+                                                  <?php
+                                                      $sql_taikham = "SELECT * FROM lichtaikham WHERE maphieu = '$maphieu' ORDER BY ngaytaikham ASC, giohen ASC";
+                                                      $query_taikham = mysqli_query($mysqli, $sql_taikham);
+                                                      $stt = 1;                 
+                                                      if (mysqli_num_rows($query_taikham) != 0) {
+                                                          while($lichtaikham = mysqli_fetch_array($query_taikham)) {
+                                                          ?>
+                                                          <li class="<?php if ($lichtaikham['trangthai'] == 1) {
+                                                              echo 'active';
+                                                          } ?>" id="dulieu-<?php echo $lichtaikham['id_lichtaikham'] ?>">
+                                                              <a>
+                                                                  <span class="circle"><?php echo ++$stt; ?></span>
+                                                                  <span class="label"><?php echo $lichtaikham['tieude'] ?> &nbsp;&nbsp;<i style="font-size: 14px;font-weight: 400;"><?php if($lichtaikham['giohen'] != NULL) {
+                                                                      echo date("d-m-Y" ,strtotime($lichtaikham['ngaytaikham'])).' '.date("H:i:s",strtotime($lichtaikham['giohen']));
+                                                                      }
+                                                                      else {
+                                                                          echo date("d-m-Y" ,strtotime($lichtaikham['ngaytaikham']));
+                                                                      }
+                                                                  ?></i></span>
+                                                              </a>
+
+                                                              <?php
+                                                                  if ($lichtaikham['noidung'] != NULL) {
+                                                                      ?>
+                                                                          <div class="step-content grey lighten-3" style="width: 650px;text-align: left;">
+                                                                              <p class="<?php
+                                                                              if ($lichtaikham['trangthai'] == 0) {
+                                                                                  echo 'grey-text';
+                                                                              }
+                                                                          ?>"><?php echo $lichtaikham['noidung'] ?></p>
+                                                                          </div>
+                                                                      <?php
+                                                                  }
+                                                              ?>                               
+                                                          </li>
+                                                          <?php
+                                                          }
+                                                      } 
+                                                  ?>
+                                                                  
+                                                  <li id="li-kt-02">
+                                                      <a href="#!">
+                                                          <span class="circle"><?php echo ++$stt ?></span>
+                                                          <span class="label">Kết thúc </span>
+                                                      </a>
+                                                  </li>
+
+                                                  </ul>            
+
+                                              </div>
                                           </div>
-                                          
                                         </div>
                                       </div>
                                       <!--Footer-->
-                                        <div class="modal-footer">
-                                          <div id="xacnhan"></div>
-                                          <?php
-                                            if ($row_tongchiphi['trangthaithuphi'] == 0) {
-                                              ?>
-                                                <button type="button" class="btn btn-sm btn-rounded btn-success waves-effect" data-toggle="modal" data-target="#frameModalTopInfoDemo-<?php echo $maphieu ?>" data-backdrop="false" >Xác nhận đã thanh toán</button>
-                                              <?php
-                                            }
-                                            else {
-                                              ?>
-                                                <button type="button" class="btn btn-sm btn-rounded btn-primary waves-effect">In lại hóa đơn</button>
-                                              <?php
-                                            }
-                                          ?>
-                                          <section>
-                                            <div class="modal fade top" id="frameModalTopInfoDemo-<?php echo $maphieu ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                              aria-hidden="true" data-backdrop="false">
-                                              <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
-                                                <!-- Content -->
-                                                <div class="modal-content">
-                                                  <!-- Body -->
-                                                  <div class="modal-body">
-                                                    <div class="row d-flex justify-content-center align-items-center">
-
-                                                      <p class="pt-3 pr-2">Bạn chắc chắn đã nhận đủ tiền phí khám chữa răng ?</p>
-
-                                                      <a type="button" class="btn btn-info btn-sm" onclick='xacnhan("<?php echo $maphieu ?>", "<?php echo $MaNV ?>")'>Có, tôi đã nhận đủ</a>
-                                                      <a type="button" class="btn btn-outline-info btn-sm waves-effect" data-dismiss="modal">Không, tôi chưa nhận</a>
-
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <!-- Content -->
-                                              </div>
-                                            </div>
-                                          </section>                             
-                                          
+                                        <div class="modal-footer">                                                             
                                           <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
                                         </div>
                                       </div>
@@ -310,7 +379,7 @@
                                 </div>
                               </div>
                               </td>
-                            </tr>0
+                            </tr>
                           <?php
                         }
                       ?>
@@ -400,7 +469,7 @@
     <!-- Copyright  -->
     <div class="footer-copyright py-3 text-center">
       <div class="container-fluid">
-        © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+        © 2022. NHA KHOA IMPLANT TQUEEN
 
       </div>
     </div>

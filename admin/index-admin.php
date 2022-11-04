@@ -273,420 +273,702 @@
       let selectMonth = document.querySelector('#selectMonth');
       let selectYear = document.querySelector('#selectYear');
 
-      window.onload = function() {
-        selectMonth.style.display = 'block';
-        selectYear.style.display = 'none';
+      function loadPage() {
+        var chonLoai = document.getElementById('chonloai').value;
+        var thongKeTheo = document.getElementById('thongke').value;
+        if (thongKeTheo == "thongKeThang") {
+          var thang = document.getElementById('chonThang').value;
+          window.location = "./index-admin.php?chonloai=" + chonLoai + "&thongke=" + thongKeTheo + "&thang=" + thang;
+        }
+        else if (thongKeTheo == "thongKeNam"){
+          var nam = document.getElementById('chonNam').value;
+          window.location = "./index-admin.php?chonloai=" + chonLoai + "&thongke=" + thongKeTheo + "&nam=" + nam;
+        }
+        else{
+          window.location = "./index-admin.php?chonloai=" + chonLoai + "&thongke=" + thongKeTheo;
+        }
       }
 
       //Sự kiện khi chọn Loại thống kê
-      function thongke() {
-        var thongKe = [];
-        var arrayLabel = [];
-        var chonLoai = document.getElementById('chonloai').value;
-        var thongKeTheo = document.getElementById('thongke').value;
+      function thongke() {}
+      var thongKe = [];
+      var arrayLabel = [];
+      var chonLoai = document.getElementById('chonloai').value;
+      var thongKeTheo = document.getElementById('thongke').value;
 
-        if (chonLoai == "doanhThuBacSi") {
-          selectDoctor.style.display = 'block';
-        }
-        else {
-          selectDoctor.style.display = 'none';
-        }
+      if (chonLoai == "doanhThuBacSi") {
+        selectDoctor.style.display = 'block';
+      }
+      else {
+        selectDoctor.style.display = 'none';
+      }
 
-        if (thongKeTheo == "thongKeThang") {
-          selectMonth.style.display = 'block';
-          selectYear.style.display = 'none';
-        }
-        else if (thongKeTheo == "thongKeNam") {
-          selectMonth.style.display = 'none';
-          selectYear.style.display = 'block';
-        }
-        else {
-          selectMonth.style.display = 'none';
-          selectYear.style.display = 'none';
-        }   
+      if (thongKeTheo == "thongKeThang") {
+        chonThang = document.getElementById('chonThang').value;
+      }
+      else if (thongKeTheo == "thongKeNam") {
+        chonNam = document.getElementById("chonNam").value;
+      }
 
-        if (chonLoai != "doanhThuBacSi") {
-          if (chonLoai == "doanhThu") {
-            document.getElementById('donvitinh').innerHTML = "Triệu VNĐ";
-            document.getElementById('donvithoigian').innerHTML = "Tháng";
-            if(thongKeTheo == "thongKeNam") {       
-              nameLabel = 'DOANH THU TRONG NĂM';
-              document.getElementById('donvithoigian').innerHTML = "Tháng";   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = 1; $i <= 12; $i++) {
-                  $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE MONTH(ngaylapphieu) = $i AND YEAR(ngaylapphieu) = $yearCurrent";
-                  $query_doanhthu = mysqli_query($mysqli, $doanhthu);
-                  $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
-                  if($tong_doanhthu == NULL) {
-                    $doanhthu_thang = 0;
-                  }
-                  else {
-                    $doanhthu_thang = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0); 
-                  }
-                  ?>
-                    thongKe.push(<?php echo $doanhthu_thang ?>);
-                  <?php 
-                }
-                  ?>
-              arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-            }
-            else if (thongKeTheo == "thongKeThang") {
-              nameLabel = 'DOANH THU TRONG THÁNG';
-              document.getElementById('donvithoigian').innerHTML = "Ngày";
-              var nameDay = 1;       
-              var chonThang = document.getElementById('chonThang').value;
-              // document.cookie = "thang=" + Number(chonThang);
-              var chonNam = document.getElementById('chonNam').value;
-              
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                function lastday($month_ld = '', $year_ld = '') {
-                  if (empty($month_ld)) {
-                      $month_ld = date('m');
-                  }
-                  if (empty($year_ld)) {
-                      $year_ld = date('Y');
-                  }
-                  $result = strtotime("{$year_ld}-{$month_ld}-01");
-                  $result = strtotime('-1 second', strtotime('+1 month', $result));
-                  return date('d', $result);
-                }
-                $monthCurrent = date("m");
-                $yearCurrent = date("Y");
-                $lastday = lastday($monthCurrent,$yearCurrent);
-                for($i = 1; $i <= $lastday; $i++) {
-                  // $thang = $_COOKIE['thang'];
-                  $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $monthCurrent AND YEAR(ngaylapphieu) = $yearCurrent";
-                  $query_doanhthu = mysqli_query($mysqli, $doanhthu);
-                  $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
-                  if ($tong_doanhthu == NULL) {
-                    $doanhthu_ngay = 0;
-                  }
-                  else {
-                    $doanhthu_ngay = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0);
-                  }
-                  
-                  ?>
-                    thongKe.push(<?php echo $doanhthu_ngay ?>);
-                    arrayLabel.push(nameDay);
-                    nameDay++;
-                    <?php 
-                }
-              ?>
-            }
-            else if (thongKeTheo == "thongKeTatCa") {
-              nameLabel = 'DOANH THU TẤT CẢ';
-              document.getElementById('donvithoigian').innerHTML = "Năm";
-              yearDay = 2020;
-              // yearDay = yearDay - 2;   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
-                  $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE YEAR(ngaylapphieu) = $i";
-                  $query_doanhthu = mysqli_query($mysqli, $doanhthu);
-                  $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
-                  if ($tong_doanhthu == NULL) {
-                    $doanhthu_nam = 0;
-                  }
-                  else {
-                    $doanhthu_nam = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0);
-                  }
-                  
-                  ?>
-                    thongKe.push(<?php echo $doanhthu_nam ?>);
-                    arrayLabel.push(yearDay);
-                    yearDay++;
-                  <?php 
-                }
-                  ?>
-            }
-          }
-          else if (chonLoai == "khachHang") {
-            document.getElementById('donvitinh').innerHTML = "Khách hàng";
-            document.getElementById('donvithoigian').innerHTML = "Tháng";
-            if(thongKeTheo == "thongKeNam") {       
-              nameLabel = 'KHÁCH HÀNG THEO THÁNG';
-              document.getElementById('donvithoigian').innerHTML = "Tháng";   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = 1; $i <= 12; $i++) {
-                  $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE MONTH(ngaylapphieu) = $i AND YEAR(ngaylapphieu) = $yearCurrent";
-                  $query_khachhang = mysqli_query($mysqli, $khachhang);
-                  $tong_khachhang = mysqli_fetch_array(($query_khachhang));
-                  ?>
-                    thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
-                  <?php 
-                }
-                  ?>
-              arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-            }
-            else if (thongKeTheo == "thongKeThang") {
-              nameLabel = 'KHÁCH HÀNG THEO NGÀY';
-              document.getElementById('donvithoigian').innerHTML = "Ngày";
-              var nameDay = 1;       
-              var chonThang = document.getElementById('chonThang').value;
-              // document.cookie = "thang=" + Number(chonThang);
-              var chonNam = document.getElementById('chonNam').value;
-              
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                function lastday02($month_ld = '', $year_ld = '') {
-                  if (empty($month_ld)) {
-                      $month_ld = date('m');
-                  }
-                  if (empty($year_ld)) {
-                      $year_ld = date('Y');
-                  }
-                  $result = strtotime("{$year_ld}-{$month_ld}-01");
-                  $result = strtotime('-1 second', strtotime('+1 month', $result));
-                  return date('d', $result);
-                }
-                $monthCurrent = date("m");
-                $yearCurrent = date("Y");
-                $lastday = lastday02($monthCurrent,$yearCurrent);
-                for($i = 1; $i <= $lastday; $i++) {
-                  // $thang = $_COOKIE['thang'];
-                  $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $monthCurrent AND YEAR(ngaylapphieu) = $yearCurrent";
-                  $query_khachhang = mysqli_query($mysqli, $khachhang);
-                  $tong_khachhang = mysqli_fetch_array(($query_khachhang));
-                  ?>
-                    thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
-                    arrayLabel.push(nameDay);
-                    nameDay++;
-                    <?php 
-                }
-              ?>
-            }
-            else if (thongKeTheo == "thongKeTatCa") {
-              nameLabel = 'DOANH THU THEO NĂM';
-              document.getElementById('donvithoigian').innerHTML = "Năm";
-              yearDay = 2020;
-              // yearDay = yearDay - 2;   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
-                  $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE YEAR(ngaylapphieu) = $i";
-                  $query_khachhang = mysqli_query($mysqli, $khachhang);
-                  $tong_khachhang = mysqli_fetch_array(($query_khachhang));
-                  ?>
-                    thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
-                    arrayLabel.push(yearDay);
-                    yearDay++;
-                  <?php 
-                }
-                  ?>
-            }
-          }
-          else if (chonLoai == "taiKhoanMoi") {
-            document.getElementById('donvitinh').innerHTML = "Tài khoản";
-            document.getElementById('donvithoigian').innerHTML = "Tháng";
-            if(thongKeTheo == "thongKeNam") {       
-              nameLabel = 'TÀI KHOẢN TRONG NĂM';
-              document.getElementById('donvithoigian').innerHTML = "Tháng";   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = 1; $i <= 12; $i++) {
-                  $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE MONTH(ngaytao_taikhoan) = $i AND YEAR(ngaytao_taikhoan) = $yearCurrent";
-                  $query_taikhoan = mysqli_query($mysqli, $taikhoan);
-                  $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
-                  ?>
-                    thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
-                  <?php 
-                }
-                  ?>
-              arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-            }
-            else if (thongKeTheo == "thongKeThang") {
-              document.getElementById('donvithoigian').innerHTML = "Ngày";
-              nameLabel = 'TÀI KHOẢN THEO NGÀY';
-              var nameDay = 1;       
-              var chonThang = document.getElementById('chonThang').value;
-              // document.cookie = "thang=" + Number(chonThang);
-              var chonNam = document.getElementById('chonNam').value;
-              
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                function lastday03($month_ld = '', $year_ld = '') {
-                  if (empty($month_ld)) {
-                      $month_ld = date('m');
-                  }
-                  if (empty($year_ld)) {
-                      $year_ld = date('Y');
-                  }
-                  $result = strtotime("{$year_ld}-{$month_ld}-01");
-                  $result = strtotime('-1 second', strtotime('+1 month', $result));
-                  return date('d', $result);
-                }
-                $monthCurrent = date("m");
-                $yearCurrent = date("Y");
-                $lastday = lastday03($monthCurrent,$yearCurrent);
-                for($i = 1; $i <= $lastday; $i++) {
-                  // $thang = $_COOKIE['thang'];
-                  $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE DAY(ngaytao_taikhoan) = $i AND MONTH(ngaytao_taikhoan) = $monthCurrent AND YEAR(ngaytao_taikhoan) = $yearCurrent";
-                  $query_taikhoan = mysqli_query($mysqli, $taikhoan);
-                  $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
-                  ?>
-                    thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
-                    arrayLabel.push(nameDay);
-                    nameDay++;
-                    <?php 
-                }
-              ?>
-            }
-            else if (thongKeTheo == "thongKeTatCa") {
-              nameLabel = 'DOANH THU THEO NĂM';
-              document.getElementById('donvithoigian').innerHTML = "Năm";
-              yearDay = 2020;
-              // yearDay = yearDay - 2;   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
-                  $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE YEAR(ngaytao_taikhoan) = $i";
-                  $query_taikhoan = mysqli_query($mysqli, $taikhoan);
-                  $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
-                  ?>
-                    thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
-                    arrayLabel.push(yearDay);
-                    yearDay++;
-                  <?php 
-                }
-                  ?>
-            }
-          }
-          else if (chonLoai == "luotTruyCap") {
-            document.getElementById('donvitinh').innerHTML = "Lượt truy cập";
-            document.getElementById('donvithoigian').innerHTML = "Tháng";
-            if(thongKeTheo == "thongKeNam") {       
-              nameLabel = 'LƯỢT TRUY CẬP TRONG NĂM';
-              document.getElementById('donvithoigian').innerHTML = "Tháng";
+      // if (thongKeTheo == "thongKeThang") {
+      //   selectMonth.style.display = 'block';
+      //   selectYear.style.display = 'none';
+      // }
+      // else if (thongKeTheo == "thongKeNam") {
+      //   selectMonth.style.display = 'none';
+      //   selectYear.style.display = 'block';
+      // }
+      // else {
+      //   selectMonth.style.display = 'none';
+      //   selectYear.style.display = 'none';
+      // }
 
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = 1; $i <= 12; $i++) {
-                  $luottruycap = "SELECT SUM(soluot_truycap) luottruycap FROM luottruycap WHERE MONTH(ngay_truycap) = $i AND YEAR(ngay_truycap) = $yearCurrent";
-                  $query_luottruycap = mysqli_query($mysqli, $luottruycap);
-                  $tong_luottruycap = mysqli_fetch_array(($query_luottruycap));
-                  if($tong_luottruycap['luottruycap'] == NULL) {
-                    $tongTruyCap = 0;
-                  }
-                  else {
-                    $tongTruyCap = $tong_luottruycap['luottruycap'];
-                  }
-                  ?>
-                    thongKe.push(<?php echo $tongTruyCap ?>);
-                  <?php 
-                }
-                  ?>
-              arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-            }
-            else if (thongKeTheo == "thongKeThang") {
-              document.getElementById('donvithoigian').innerHTML = "Ngày";
-              nameLabel = 'LƯỢT TRUY CẬP TRONG THÁNG';
-              var nameDay = 1;       
-              var chonThang = document.getElementById('chonThang').value;
-              var chonNam = document.getElementById('chonNam').value;
-              
-              var thang = document.getElementById('chonThang').value;
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("dataDoanhThuThang").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-                }
-              };
-              xmlhttp.open("GET", "doanhthu.php?thang=" + thang, true);
-              xmlhttp.send();
-
-              var chooseDay = chonNam + '-' + (Number(chonThang) + 1) + '-1'; 
-              function dateLastMonth() {
-                let date = new Date(chooseDay);
-                date.setDate(0);
-                return date.getDate().toString();
-              }
-              dateNew = dateLastMonth();
-              // document.getElementById('testDT').innerHTML = dateNew;
-              for(i = 1; i <= dateNew; i++) {              
-                arrayLabel.push(nameDay);
-                nameDay++;
-              }
-              thongKe = [document.getElementById('dataDoanhThuThang').value]
-              document.getElementById('testDT').value = thongKe;
-            }
-            else if (thongKeTheo == "thongKeTatCa") {
-              nameLabel = 'TẤT CẢ LƯỢT TRUY CẬP';
-              document.getElementById('donvithoigian').innerHTML = "Năm";
-              yearDay = 2020;
-              // yearDay = yearDay - 2;   
-              <?php
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $yearCurrent = date("Y");
-                for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
-                  $luottruycap = "SELECT SUM(soluot_truycap) luottruycap FROM luottruycap WHERE YEAR(ngay_truycap) = $i";
-                  $query_luottruycap = mysqli_query($mysqli, $luottruycap);
-                  $tong_luottruycap = mysqli_fetch_array(($query_luottruycap));
-                  if($tong_luottruycap['luottruycap'] == NULL) {
-                    $tong_luottruycap['luottruycap'] = 0;
-                  }
-                  ?>
-                    thongKe.push(<?php echo $tong_luottruycap['luottruycap'] ?>);
-                    arrayLabel.push(yearDay);
-                    yearDay++;
-                  <?php 
-                }
-                  ?>
-            }
-          }
-
-          var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-              labels: arrayLabel,
-              datasets: [{
-                  label: nameLabel,
-                  fillColor: "rgba(220,220,220,0.2)",
-                  strokeColor: "rgba(220,220,220,1)",
-                  pointColor: "rgba(220,220,220,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  backgroundColor: [
-                    'rgba(255, 255, 255, 0.2)',
-                    'rgba(255, 255, 255, 0.2)',
-                    'rgba(255, 255, 255, 0.2)',
-                    'rgba(255, 255, 255, 0.2)',
-                    'rgba(255, 255, 255, 0.2)',
-                    'rgba(255, 255, 255, 0.2)'
-                  ],
-                  borderColor: [
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)'
-                  ],
-                  borderWidth: 1,
-                  
-                  data: thongKe
-                }
-              ]
-            },
-            options: {
-              responsive: true
-            }
-          });
-        }
-        else {
+      if (chonLoai != "doanhThuBacSi") {
+        if (chonLoai == "doanhThu") {
           document.getElementById('donvitinh').innerHTML = "Triệu VNĐ";
           document.getElementById('donvithoigian').innerHTML = "Tháng";
+          if(thongKeTheo == "thongKeNam") {       
+            nameLabel = 'DOANH THU TRONG NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Tháng";   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['nam'])) {
+                $year = $_GET['nam'];
+              }
+              else {
+                $year = $yearCurrent;
+              }
+              for($i = 1; $i <= 12; $i++) {
+                $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE MONTH(ngaylapphieu) = $i AND YEAR(ngaylapphieu) = $year";
+                $query_doanhthu = mysqli_query($mysqli, $doanhthu);
+                $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
+                if($tong_doanhthu == NULL) {
+                  $doanhthu_thang = 0;
+                }
+                else {
+                  $doanhthu_thang = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0); 
+                }
+                ?>
+                  thongKe.push(<?php echo $doanhthu_thang ?>);
+                <?php 
+              }
+                ?>
+            arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+          }
+          else if (thongKeTheo == "thongKeThang") {
+            nameLabel = 'DOANH THU TRONG THÁNG';
+            document.getElementById('donvithoigian').innerHTML = "Ngày";
+            var nameDay = 1;       
+            var chonThang = document.getElementById('chonThang').value;
+            // document.cookie = "thang=" + Number(chonThang);
+            var chonNam = document.getElementById('chonNam').value;
+
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              function lastday($month_ld = '', $year_ld = '') {
+                if (empty($month_ld)) {
+                    $month_ld = date('m');
+                }
+                if (empty($year_ld)) {
+                    $year_ld = date('Y');
+                }
+                $result = strtotime("{$year_ld}-{$month_ld}-01");
+                $result = strtotime('-1 second', strtotime('+1 month', $result));
+                return date('d', $result);
+              }
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+              $lastday = lastday($monthCurrent,$yearCurrent);
+
+              if(isset($_GET['thang'])) {
+                $month = $_GET['thang'];
+              }
+              else {
+                $month = $monthCurrent;
+              }          
+
+              for($i = 1; $i <= $lastday; $i++) {
+                // $thang = $_COOKIE['thang'];
+                $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $month AND YEAR(ngaylapphieu) = $yearCurrent";
+                $query_doanhthu = mysqli_query($mysqli, $doanhthu);
+                $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
+                if ($tong_doanhthu == NULL) {
+                  $doanhthu_ngay = 0;
+                }
+                else {
+                  $doanhthu_ngay = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0);
+                }
+                
+                ?>
+                  thongKe.push(<?php echo $doanhthu_ngay ?>);
+                  arrayLabel.push(nameDay);
+                  nameDay++;
+                  <?php 
+              }
+            ?>
+            
+          }
+          else if (thongKeTheo == "thongKeTatCa") {
+            nameLabel = 'DOANH THU TẤT CẢ';
+            document.getElementById('donvithoigian').innerHTML = "Năm";
+            yearDay = 2020;
+            // yearDay = yearDay - 2;   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+              for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                $doanhthu = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE YEAR(ngaylapphieu) = $i";
+                $query_doanhthu = mysqli_query($mysqli, $doanhthu);
+                $tong_doanhthu = mysqli_fetch_array(($query_doanhthu));
+                if ($tong_doanhthu == NULL) {
+                  $doanhthu_nam = 0;
+                }
+                else {
+                  $doanhthu_nam = round($tong_doanhthu['tongdoanhthu'] / 1000000, 0);
+                }
+                
+                ?>
+                  thongKe.push(<?php echo $doanhthu_nam ?>);
+                  arrayLabel.push(yearDay);
+                  yearDay++;
+                <?php 
+              }
+                ?>
+          }
         }
+        else if (chonLoai == "khachHang") {
+          document.getElementById('donvitinh').innerHTML = "Khách hàng";
+          document.getElementById('donvithoigian').innerHTML = "Tháng";
+          if(thongKeTheo == "thongKeNam") {       
+            nameLabel = 'KHÁCH HÀNG TRONG NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Tháng";   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['nam'])) {
+                $year = $_GET['nam'];
+              }
+              else {
+                $year = $yearCurrent;
+              }
+              for($i = 1; $i <= 12; $i++) {
+                $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE MONTH(ngaylapphieu) = $i AND YEAR(ngaylapphieu) = $year";
+                $query_khachhang = mysqli_query($mysqli, $khachhang);
+                $tong_khachhang = mysqli_fetch_array(($query_khachhang));
+                ?>
+                  thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
+                <?php 
+              }
+                ?>
+            arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+          }
+          else if (thongKeTheo == "thongKeThang") {
+            nameLabel = 'KHÁCH HÀNG TRONG THÁNG';
+            document.getElementById('donvithoigian').innerHTML = "Ngày";
+            var nameDay = 1;       
+            var chonThang = document.getElementById('chonThang').value;
+            // document.cookie = "thang=" + Number(chonThang);
+            var chonNam = document.getElementById('chonNam').value;
+            
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              function lastday02($month_ld = '', $year_ld = '') {
+                if (empty($month_ld)) {
+                    $month_ld = date('m');
+                }
+                if (empty($year_ld)) {
+                    $year_ld = date('Y');
+                }
+                $result = strtotime("{$year_ld}-{$month_ld}-01");
+                $result = strtotime('-1 second', strtotime('+1 month', $result));
+                return date('d', $result);
+              }
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['thang'])) {
+                $month = $_GET['thang'];
+              }
+              else {
+                $month = $monthCurrent;
+              }
+              $lastday = lastday02($monthCurrent,$yearCurrent);
+              for($i = 1; $i <= $lastday; $i++) {
+                // $thang = $_COOKIE['thang'];
+                $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $month AND YEAR(ngaylapphieu) = $yearCurrent";
+                $query_khachhang = mysqli_query($mysqli, $khachhang);
+                $tong_khachhang = mysqli_fetch_array(($query_khachhang));
+                ?>
+                  thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
+                  arrayLabel.push(nameDay);
+                  nameDay++;
+                  <?php 
+              }
+            ?>
+          }
+          else if (thongKeTheo == "thongKeTatCa") {
+            nameLabel = 'DOANH THU THEO NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Năm";
+            yearDay = 2020;
+            // yearDay = yearDay - 2;   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+              for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE YEAR(ngaylapphieu) = $i";
+                $query_khachhang = mysqli_query($mysqli, $khachhang);
+                $tong_khachhang = mysqli_fetch_array(($query_khachhang));
+                ?>
+                  thongKe.push(<?php echo $tong_khachhang['tongkhachhang'] ?>);
+                  arrayLabel.push(yearDay);
+                  yearDay++;
+                <?php 
+              }
+                ?>
+          }
+        }
+        else if (chonLoai == "taiKhoanMoi") {
+          document.getElementById('donvitinh').innerHTML = "Tài khoản";
+          document.getElementById('donvithoigian').innerHTML = "Tháng";
+          if(thongKeTheo == "thongKeNam") {       
+            nameLabel = 'TÀI KHOẢN TRONG NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Tháng";   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['nam'])) {
+                $year = $_GET['nam'];
+              }
+              else {
+                $year = $yearCurrent;
+              }
+              for($i = 1; $i <= 12; $i++) {
+                $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE MONTH(ngaytao_taikhoan) = $i AND YEAR(ngaytao_taikhoan) = $year";
+                $query_taikhoan = mysqli_query($mysqli, $taikhoan);
+                $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
+                ?>
+                  thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
+                <?php 
+              }
+                ?>
+            arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+          }
+          else if (thongKeTheo == "thongKeThang") {
+            document.getElementById('donvithoigian').innerHTML = "Ngày";
+            nameLabel = 'TÀI KHOẢN THEO NGÀY';
+            var nameDay = 1;       
+            var chonThang = document.getElementById('chonThang').value;
+            // document.cookie = "thang=" + Number(chonThang);
+            var chonNam = document.getElementById('chonNam').value;
+            
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              function lastday03($month_ld = '', $year_ld = '') {
+                if (empty($month_ld)) {
+                    $month_ld = date('m');
+                }
+                if (empty($year_ld)) {
+                    $year_ld = date('Y');
+                }
+                $result = strtotime("{$year_ld}-{$month_ld}-01");
+                $result = strtotime('-1 second', strtotime('+1 month', $result));
+                return date('d', $result);
+              }
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['thang'])) {
+                $month = $_GET['thang'];
+              }
+              else {
+                $month = $monthCurrent;
+              }
+              $lastday = lastday03($monthCurrent,$yearCurrent);
+              for($i = 1; $i <= $lastday; $i++) {
+                // $thang = $_COOKIE['thang'];
+                $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE DAY(ngaytao_taikhoan) = $i AND MONTH(ngaytao_taikhoan) = $month AND YEAR(ngaytao_taikhoan) = $yearCurrent";
+                $query_taikhoan = mysqli_query($mysqli, $taikhoan);
+                $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
+                ?>
+                  thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
+                  arrayLabel.push(nameDay);
+                  nameDay++;
+                  <?php 
+              }
+            ?>
+          }
+          else if (thongKeTheo == "thongKeTatCa") {
+            nameLabel = 'DOANH THU THEO NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Năm";
+            yearDay = 2020;
+            // yearDay = yearDay - 2;   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+              for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE YEAR(ngaytao_taikhoan) = $i";
+                $query_taikhoan = mysqli_query($mysqli, $taikhoan);
+                $tong_taikhoan = mysqli_fetch_array(($query_taikhoan));
+                ?>
+                  thongKe.push(<?php echo $tong_taikhoan['tongtaikhoan'] ?>);
+                  arrayLabel.push(yearDay);
+                  yearDay++;
+                <?php 
+              }
+                ?>
+          }
+        }
+        else if (chonLoai == "luotTruyCap") {
+          document.getElementById('donvitinh').innerHTML = "Lượt truy cập";
+          document.getElementById('donvithoigian').innerHTML = "Tháng";
+          if(thongKeTheo == "thongKeNam") {       
+            nameLabel = 'LƯỢT TRUY CẬP TRONG NĂM';
+            document.getElementById('donvithoigian').innerHTML = "Tháng";
+
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['nam'])) {
+                $year = $_GET['nam'];
+              }
+              else {
+                $year = $yearCurrent;
+              }
+              for($i = 1; $i <= 12; $i++) {
+                $luottruycap = "SELECT SUM(soluot_truycap) luottruycap FROM luottruycap WHERE MONTH(ngay_truycap) = $i AND YEAR(ngay_truycap) = $year";
+                $query_luottruycap = mysqli_query($mysqli, $luottruycap);
+                $tong_luottruycap = mysqli_fetch_array(($query_luottruycap));
+                if($tong_luottruycap['luottruycap'] == NULL) {
+                  $tongTruyCap = 0;
+                }
+                else {
+                  $tongTruyCap = $tong_luottruycap['luottruycap'];
+                }
+                ?>
+                  thongKe.push(<?php echo $tongTruyCap ?>);
+                <?php 
+              }
+                ?>
+            arrayLabel = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+          }
+          else if (thongKeTheo == "thongKeThang") {
+            document.getElementById('donvithoigian').innerHTML = "Ngày";
+            nameLabel = 'TÀI KHOẢN THEO NGÀY';
+            var nameDay = 1;       
+            
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              function lastday04($month_ld = '', $year_ld = '') {
+                if (empty($month_ld)) {
+                    $month_ld = date('m');
+                }
+                if (empty($year_ld)) {
+                    $year_ld = date('Y');
+                }
+                $result = strtotime("{$year_ld}-{$month_ld}-01");
+                $result = strtotime('-1 second', strtotime('+1 month', $result));
+                return date('d', $result);
+              }
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+
+              if(isset($_GET['thang'])) {
+                $month = $_GET['thang'];
+              }
+              else {
+                $month = $monthCurrent;
+              }
+              $lastday = lastday04($month,$yearCurrent);
+              for($i = 1; $i <= $lastday; $i++) {
+                $day = $i * 1;
+                $sql_luottruycap = "SELECT * FROM luottruycap WHERE ngay_truycap = '$yearCurrent-$month-$day'";
+                $query_luottruycap = mysqli_query($mysqli, $sql_luottruycap);
+                if(mysqli_num_rows($query_luottruycap) != 0) {
+                  $luottruycap = mysqli_fetch_array($query_luottruycap);
+                  $soluottruycap = $luottruycap['soluot_truycap'];
+                }
+                else {
+                  $soluottruycap = 0;
+                }
+                
+                ?>
+                  thongKe.push(<?php echo $soluottruycap ?>);
+                  arrayLabel.push(nameDay);
+                  nameDay++;
+                  <?php 
+              }
+            ?>
+          }
+          else if (thongKeTheo == "thongKeTatCa") {
+            nameLabel = 'TẤT CẢ LƯỢT TRUY CẬP';
+            document.getElementById('donvithoigian').innerHTML = "Năm";
+            yearDay = 2020;
+            // yearDay = yearDay - 2;   
+            <?php
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $yearCurrent = date("Y");
+              for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                $luottruycap = "SELECT SUM(soluot_truycap) luottruycap FROM luottruycap WHERE YEAR(ngay_truycap) = $i";
+                $query_luottruycap = mysqli_query($mysqli, $luottruycap);
+                $tong_luottruycap = mysqli_fetch_array(($query_luottruycap));
+                if($tong_luottruycap['luottruycap'] == NULL) {
+                  $tong_luottruycap['luottruycap'] = 0;
+                }
+                ?>
+                  thongKe.push(<?php echo $tong_luottruycap['luottruycap'] ?>);
+                  arrayLabel.push(yearDay);
+                  yearDay++;
+                <?php 
+              }
+                ?>
+          }
+        }
+
+        var thongke02 = [];
+        var thongke03 = [];
+        var thongke04 = [];
+        var thongke05 = [];
+        var thongke06 = [];
+        for (var i = 0; i < 12; i++) {
+          thongke02.push(Math.round(Math.random() * 1400));
+          thongke03.push(Math.round(Math.random() * 1400));
+          thongke04.push(Math.round(Math.random() * 1400));
+          thongke05.push(Math.round(Math.random() * 1400));
+          thongke06.push(Math.round(Math.random() * 1400));
+        }
+          
+
+        var myLineChart = new Chart(ctxL, {
+          type: 'line',
+          data: {
+            labels: arrayLabel,
+            datasets: [<?php
+              ?>{
+                label: nameLabel,
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                backgroundColor: [
+                  'rgba(255, 255, 255, 0.2)',
+                  'rgba(255, 255, 255, 0.2)',
+                  'rgba(255, 255, 255, 0.2)',
+                  'rgba(255, 255, 255, 0.2)',
+                  'rgba(255, 255, 255, 0.2)',
+                  'rgba(255, 255, 255, 0.2)'
+                  
+                ],
+                borderColor: [
+                  'rgba(255, 0, 102, 1)',
+                  'rgba(255, 0, 102, 1)',
+                  'rgba(255, 0, 102, 1)',
+                  'rgba(255, 0, 102, 1)',
+                  'rgba(255, 0, 102, 1)',
+                  'rgba(255, 0, 102, 1)'
+                ],
+                borderWidth: 1,
+                
+                data: thongKe
+              }
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 02",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(102, 255, 51, 1)',
+              //     'rgba(102, 255, 51, 1)',
+              //     'rgba(102, 255, 51, 1)',
+              //     'rgba(102, 255, 51, 1)',
+              //     'rgba(102, 255, 51, 1)',
+              //     'rgba(102, 255, 51, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: [1200, 856, 123, 489, 415, 367, 1120, 985, 578, 698, 330, 780]
+              // },
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 03",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(255, 255, 0, 1)',
+              //     'rgba(255, 255, 0, 1)',
+              //     'rgba(255, 255, 0, 1)',
+              //     'rgba(255, 255, 0, 1)',
+              //     'rgba(255, 255, 0, 1)',
+              //     'rgba(255, 255, 0, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: thongke02
+              // },
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 04",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: thongke03
+              // },
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 05",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: thongke04
+              // },
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 06",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: thongke05
+              // },
+              // {
+              //   label: "TEST-DSBACSI-NHAKHOA 07",
+              //   fillColor: "rgba(220,220,220,0.2)",
+              //   strokeColor: "rgba(220,220,220,1)",
+              //   pointColor: "rgba(220,220,220,1)",
+              //   pointStrokeColor: "#fff",
+              //   pointHighlightFill: "#fff",
+              //   pointHighlightStroke: "rgba(220,220,220,1)",
+              //   backgroundColor: [
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)',
+              //     'rgba(255, 255, 255, 0.2)'
+              //   ],
+              //   borderColor: [
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)',
+              //     'rgba(255, 153, 0, 1)'
+              //   ],
+              //   borderWidth: 1,
+                
+              //   data: thongke06
+              // }
+            ]
+          },
+          options: {
+            responsive: true
+          }
+        });
+      }
+      else {
+        document.getElementById('donvitinh').innerHTML = "Triệu VNĐ";
+        document.getElementById('donvithoigian').innerHTML = "Tháng";
+
+        function them(idbs) {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("doanhthuthang1").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+          };
+          xmlhttp.open("GET", "./thongke/thongke.php?idbs=" + idbs, true);
+          xmlhttp.send();
+        }
+
+        $sql_mabs = "SELECT * FROM temp_dsbacsi";
+        $sql_doanhthubs = "SELECT * FROM phieukhambenh, ";
       };
       //Kết thúc sự kiện chọn loại thống kê
 
