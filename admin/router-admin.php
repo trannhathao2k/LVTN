@@ -26,6 +26,9 @@
         case "themnhanvien":
             include("themnhanvien.php");            
             break;
+        case "lichlamviecbacsi":
+            include("lichlamviecbacsi.php");            
+            break;
         default:
             include("trangchu-admin.php");            
     }

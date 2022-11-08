@@ -334,7 +334,7 @@
               </div>
               <h5 class="font-weight-bold mb-4">TẬN TÂM</h5>
               <p class="grey-text font-small mx-3">Chính sách bảo hành và chăm sóc cho bệnh nhân đến trọn đời. 
-                Tư vấn, hỗ trợ bệnh nhân nhiệt tình tất cả các vấn đề phát sinh trong suốt quá trình điều trị. 
+                Tư vấn, hỗ trợ bệnh nhân nhiệt tình trong suốt quá trình điều trị. 
                 Cam kết không bỏ mặc bệnh nhân sau khi điều trị xong.</p>
             </div>
           </div>

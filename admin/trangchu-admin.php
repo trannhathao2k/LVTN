@@ -340,14 +340,25 @@
           <label for="chonloai" class="mdb-main-label">Chọn loại</label>
         </div>
         <div class="col-lg-3 p-2" id="selectDoctor" style="display: none;">
-          <select id="chonbacsi" class="mdb-select md-form" multiple searchable="Tìm kiếm..">
+          <select id="chonbacsi" class="mdb-select md-form" multiple searchable="Tìm kiếm.."  onchange="thembacsi(this)">
             <?php
               $sql_bacsi = "SELECT * FROM bacsi";
               $query_bacsi = mysqli_query($mysqli, $sql_bacsi);
+             
               while($bacsi = mysqli_fetch_array($query_bacsi)) {
                 ?>
                   <option value="<?php echo $bacsi['id_bs'] ?>" data-icon="../<?php echo $bacsi['anhdaidien_bs'] ?>"
-                      class="rounded-circle">
+                      class="rounded-circle" <?php
+                        $sql_dsbacsi = "SELECT * FROM temp_dsbacsi";
+                        $query_dsbacsi = mysqli_query($mysqli, $sql_dsbacsi);
+                        if (mysqli_num_rows($query_dsbacsi) != 0) {
+                          while($ds_bacsi = mysqli_fetch_array($query_dsbacsi)) {
+                            if($bacsi['id_bs'] == $ds_bacsi['id_bs']) {
+                              echo 'selected';
+                            }
+                          }
+                        }
+                      ?>>
                     <?php echo $bacsi['hoten_bs'] ?></option>
                 <?php
               }
@@ -446,6 +457,7 @@
 
     </div>
     <p id="doanhthuthang1"></p>
+    <p id="doanhthuthang2"></p>
   </section>
 
   <!-- <div class="default-color-dark ml-0 mr-0" style="height: 5px;width: 100%;margin-top: -50px;"></div> -->

@@ -68,15 +68,20 @@
         <li>
           <ul class="collapsible collapsible-accordion">
 
-            <!-- Simple link -->
             <li>
-              <a href="index-admin.php?route-admin=thongtinbacsi" class="collapsible-header waves-effect">Thông tin bác sĩ</a>
+              <a href="index-admin.php?route-admin=trangchu" class="collapsible-header waves-effect"><i class="fas fa-chevron-circle-right"></i>Thống kê doanh thu</a>
             </li>
             <li>
-              <a href="index-admin.php?route-admin=thongtinnhanvien" class="collapsible-header waves-effect">Thông tin nhân viên</a>
+              <a href="index-admin.php?route-admin=thongtinbacsi" class="collapsible-header waves-effect"><i class="fas fa-chevron-circle-right"></i>Thông tin bác sĩ</a>
             </li>
             <li>
-              <a href="#" class="collapsible-header waves-effect">Tài khoản khách hàng</a>
+              <a href="index-admin.php?route-admin=lichlamviecbacsi" class="collapsible-header waves-effect"><i class="fas fa-chevron-circle-right"></i>Lịch làm việc của bác sĩ</a>
+            </li>
+            <li>
+              <a href="index-admin.php?route-admin=thongtinnhanvien" class="collapsible-header waves-effect"><i class="fas fa-chevron-circle-right"></i>Thông tin nhân viên</a>
+            </li>
+            <li>
+              <a href="#" class="collapsible-header waves-effect"><i class="fas fa-chevron-circle-right"></i>Tài khoản khách hàng</a>
             </li>
 
           </ul>
@@ -151,6 +156,7 @@
   <script type="text/javascript" src="../js/dangky/addons/datatables.min.js"></script>
   <!-- DataTables Select  -->
   <script type="text/javascript" src="../js/dangky/addons/datatables-select.min.js"></script>
+  
   <!-- <script type="text/javascript" src="./js/uploadimage-bs.js"></script> -->
   <!-- Custom scripts -->
   <script>
@@ -289,6 +295,37 @@
         }
       }
 
+      function thembacsi(obj) {       
+        // Lấy danh sách các options
+        var options = obj.children;
+        
+        // Biến lưu trữ các chuyên mục đa chọn
+        var html = '';
+
+        var soluong = 0;
+        var getValue = "";
+        var i = 0;
+        // lặp qua từng option và kiểm tra thuộc tính selected
+        for (var i = 0; i < options.length; i++){
+            if (options[i].selected){
+                getValue += "&bacsi" + (soluong + 1) + "=" + options[i].value;
+                soluong++;
+            }
+        }
+
+        var linkGET = "./thongke/thembacsi.php?soluong=" + soluong + getValue;
+        
+        // document.getElementById('doanhthuthang1').innerHTML = linkGET;
+        var xmlhttp = new XMLHttpRequest();
+        // xmlhttp.onreadystatechange = function() {
+        //   if (this.readyState == 4 && this.status == 200) {
+        //       document.getElementById("doanhthuthang2").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        //   }
+        // };
+        xmlhttp.open("GET", linkGET, true);
+        xmlhttp.send();
+      }
+
       //Sự kiện khi chọn Loại thống kê
       function thongke() {}
       var thongKe = [];
@@ -322,6 +359,74 @@
       //   selectMonth.style.display = 'none';
       //   selectYear.style.display = 'none';
       // }
+
+        //Màu secondary
+        color_1 = ['rgba(252, 128, 120, 1)',
+          'rgba(252, 128, 120, 1)',
+          'rgba(252, 128, 120, 1)',
+          'rgba(252, 128, 120, 1)',
+          'rgba(252, 128, 120, 1)',
+          'rgba(252, 128, 120, 1)'];
+        
+        //Màu success
+        color_2 = ['rgba(0, 226, 91, 1)',
+          'rgba(0, 226, 91, 1)',
+          'rgba(0, 226, 91, 1)',
+          'rgba(0, 226, 91, 1)',
+          'rgba(0, 226, 91, 1)',
+          'rgba(0, 226, 91, 1)'];
+          
+        //Màu warning
+        color_3 = ['rgba(255, 196, 77, 1)',
+          'rgba(255, 196, 77, 1)',
+          'rgba(255, 196, 77, 1)',
+          'rgba(255, 196, 77, 1)',
+          'rgba(255, 196, 77, 1)',
+          'rgba(255, 196, 77, 1)'];
+
+        //Màu purple (tím)
+        color_4 = ['rgba(160, 40, 191, 1)',
+          'rgba(160, 40, 191, 1)',
+          'rgba(160, 40, 191, 1)',
+          'rgba(160, 40, 191, 1)',
+          'rgba(160, 40, 191, 1)',
+          'rgba(160, 40, 191, 1)'];
+        
+        //Màu xanh dương đậm
+        color_5 = ['rgba(13, 71, 161, 1)',
+          'rgba(13, 71, 161, 1)',
+          'rgba(13, 71, 161, 1)',
+          'rgba(13, 71, 161, 1)',
+          'rgba(13, 71, 161, 1)',
+          'rgba(13, 71, 161, 1)'];
+
+        //Màu nâu
+        color_8 = ['rgba(137, 96, 82, 1)',
+          'rgba(137, 96, 82, 1)',
+          'rgba(137, 96, 82, 1)',
+          'rgba(137, 96, 82, 1)',
+          'rgba(137, 96, 82, 1)',
+          'rgba(137, 96, 82, 1)'];
+
+        
+
+        //Màu tím đậm
+        color_6 = ['rgba(173, 20, 87, 1)',
+          'rgba(173, 20, 87, 1)',
+          'rgba(173, 20, 87, 1)',
+          'rgba(173, 20, 87, 1)',
+          'rgba(173, 20, 87, 1)',
+          'rgba(173, 20, 87, 1)'];
+
+        
+
+        //Màu cam đậm
+        color_7 = ['rgba(230, 81, 0, 1)',
+          'rgba(230, 81, 0, 1)',
+          'rgba(230, 81, 0, 1)',
+          'rgba(230, 81, 0, 1)',
+          'rgba(230, 81, 0, 1)',
+          'rgba(230, 81, 0, 1)'];
 
       if (chonLoai != "doanhThuBacSi") {
         if (chonLoai == "doanhThu") {
@@ -380,14 +485,14 @@
               }
               $monthCurrent = date("m");
               $yearCurrent = date("Y");
-              $lastday = lastday($monthCurrent,$yearCurrent);
-
+              
               if(isset($_GET['thang'])) {
                 $month = $_GET['thang'];
               }
               else {
                 $month = $monthCurrent;
-              }          
+              }
+              $lastday = lastday($month,$yearCurrent);          
 
               for($i = 1; $i <= $lastday; $i++) {
                 // $thang = $_COOKIE['thang'];
@@ -413,7 +518,10 @@
           else if (thongKeTheo == "thongKeTatCa") {
             nameLabel = 'DOANH THU TẤT CẢ';
             document.getElementById('donvithoigian').innerHTML = "Năm";
-            yearDay = 2020;
+            nameYear = <?php
+              $yearCurrent = date("Y");
+              echo ($yearCurrent - 2);
+            ?>;
             // yearDay = yearDay - 2;   
             <?php
               date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -431,8 +539,8 @@
                 
                 ?>
                   thongKe.push(<?php echo $doanhthu_nam ?>);
-                  arrayLabel.push(yearDay);
-                  yearDay++;
+                  arrayLabel.push(nameYear);
+                  nameYear++;
                 <?php 
               }
                 ?>
@@ -495,7 +603,7 @@
               else {
                 $month = $monthCurrent;
               }
-              $lastday = lastday02($monthCurrent,$yearCurrent);
+              $lastday = lastday02($month,$yearCurrent);
               for($i = 1; $i <= $lastday; $i++) {
                 // $thang = $_COOKIE['thang'];
                 $khachhang = "SELECT COUNT(maphieu) tongkhachhang FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $month AND YEAR(ngaylapphieu) = $yearCurrent";
@@ -587,7 +695,7 @@
               else {
                 $month = $monthCurrent;
               }
-              $lastday = lastday03($monthCurrent,$yearCurrent);
+              $lastday = lastday03($month,$yearCurrent);
               for($i = 1; $i <= $lastday; $i++) {
                 // $thang = $_COOKIE['thang'];
                 $taikhoan = "SELECT COUNT(id_kh) tongtaikhoan FROM khachhang WHERE DAY(ngaytao_taikhoan) = $i AND MONTH(ngaytao_taikhoan) = $month AND YEAR(ngaytao_taikhoan) = $yearCurrent";
@@ -727,56 +835,40 @@
               }
                 ?>
           }
-        }
-
-        var thongke02 = [];
-        var thongke03 = [];
-        var thongke04 = [];
-        var thongke05 = [];
-        var thongke06 = [];
-        for (var i = 0; i < 12; i++) {
-          thongke02.push(Math.round(Math.random() * 1400));
-          thongke03.push(Math.round(Math.random() * 1400));
-          thongke04.push(Math.round(Math.random() * 1400));
-          thongke05.push(Math.round(Math.random() * 1400));
-          thongke06.push(Math.round(Math.random() * 1400));
-        }
-          
+        }        
 
         var myLineChart = new Chart(ctxL, {
           type: 'line',
           data: {
             labels: arrayLabel,
-            datasets: [<?php
-              ?>{
-                label: nameLabel,
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                backgroundColor: [
-                  'rgba(255, 255, 255, 0.2)',
-                  'rgba(255, 255, 255, 0.2)',
-                  'rgba(255, 255, 255, 0.2)',
-                  'rgba(255, 255, 255, 0.2)',
-                  'rgba(255, 255, 255, 0.2)',
-                  'rgba(255, 255, 255, 0.2)'
-                  
-                ],
-                borderColor: [
-                  'rgba(255, 0, 102, 1)',
-                  'rgba(255, 0, 102, 1)',
-                  'rgba(255, 0, 102, 1)',
-                  'rgba(255, 0, 102, 1)',
-                  'rgba(255, 0, 102, 1)',
-                  'rgba(255, 0, 102, 1)'
-                ],
-                borderWidth: 1,
-                
-                data: thongKe
-              }
+            datasets: [{
+                    label: nameLabel,
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    backgroundColor: [
+                      'rgba(255, 255, 255, 0.2)',
+                      'rgba(255, 255, 255, 0.2)',
+                      'rgba(255, 255, 255, 0.2)',
+                      'rgba(255, 255, 255, 0.2)',
+                      'rgba(255, 255, 255, 0.2)',
+                      'rgba(255, 255, 255, 0.2)'
+                    ],
+                    borderColor: [
+                      'rgba(255, 255, 255, 1)',
+                      'rgba(255, 255, 255, 1)',
+                      'rgba(255, 255, 255, 1)',
+                      'rgba(255, 255, 255, 1)',
+                      'rgba(255, 255, 255, 1)',
+                      'rgba(255, 255, 255, 1)'
+                    ],
+                    borderWidth: 1,
+                    
+                    data: thongKe
+                  }
               // {
               //   label: "TEST-DSBACSI-NHAKHOA 02",
               //   fillColor: "rgba(220,220,220,0.2)",
@@ -793,18 +885,11 @@
               //     'rgba(255, 255, 255, 0.2)',
               //     'rgba(255, 255, 255, 0.2)'
               //   ],
-              //   borderColor: [
-              //     'rgba(102, 255, 51, 1)',
-              //     'rgba(102, 255, 51, 1)',
-              //     'rgba(102, 255, 51, 1)',
-              //     'rgba(102, 255, 51, 1)',
-              //     'rgba(102, 255, 51, 1)',
-              //     'rgba(102, 255, 51, 1)'
-              //   ],
+              //   borderColor: color_3,
               //   borderWidth: 1,
                 
               //   data: [1200, 856, 123, 489, 415, 367, 1120, 985, 578, 698, 330, 780]
-              // },
+              // }
               // {
               //   label: "TEST-DSBACSI-NHAKHOA 03",
               //   fillColor: "rgba(220,220,220,0.2)",
@@ -954,24 +1039,319 @@
       }
       else {
         document.getElementById('donvitinh').innerHTML = "Triệu VNĐ";
-        document.getElementById('donvithoigian').innerHTML = "Tháng";
-
-        function them(idbs) {
-          var xmlhttp = new XMLHttpRequest();
-          xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("doanhthuthang1").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+        document.getElementById('donvithoigian').innerHTML = "Tháng";    
+        
+        
+        if(thongKeTheo == "thongKeThang") {
+          document.getElementById('donvithoigian').innerHTML = "Ngày";
+          var nameDay = 1;
+          var arrayLabel = [];  
+          <?php
+            $sql_ds = "SELECT * FROM temp_dsbacsi";
+            $query_ds = mysqli_query($mysqli, $sql_ds);
+            if (mysqli_num_rows($query_ds) == 0) {
+              $sql_dsbacsi = "SELECT * FROM bacsi";
+              $query_dsbacsi = mysqli_query($mysqli, $sql_dsbacsi);
             }
-          };
-          xmlhttp.open("GET", "./thongke/thongke.php?idbs=" + idbs, true);
-          xmlhttp.send();
+            else {
+              $sql_dsbacsi = "SELECT * FROM temp_dsbacsi";
+              $query_dsbacsi = mysqli_query($mysqli, $sql_dsbacsi);
+            }
+
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $monthCurrent = date("m");
+            $yearCurrent = date("Y");            
+
+            for($i = 1; $i <= $lastday; $i++) {
+              ?>
+                arrayLabel.push(nameDay);
+                nameDay++;
+              <?php
+            }
+
+            if(isset($_GET['thang'])) {
+              $month = $_GET['thang'];
+            }
+            else {
+              $month = $monthCurrent;
+            }
+            
+            $lastday = lastday($month,$yearCurrent);
+
+            while($row_dsbacsi = mysqli_fetch_array($query_dsbacsi)) {
+              $idbacsi = $row_dsbacsi['id_bs'];
+              ?>
+                var thongKeBS<?php echo $idbacsi ?> = [];
+              <?php
+              for($i = 1; $i <= $lastday; $i++) {
+                // $thang = $_COOKIE['thang'];
+                $doanhthu_bs = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE DAY(ngaylapphieu) = $i AND MONTH(ngaylapphieu) = $month AND YEAR(ngaylapphieu) = $yearCurrent AND id_bs = $idbacsi";
+                $query_doanhthu_bs = mysqli_query($mysqli, $doanhthu_bs);
+                $tong_doanhthu_bs = mysqli_fetch_array(($query_doanhthu_bs));
+                if ($tong_doanhthu_bs == NULL) {
+                  $doanhthu_bs_ngay = 0;
+                }
+                else {
+                  $doanhthu_bs_ngay = round($tong_doanhthu_bs['tongdoanhthu'] / 1000000, 0);
+                }
+              
+              ?>
+                thongKeBS<?php echo $idbacsi ?>.push(<?php echo $doanhthu_bs_ngay ?>)
+              <?php
+              }
+            }
+            ?>
+              // document.getElementById('doanhthuthang2').innerHTML = <php echo $idbacsi ?>;
+            <?php
+            
+          ?>
+        }
+        else if(thongKeTheo == "thongKeNam") {
+          document.getElementById('donvithoigian').innerHTML = "Tháng";
+          var nameDay = 1;
+          var arrayLabel = [];  
+          <?php
+            $sql_dsbacsi = "SELECT * FROM temp_dsbacsi";
+            $query_dsbacsi = mysqli_query($mysqli, $sql_dsbacsi);
+            if (mysqli_num_rows($query_dsbacsi) != 0) {
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+
+              for($i = 1; $i <= 12; $i++) {
+                ?>
+                  arrayLabel.push("Tháng " + nameDay);
+                  nameDay++;
+                <?php
+              }
+
+              if(isset($_GET['nam'])) {
+                $year = $_GET['nam'];
+              }
+              else {
+                $year = $yearCurrent;
+              }     
+
+              while($row_dsbacsi = mysqli_fetch_array($query_dsbacsi)) {
+                $idbacsi = $row_dsbacsi['id_bs'];
+                ?>
+                  var thongKeBS<?php echo $idbacsi ?> = [];
+                <?php
+                for($i = 1; $i <= 12; $i++) {
+                  // $thang = $_COOKIE['thang'];
+                  $doanhthu_bs = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE MONTH(ngaylapphieu) = $i AND YEAR(ngaylapphieu) = $year AND id_bs = $idbacsi";
+                  $query_doanhthu_bs = mysqli_query($mysqli, $doanhthu_bs);
+                  $tong_doanhthu_bs = mysqli_fetch_array(($query_doanhthu_bs));
+                  if ($tong_doanhthu_bs == NULL) {
+                    $doanhthu_bs_thang = 0;
+                  }
+                  else {
+                    $doanhthu_bs_thang = round($tong_doanhthu_bs['tongdoanhthu'] / 1000000, 0);
+                  }
+                
+                ?>
+                  thongKeBS<?php echo $idbacsi ?>.push(<?php echo $doanhthu_bs_thang ?>)
+                <?php
+                }
+              }
+            ?>
+              // document.getElementById('doanhthuthang2').innerHTML = <php echo $idbacsi ?>;
+            <?php
+            }
+          ?>
+        }
+        else {
+          document.getElementById('donvithoigian').innerHTML = "Năm";
+          var nameYear = <?php
+            $yearCurrent = date("Y");
+            echo $yearCurrent - 2;
+          ?>;
+          var arrayLabel = [];  
+          <?php
+            $sql_dsbacsi = "SELECT * FROM temp_dsbacsi";
+            $query_dsbacsi = mysqli_query($mysqli, $sql_dsbacsi);
+            if (mysqli_num_rows($query_dsbacsi) != 0) {
+              date_default_timezone_set('Asia/Ho_Chi_Minh');
+              $monthCurrent = date("m");
+              $yearCurrent = date("Y");
+
+              for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                ?>
+                  arrayLabel.push("Năm " + nameYear);
+                  nameYear++;
+                <?php
+              } 
+
+              while($row_dsbacsi = mysqli_fetch_array($query_dsbacsi)) {
+                $idbacsi = $row_dsbacsi['id_bs'];
+                ?>
+                  var thongKeBS<?php echo $idbacsi ?> = [];
+                <?php
+                for($i = ($yearCurrent - 2); $i <= ($yearCurrent + 2); $i++) {
+                  // $thang = $_COOKIE['thang'];
+                  $doanhthu_bs = "SELECT SUM(tongchiphi) tongdoanhthu FROM phieukhambenh WHERE YEAR(ngaylapphieu) = $i AND id_bs = $idbacsi";
+                  $query_doanhthu_bs = mysqli_query($mysqli, $doanhthu_bs);
+                  $tong_doanhthu_bs = mysqli_fetch_array(($query_doanhthu_bs));
+                  if ($tong_doanhthu_bs == NULL) {
+                    $doanhthu_bs_nam = 0;
+                  }
+                  else {
+                    $doanhthu_bs_nam = round($tong_doanhthu_bs['tongdoanhthu'] / 1000000, 0);
+                  }
+                
+                ?>
+                  thongKeBS<?php echo $idbacsi ?>.push(<?php echo $doanhthu_bs_nam ?>)
+                <?php
+                }
+              }
+            ?>
+              // document.getElementById('doanhthuthang2').innerHTML = <php echo $idbacsi ?>;
+            <?php
+            }
+          ?>
         }
 
-        $sql_mabs = "SELECT * FROM temp_dsbacsi";
-        $sql_doanhthubs = "SELECT * FROM phieukhambenh, ";
+        var myLineChart = new Chart(ctxL, {
+          type: 'line',
+          data: {
+            labels: arrayLabel,
+            datasets: [<?php
+              $sql_dsbacsi02 = "SELECT * FROM temp_dsbacsi, bacsi WHERE temp_dsbacsi.id_bs = bacsi.id_bs";
+              $query_dsbacsi02 = mysqli_query($mysqli, $sql_dsbacsi02);
+              if (mysqli_num_rows($query_dsbacsi02) != 0) {
+                $i = 1;
+                while($row_dsbacsi02 = mysqli_fetch_array($query_dsbacsi02)) {
+                  ?>{
+                      label: "<?php echo $row_dsbacsi02['hoten_bs'] ?>",
+                      fillColor: "rgba(220,220,220,0.2)",
+                      strokeColor: "rgba(220,220,220,1)",
+                      pointColor: "rgba(220,220,220,1)",
+                      pointStrokeColor: "#fff",
+                      pointHighlightFill: "#fff",
+                      pointHighlightStroke: "rgba(220,220,220,1)",
+                      backgroundColor: [
+                        'rgba(255, 255, 255, 0.2)',
+                        'rgba(255, 255, 255, 0.2)',
+                        'rgba(255, 255, 255, 0.2)',
+                        'rgba(255, 255, 255, 0.2)',
+                        'rgba(255, 255, 255, 0.2)',
+                        'rgba(255, 255, 255, 0.2)'
+                      ],
+                      borderColor: color_<?php echo $i;
+                        $i++;
+                      ?>,
+                      borderWidth: 1,
+                      
+                      data: thongKeBS<?php echo $row_dsbacsi02['id_bs'] ?>
+                    },
+                  <?php
+                }
+              }
+              else {
+                echo "";
+              }
+            ?>
+            ]
+          },
+          options: {
+            responsive: true
+          }
+        });
       };
       //Kết thúc sự kiện chọn loại thống kê
 
+  </script>
+  <script>
+    let monthEle = document.querySelector('.month-calender');
+    let yearEle = document.querySelector('.year-calender');
+    let btnNext = document.querySelector('.btn-next-calender');
+    let btnPrev = document.querySelector('.btn-prev-calender');
+    let btnToday = document.querySelector('.btn-today');
+    let dateEle = document.querySelector('.date-container');
+
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    // Lấy số ngày của 1 tháng
+    function getDaysInMonth() {
+        return new Date(currentYear, currentMonth + 1, 0).getDate();
+    }
+
+    // Lấy ngày bắt đầu của tháng
+    function getStartDayInMonth() {
+        return new Date(currentYear, currentMonth, 1).getDay();
+    }
+
+    // Active current day
+    function activeCurrentDay(day) {
+        let day1 = new Date().toDateString();
+        let day2 = new Date(currentYear, currentMonth, day).toDateString();
+        return day1 == day2 ? 1 : 0;
+    }
+
+    // Xử lý khi ấn vào nút next month
+    btnNext.addEventListener('click', function () {
+        if (currentMonth == 11) {
+            currentMonth = 0;
+            currentYear++;
+        } else {
+            currentMonth++;
+        }
+        // displayInfo();
+        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+          }
+        };
+        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+        xmlhttp.send();
+    });
+
+    // Xử lý khi ấn vào nút previous month
+    btnPrev.addEventListener('click', function () {
+        if (currentMonth == 0) {
+            currentMonth = 11;
+            currentYear--;
+        } else {
+            currentMonth--;
+        }
+        // displayInfo();
+        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+          }
+        };
+        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+        xmlhttp.send();
+    });
+
+    btnToday.addEventListener('click', function () {
+        let d = new Date();
+        currentMonth = d.getMonth();
+        currentYear = d.getFullYear();
+        // displayInfo();
+        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+          }
+        };
+        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+        xmlhttp.send();
+    });
+
+    window.onload = displayInfo;
   </script>
 </body>
 
