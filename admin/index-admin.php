@@ -1262,96 +1262,98 @@
 
   </script>
   <script>
-    let monthEle = document.querySelector('.month-calender');
-    let yearEle = document.querySelector('.year-calender');
-    let btnNext = document.querySelector('.btn-next-calender');
-    let btnPrev = document.querySelector('.btn-prev-calender');
-    let btnToday = document.querySelector('.btn-today');
-    let dateEle = document.querySelector('.date-container');
+    // let monthEle = document.querySelector('.month-calender');
+    // let yearEle = document.querySelector('.year-calender');
+    // let btnNext = document.querySelector('.btn-next-calender');
+    // let btnPrev = document.querySelector('.btn-prev-calender');
+    // let btnToday = document.querySelector('.btn-today');
+    // let dateEle = document.querySelector('.date-container');
 
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
+    // let currentMonth = new Date().getMonth();
+    // let currentYear = new Date().getFullYear();
 
-    // Lấy số ngày của 1 tháng
-    function getDaysInMonth() {
-        return new Date(currentYear, currentMonth + 1, 0).getDate();
-    }
+    // // Lấy số ngày của 1 tháng
+    // function getDaysInMonth() {
+    //     return new Date(currentYear, currentMonth + 1, 0).getDate();
+    // }
 
-    // Lấy ngày bắt đầu của tháng
-    function getStartDayInMonth() {
-        return new Date(currentYear, currentMonth, 1).getDay();
-    }
+    // // Lấy ngày bắt đầu của tháng
+    // function getStartDayInMonth() {
+    //     return new Date(currentYear, currentMonth, 1).getDay();
+    // }
 
-    // Active current day
-    function activeCurrentDay(day) {
-        let day1 = new Date().toDateString();
-        let day2 = new Date(currentYear, currentMonth, day).toDateString();
-        return day1 == day2 ? 1 : 0;
-    }
+    // // Active current day
+    // function activeCurrentDay(day) {
+    //     let day1 = new Date().toDateString();
+    //     let day2 = new Date(currentYear, currentMonth, day).toDateString();
+    //     return day1 == day2 ? 1 : 0;
+    // }
 
-    // Xử lý khi ấn vào nút next month
-    btnNext.addEventListener('click', function () {
-        if (currentMonth == 11) {
-            currentMonth = 0;
-            currentYear++;
-        } else {
-            currentMonth++;
-        }
-        // displayInfo();
-        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
-        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+    // // Xử lý khi ấn vào nút next month
+    // btnNext.addEventListener('click', function () {
+    //     // currentMonth = document.getElementById('thang02').value;
+    //     // currentYear = document.getElementById('year').value;
+    //     if (currentMonth == 11) {
+    //         currentMonth = 0;
+    //         currentYear++;
+    //     } else {
+    //         currentMonth++;
+    //     }
+    //     // displayInfo();
+    //     document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+    //     document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-          }
-        };
-        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
-        xmlhttp.send();
-    });
+    //     var xmlhttp = new XMLHttpRequest();
+    //     xmlhttp.onreadystatechange = function() {
+    //       if (this.readyState == 4 && this.status == 200) {
+    //           document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+    //       }
+    //     };
+    //     xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    //     xmlhttp.send();
+    // });
 
-    // Xử lý khi ấn vào nút previous month
-    btnPrev.addEventListener('click', function () {
-        if (currentMonth == 0) {
-            currentMonth = 11;
-            currentYear--;
-        } else {
-            currentMonth--;
-        }
-        // displayInfo();
-        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
-        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+    // // Xử lý khi ấn vào nút previous month
+    // btnPrev.addEventListener('click', function () {
+    //     if (currentMonth == 0) {
+    //         currentMonth = 11;
+    //         currentYear--;
+    //     } else {
+    //         currentMonth--;
+    //     }
+    //     // displayInfo();
+    //     document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+    //     document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-          }
-        };
-        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
-        xmlhttp.send();
-    });
+    //     var xmlhttp = new XMLHttpRequest();
+    //     xmlhttp.onreadystatechange = function() {
+    //       if (this.readyState == 4 && this.status == 200) {
+    //           document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+    //       }
+    //     };
+    //     xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    //     xmlhttp.send();
+    // });
 
-    btnToday.addEventListener('click', function () {
-        let d = new Date();
-        currentMonth = d.getMonth();
-        currentYear = d.getFullYear();
-        // displayInfo();
-        document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
-        document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
+    // btnToday.addEventListener('click', function () {
+    //     let d = new Date();
+    //     currentMonth = d.getMonth();
+    //     currentYear = d.getFullYear();
+    //     // displayInfo();
+    //     document.getElementById("thang").innerHTML = `<p class="month-calender info-calender">Tháng ${currentMonth+1},&nbsp</p>`;
+    //     document.getElementById("nam").innerHTML = `<p class="month-calender info-calender">${currentYear}</p>`;
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-          }
-        };
-        xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
-        xmlhttp.send();
-    });
+    //     var xmlhttp = new XMLHttpRequest();
+    //     xmlhttp.onreadystatechange = function() {
+    //       if (this.readyState == 4 && this.status == 200) {
+    //           document.getElementById("lich").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+    //       }
+    //     };
+    //     xmlhttp.open("GET", "./lichlamviec_thang.php?month=" + (currentMonth + 1) + "&year=" + currentYear, true);
+    //     xmlhttp.send();
+    // });
 
-    window.onload = displayInfo;
+    // window.onload = displayInfo;
   </script>
 </body>
 

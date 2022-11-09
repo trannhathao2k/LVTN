@@ -225,3 +225,9 @@
             #aa076b 100%);
     color: #fff;
 }
+
+.hide-calamviec {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}

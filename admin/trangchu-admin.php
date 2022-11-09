@@ -521,63 +521,63 @@
                           <!--Modal Info-->
                           <div class="modal fade modal-ext" id="modal-info-<?php echo $row_ttphieu['maphieu'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                           aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                              <!--Content-->
-                              <div class="modal-content">
-                              <!--Header-->
-                              <div class="modal-header text-center">
-                                  <h4 class="modal-title w-100 py-3" id="myModalLabel">THÔNG TIN CHI TIẾT</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </div>
-                              <!--Body-->
-                              <div class="modal-body text-center" style="font-size: 14px;">
-                                  <div class="row">
-                                      <div class="col-md-6" style="text-align: left;">
-                                        <p><b>Tên khách hàng: </b> <?php echo $row_ttphieu['tenkhachhang'] ?></p>
-                                        <p><b>Ngày khám: </b><?php echo $row_ttphieu['ngaylapphieu'] ?></p>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
-                                      </div>           
-                                  </div>
-                                  <hr>
-                                  <div class="row">
-                                    <div class="col-md-12">
-                                      <?php
-                                        $maphieu = $row_ttphieu['maphieu'];
-                                        $ds_dichvu = "SELECT * FROM dichvuduocchidinh, dichvu, phieukhambenh WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND dichvuduocchidinh.maphieu = phieukhambenh.maphieu AND dichvuduocchidinh.maphieu = '$maphieu'";
-                                        $query_ds = mysqli_query($mysqli, $ds_dichvu);
-                                      ?>
-                                      <h6 class="title mb-3 font-weight-bold">Danh sách dịch vụ:</h6>
-                                      <ul class="striped list-unstyled waves-effect" style="background-color: #b9f6ca">
-                                        <?php
-                                          while($row_ds = mysqli_fetch_array($query_ds)) {
-                                            ?>
-                                              <li style="font-size: 14px;"><?php echo $row_ds['ten_dichvu'] ?> - <?php echo $row_ds['soluong']?> <?php echo $row_ds['donvitinh'] ?> - <b class="red-text"><?php echo number_format($row_ds['phihientai_dichvu'] * $row_ds['soluong'], 0, '', '.')?> VNĐ</b></li>
-                                            <?php
-                                          }
-                                        ?>
-                                      </ul>
-                                      <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Tổng phí: <b class="red-text"><?php
-                                        $tongphi = "SELECT * FROM phieukhambenh WHERE maphieu = '$maphieu'";
-                                        $query_tong = mysqli_query($mysqli, $tongphi);
-                                        $row_tongchiphi = mysqli_fetch_array($query_tong);
-                                        echo number_format($row_tongchiphi['tongchiphi'], 0, '', '.');
-                                      ?> VNĐ</b></h6>
+                            <div class="modal-dialog" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 py-3" id="myModalLabel">THÔNG TIN CHI TIẾT</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!--Body-->
+                                <div class="modal-body text-center" style="font-size: 14px;">
+                                    <div class="row">
+                                        <div class="col-md-6" style="text-align: left;">
+                                          <p><b>Tên khách hàng: </b> <?php echo $row_ttphieu['tenkhachhang'] ?></p>
+                                          <p><b>Ngày khám: </b><?php echo $row_ttphieu['ngaylapphieu'] ?></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
+                                        </div>           
                                     </div>
-                                    
-                                  </div>
-                              </div>
-                              <!--Footer-->
-                              <div class="modal-footer">                        
-                                
-                                <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
-                              </div>
-                              </div>
-                              <!--/Content-->
-                          </div>
+                                    <hr>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <?php
+                                          $maphieu = $row_ttphieu['maphieu'];
+                                          $ds_dichvu = "SELECT * FROM dichvuduocchidinh, dichvu, phieukhambenh WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND dichvuduocchidinh.maphieu = phieukhambenh.maphieu AND dichvuduocchidinh.maphieu = '$maphieu'";
+                                          $query_ds = mysqli_query($mysqli, $ds_dichvu);
+                                        ?>
+                                        <h6 class="title mb-3 font-weight-bold">Danh sách dịch vụ:</h6>
+                                        <ul class="striped list-unstyled waves-effect" style="background-color: #b9f6ca">
+                                          <?php
+                                            while($row_ds = mysqli_fetch_array($query_ds)) {
+                                              ?>
+                                                <li style="font-size: 14px;"><?php echo $row_ds['ten_dichvu'] ?> - <?php echo $row_ds['soluong']?> <?php echo $row_ds['donvitinh'] ?> - <b class="red-text"><?php echo number_format($row_ds['phihientai_dichvu'] * $row_ds['soluong'], 0, '', '.')?> VNĐ</b></li>
+                                              <?php
+                                            }
+                                          ?>
+                                        </ul>
+                                        <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Tổng phí: <b class="red-text"><?php
+                                          $tongphi = "SELECT * FROM phieukhambenh WHERE maphieu = '$maphieu'";
+                                          $query_tong = mysqli_query($mysqli, $tongphi);
+                                          $row_tongchiphi = mysqli_fetch_array($query_tong);
+                                          echo number_format($row_tongchiphi['tongchiphi'], 0, '', '.');
+                                        ?> VNĐ</b></h6>
+                                      </div>
+                                      
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">                        
+                                  
+                                  <button type="button" class="btn btn-sm btn-rounded btn-danger waves-effect" data-dismiss="modal">ĐÓNG</button>
+                                </div>
+                                </div>
+                                <!--/Content-->
+                            </div>
                           </div>
                           <!--/Modal Info-->
                       </tr>

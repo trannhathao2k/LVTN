@@ -507,7 +507,7 @@
               tại Đại Học Aix- Marseille, nước Pháp.
             </p>
 
-            <p class="grey-text" align="justify">Trong hơn 10 năm tu nghiệp tại Pháp và được tiếp cận 
+            <!-- <p class="grey-text" align="justify">Trong hơn 10 năm tu nghiệp tại Pháp và được tiếp cận 
               với những công nghệ hiện đại nhất, <b>Bác sĩ Lee Ji-eun</b> cảm thấy lo ngại trước những 
               kỹ thuật nha khoa đã quá cũ và không bắt kịp sự tiến bộ của nền Nha khoa thế giới tại nước ta. 
               Đồng thời, tại Việt Nam cũng thiếu đi những địa chỉ nha khoa tin cậy và các phương án 
@@ -518,20 +518,18 @@
               rộng rãi là nguyên nhân chính tạo nên sự thờ ơ và không quan tâm đúng mức đến sức khỏe 
               răng miệng của phần lớn người dân trong nước, dẫn đấu những hậu quả nghiêm trọng về sức khỏe 
               lâu dài, trong đó có chính gia đình của Bác sĩ Tùng.
-            </p>
+            </p> -->
 
             <p class="grey-text" align="justify">Trở thành 1 trong những Tiến Sĩ Y Khoa trẻ nhất Việt Nam 
               sau khi bảo vệ thành công luận án tiến sĩ tại Pháp, với rất nhiều cơ hội để thành công tại 
-              nước ngoài. Tuy nhiên, bằng tình yêu quê hương, nhiệt huyết và mong muốn đóng góp phát triển 
-              cho ngành Nha khoa tại nước nhà, đặc biệt là trong lĩnh vực Cấy ghép Implant, Bác sĩ Tùng 
-              đã quyết định từ bỏ tất cả để quay về Việt Nam và lập nghiệp.
+              nước ngoài. Tuy nhiên, bằng tình yêu quê hương, Bác sĩ Lee đã quyết định từ bỏ tất cả để quay về Việt Nam và lập nghiệp.
             </p>
 
-            <p class="grey-text" align="justify">Với những trăn trở và mong muốn đó của Bác sĩ Tùng đã 
+            <p class="grey-text" align="justify">Với những trăn trở và mong muốn đó của Bác sĩ Lee đã 
               trở thành kim chỉ nam để thành lập và phát triển Nha khoa TQueen. Thành lập năm 2014, 
               sau hơn 6 năm đi vào hoạt động, với sự nỗ lực không ngừng của <b>Tiến sĩ – Bác sĩ Lee Ji-eun</b> 
-              cùng với đội ngũ cộng sự Bác sĩ, phụ tá, nhân viên tại nha khoa TQueen đã thực hiện 
-              thành công hơn 10,000 ca Implant, qua đó kiến tạo nụ cười hạnh phúc cho hàng ngàn bệnh nhân.
+              cùng với đội ngũ cộng sự tại nha khoa TQueen đã thực hiện thành công hơn 10,000 ca Implant, 
+              qua đó kiến tạo nụ cười hạnh phúc cho hàng ngàn bệnh nhân.
             </p>
 
             <p class="grey-text" align="justify">
@@ -782,43 +780,6 @@
     <div class="container-fluid grey lighten-3">
       <div class="container">
 
-      <section id="services" class="mt-3 pb-3">
-
-        <!-- Grid row -->
-        <div class="row mt-5 pt-5 wow fadeIn" data-wow-delay="0.4s">
-
-          <!-- Grid column -->
-          <div class="col-md-6 mb-1 text-center">
-
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/WXX4qCbyts0" title="YouTube video player" frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">VTV3</b> về Nha khoa TQueen</p>
-
-          </div>
-          <!-- Grid column -->
-
-          <!-- Second column -->
-          <div class="col-md-6 mb-1 text-center">
-
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/PQu1lk1zBiU" title="YouTube video player" frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <p style="margin-top: 10px;">Đánh giá của Đài truyền hình <b class="text-danger">HTV7</b> về Nha khoa TQueen</p>
-
-          </div>
-          <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
-      </section>
-      <!-- Section: Download -->
-      <hr>
       <h3 class="text-center mb-3 mt-3 pt-4 font-weight-bold dark-grey-text wow fadeIn" data-wow-delay="0.2s">
         VIDEOS CẢM NHẬN CỦA KHÁCH HÀNG VỀ NHA KHOA TQUEEN
       </h3>
@@ -831,7 +792,7 @@
           <div class="col-md-6 mb-1 text-center">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/jZF0MMdPang" 
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/TidRG-baYi8" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
@@ -842,7 +803,7 @@
           <div class="col-md-6 mb-1 text-center">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/cUUFDm2GJeo" title="YouTube video player" 
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/uR5Jq0UDd2A" title="YouTube video player" 
                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 

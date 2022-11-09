@@ -441,7 +441,7 @@
                                     }
                                     else {
                                         echo '
-                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(1)" data-dismiss="modal" style="min-width: 130px;">
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(1)" data-dismiss="modal" style="min-width: 130px;">
                                                 7h00 - 8h30<br/>
                                                 CÒN TRỐNG
                                             </a>
@@ -458,7 +458,7 @@
                                     }
                                     else {
                                         echo '
-                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(2)" data-dismiss="modal" style="min-width: 130px;">
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(2)" data-dismiss="modal" style="min-width: 130px;">
                                                 8h30 - 10h00<br/>
                                                 CÒN TRỐNG
                                             </a>
@@ -475,7 +475,7 @@
                                     }
                                     else {
                                         echo '
-                                            <a class="btn btn-sm btn-outline-warning" onclick="chongio(3)" data-dismiss="modal" style="min-width: 130px;">
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(3)" data-dismiss="modal" style="min-width: 130px;">
                                                 10h00 - 11h30<br/>
                                                 CÒN TRỐNG
                                             </a>
@@ -507,7 +507,7 @@
                                 }
                                 else {
                                     echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
+                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
                                         13h00 - 14h30<br/>
                                             CÒN TRỐNG
                                         </a>
@@ -524,7 +524,7 @@
                                 }
                                 else {
                                     echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
+                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
                                             14h30 - 16h00<br/>
                                             CÒN TRỐNG
                                         </a>
@@ -541,7 +541,7 @@
                                 }
                                 else {
                                     echo '
-                                        <a class="btn btn-sm btn-outline-warning" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
+                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
                                             16h00 - 17h30<br/>
                                             CÒN TRỐNG
                                         </a>
