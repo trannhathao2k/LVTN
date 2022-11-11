@@ -76,12 +76,14 @@
                     <?php
                         $sql_taikham = "SELECT * FROM lichtaikham WHERE maphieu = '$maphieu' ORDER BY ngaytaikham ASC, giohen ASC";
                         $query_taikham = mysqli_query($mysqli, $sql_taikham);
-                        $stt = 1;                 
+                        $stt = 1;         
+                        $checkFinish = 1;        
                         if (mysqli_num_rows($query_taikham) != 0) {
                             while($lichtaikham = mysqli_fetch_array($query_taikham)) {
                             ?>
-                            <li onclick="capnhat<?php echo $lichtaikham['id_lichtaikham'] ?>(<?php echo '\''.$lichtaikham['id_lichtaikham'].'\', \''.++$stt.'\'' ?>)" class="<?php if ($lichtaikham['trangthai'] == 1) {
+                            <li onclick="capnhat<?php echo $lichtaikham['id_lichtaikham'] ?>(<?php echo '\''.$maphieu.'\', \''.++$stt.'\'' ?>);themchongio<?php echo $lichtaikham['id_lichtaikham'] ?>()" class="<?php if ($lichtaikham['trangthai'] == 1) {
                                 echo 'active';
+                                $checkFinish++;
                             } ?>" id="dulieu-<?php echo $lichtaikham['id_lichtaikham'] ?>" style="display: block;">
                                 <a>
                                     <span class="circle"><?php echo $stt; ?></span>
@@ -119,7 +121,7 @@
                                     var xmlhttp = new XMLHttpRequest();
                                     xmlhttp.onreadystatechange = function() {
                                         if (this.readyState == 4 && this.status == 200) {
-                                            document.getElementById("<?php echo 'capnhat-'.$lichtaikham['id_lichtaikham'] ?>").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+                                            document.getElementById("<?php echo 'capnhat-'.$lichtaikham['id_lichtaikham'] ?>").innerHTML =(this.responseText);
                                         }
                                     };
                                     xmlhttp.open("GET", "capnhatlich.php?maphieu=" + maphieu + "&stt=" + stt + "&id=" + <?php echo $lichtaikham['id_lichtaikham'] ?>, true);
@@ -132,7 +134,7 @@
                     ?>
 
                     <div class="modal fade modal-ext" id="modal-info-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+                            aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <!--Content-->
                             <div class="modal-content">
@@ -269,7 +271,7 @@
                     </div>
 
                     <div class="modal fade modal-ext" id="modal-info-giokham" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
+                        aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <!--Content-->
                             <div class="modal-content">
@@ -294,19 +296,16 @@
                             </div>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                
                     
                     <div id="themlich">
-                        <!-- <li>
-                            <a href="#!">
-                                <span class="circle"><php echo ++$stt ?></span>
-                                <span class="label">Kết thúc </span>
-                            </a>
-                        </li>                       -->
                     </div>
                     <div id="loadPage"></div>
-                    <li id="li-kt-02" style="display: block;">
+                    <li id="li-kt-02" style="display: block;" class="<?php
+                        if (($checkFinish != 1) && ($checkFinish == $stt)) {
+                            echo 'active';
+                        }
+                    ?>">
                         <a href="#!">
                             <span class="circle"><?php echo ++$stt ?></span>
                             <span class="label">Kết thúc </span>
@@ -368,6 +367,17 @@
             }
         };
         xmlhttp.open("GET", "./lichtrinh/xoaLichTrinh.php?maphieu=" + maphieu, true);
+        xmlhttp.send();
+    }
+
+    function hoanthanh(maphieu, id_phieu) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("loadPage").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/hoanthanh.php?maphieu=" + maphieu + "&idphieu=" + id_phieu, true);
         xmlhttp.send();
     }
 
@@ -457,19 +467,6 @@
         }
         };
         xmlhttp.open("GET", "../giokham.php?mabs=" + mabs + "&maphieu=" + maPhieu + "&day=" + day + "&month=" + (currentMonth + 1) + "&year=" + currentYear + "&thaotac=bacsi", true);
-        xmlhttp.send();
-    }
-    
-    function test() {
-        var mabs = <?php echo $phieu['id_bs'] ?>;
-
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("form-contact-message").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-            }
-        };
-        xmlhttp.open("GET", "../themlichhen.php", true);
         xmlhttp.send();
     }
 

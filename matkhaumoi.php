@@ -108,7 +108,49 @@
                             <div class="mb-1 wow fadeIn mt-3" >
                                 <div id="maxn"></div>
                                 <p class="white-text" style="font-size: 13px;">Mã xác nhận đang được gửi đi. <br/>Vui lòng nhấn thử lại nếu bạn chưa nhận được mã.</p>
-                                <a class="btn btn-sm" style="background-color: tomato;">THỬ LẠI</a>
+                                <button id="btn-thulai" class="btn btn-sm white-text" style="background-color: tomato;" onclick="guilaima()" disabled>THỬ LẠI &nbsp;<b id="giay">60</b></button>
+                                <script>
+                                  window.onload = start();
+                                  var s = null; // Giây
+                                
+                                  var timeout = null; // Timeout
+                                
+                                  function start()
+                                  {
+                                    
+                                  /*BƯỚC 1: LẤY GIÁ TRỊ BAN ĐẦU*/
+                                  if (document.getElementById('giay').innerHTML == '') {
+                                    s = 59;
+                                  }
+                                  else {
+                                    s = parseInt(document.getElementById('giay').innerHTML) - 1;
+                                  }
+                                  
+
+                                  /*BƯỚC 1: CHUYỂN ĐỔI DỮ LIỆU*/
+                                  // Nếu số giây = 0 tức là đã hết giờ, lúc này:
+                                  //  - Dừng chương trình
+                                    if (s == 0){
+                                        clearTimeout(timeout);
+                                        document.getElementById('btn-thulai').disabled = false;
+                                        document.getElementById('giay').innerHTML = '';
+                                        return false;
+                                    }
+
+                                    /*BƯỚC 1: HIỂN THỊ ĐỒNG HỒ*/
+                                    document.getElementById('giay').innerHTML = s.toString();
+
+                                    /*BƯỚC 1: GIẢM PHÚT XUỐNG 1 GIÂY VÀ GỌI LẠI SAU 1 GIÂY */
+                                    timeout = setTimeout(function(){
+                                        s--;
+                                        start();
+                                    }, 1000);
+                                  }
+                                
+                                  function stop(){
+                                      clearTimeout(timeout);
+                                  }
+                                </script>
                             </div>
 
                         </div>
@@ -171,6 +213,16 @@
         }
         
     };
+
+    function guilaima() {
+      document.getElementById('btn-thulai').disabled = true;
+      start();
+      var email = document.getElementById('email-khachhang').innerHTML;
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "datlaimatkhau.php?action=guima&email=" + email, true);
+      xmlhttp.send();
+    }
     
   </script>
 </body>

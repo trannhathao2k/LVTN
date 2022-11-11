@@ -190,25 +190,43 @@
                                             </div>
                                             <div class="col-md-6">
                                               <section>
-                                                <select id="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-select md-form m-3" searchable="Tìm kiếm..">
-                                                  <option value="0">Chưa có tài khoản</option>
-                                                  <?php
-                                                    $sql_kh = "SELECT * FROM khachhang";
-                                                    $query_kh = mysqli_query($mysqli, $sql_kh);
-                                                    while($kh = mysqli_fetch_array($query_kh)){
-                                                      ?>
-                                                        <option value="<?php echo $kh['id_kh'] ?>" data-icon="../<?php echo $kh['anhdaidien_kh'] ?>"
-                                                          class="rounded-circle">
-                                                          <ul>
-                                                            <li><?php echo $kh['hoten_kh'] ?> - </li>
-                                                            <li><?php echo $kh['sdt_kh'] ?></li>
-                                                            <li> - <?php echo $kh['email_kh'] ?></li>
-                                                          </ul></option>
-                                                      <?php
-                                                    }
-                                                  ?>
-                                                </select>
-                                                <label for="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-main-label">Chọn tài khoản</label>
+                                                <?php
+                                                  if ($row_ttphieu['id_kh'] == NULL) {
+                                                    ?>
+                                                      <select id="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-select md-form m-3" searchable="Tìm kiếm..">
+                                                        <option value="0">Chưa có tài khoản</option>
+                                                        <?php
+                                                          $sql_kh = "SELECT * FROM khachhang";
+                                                          $query_kh = mysqli_query($mysqli, $sql_kh);
+                                                          while($kh = mysqli_fetch_array($query_kh)){
+                                                            ?>
+                                                              <option value="<?php echo $kh['id_kh'] ?>" data-icon="../<?php echo $kh['anhdaidien_kh'] ?>"
+                                                                class="rounded-circle">
+                                                                <ul>
+                                                                  <li><?php echo $kh['hoten_kh'] ?> - </li>
+                                                                  <li><?php echo $kh['sdt_kh'] ?></li>
+                                                                  <li> - <?php echo $kh['email_kh'] ?></li>
+                                                                </ul></option>
+                                                            <?php
+                                                          }
+                                                        ?>
+                                                      </select>
+                                                      <label for="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-main-label">Chọn tài khoản</label>
+                                                    <?php
+                                                  }
+                                                  else {
+                                                    $id_kh = $row_ttphieu['id_kh'];
+                                                    $sql_thongtinkh = "SELECT * FROM khachhang WHERE id_kh = $id_kh";
+                                                    $query_thongtinkh = mysqli_query($mysqli, $sql_thongtinkh);
+                                                    $thongtinkh = mysqli_fetch_array($query_thongtinkh);
+                                                    echo '<ul style="text-align: left">';?>
+                                                      <li><b>Tên tài khoản:</b> <?php echo $thongtinkh['hoten_kh'] ?></li>
+                                                      <li><b>Email:</b> <?php echo $thongtinkh['email_kh'] ?></li>
+                                                      <li><b>SĐT:</b> <?php echo $thongtinkh['sdt_kh'] ?></li>
+                                                    <?php echo '</ul>';
+                                                  }
+                                                ?>
+                                                
                                               </section>
                                               
                                               

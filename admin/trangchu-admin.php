@@ -470,7 +470,7 @@
             <h4 class="h2-responsive mb-0 font-weight-500">THÔNG TIN THU PHÍ KHÁCH HÀNG</h4>
           </div>
           
-          <div class="card-body" >
+          <div class="card-body">
               <!-- <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">DANH SÁCH THU PHÍ KHÁCH HÀNG</h5> -->
               <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                   <colgroup>

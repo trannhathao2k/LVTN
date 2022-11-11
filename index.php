@@ -116,7 +116,7 @@
               <a class="nav-link dropdown-toggle title" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">DỊCH VỤ</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="./dichvu/trongrangimplant.php">
                     <i class="fas fa-angle-right"></i>
                     Trồng răng Implant</a>
                   <a class="dropdown-item" href="">

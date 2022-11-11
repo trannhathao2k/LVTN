@@ -488,70 +488,70 @@
                                 
                                 if ($row_calv['calamviec'] !== "S") {
                                     echo '
-                                    <hr>
-                                    <div>
-                                    <div class="div canhgiua" style="width: 100%;">
-                                        <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
-                                    </div>
+                                        <hr>
+                                        <div>
+                                        <div class="div canhgiua" style="width: 100%;">
+                                            <h6 class="font-weight-bold text-center">CA CHIỀU</h6>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between;">
+                                    ';
+                                
+                                    //Ô chọn giờ 4
+                                    if($lich[3] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                            13h00 - 14h30<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
+                                            13h00 - 14h30<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
                                     
-                                    <div style="display: flex; justify-content: space-between;">
-                                ';
+                                    //Ô chọn giờ 5
+                                    if($lich[4] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                                14h30 - 16h00<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
+                                                14h30 - 16h00<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
+                                    
+                                    //Ô chọn giờ 6
+                                    if($lich[5] == "T") {
+                                        echo
+                                            '<a class="btn btn-sm btn-success" style="min-width: 130px;">
+                                                16h00 - 17h30<br/>
+                                                ĐÃ ĐƯỢC CHỌN
+                                            </a>';
+                                    }
+                                    else {
+                                        echo '
+                                            <a class="btn btn-sm btn-outline-success" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
+                                                16h00 - 17h30<br/>
+                                                CÒN TRỐNG
+                                            </a>
+                                        ';
+                                    }
                                 
-                                //Ô chọn giờ 4
-                                if($lich[3] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
-                                        13h00 - 14h30<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(4)" data-dismiss="modal" style="min-width: 130px;">
-                                        13h00 - 14h30<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                                
-                                //Ô chọn giờ 5
-                                if($lich[4] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
-                                            14h30 - 16h00<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(5)" data-dismiss="modal" style="min-width: 130px;">
-                                            14h30 - 16h00<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                                
-                                //Ô chọn giờ 6
-                                if($lich[5] == "T") {
-                                    echo
-                                        '<a class="btn btn-sm btn-success" style="min-width: 130px;">
-                                            16h00 - 17h30<br/>
-                                            ĐÃ ĐƯỢC CHỌN
-                                        </a>';
-                                }
-                                else {
-                                    echo '
-                                        <a class="btn btn-sm btn-outline-success" onclick="chongio(6)" data-dismiss="modal" style="min-width: 130px;">
-                                            16h00 - 17h30<br/>
-                                            CÒN TRỐNG
-                                        </a>
-                                    ';
-                                }
-                                
-                                // echo $year.'-'.$month.'-'.$day;
-                                
-                                echo '</div>
-                                </div>';
+                                    // echo $year.'-'.$month.'-'.$day;
+                                    
+                                    echo '</div>
+                                    </div>';
                                 
                                 }
                                 

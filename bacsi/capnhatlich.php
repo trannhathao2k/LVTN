@@ -47,7 +47,7 @@ echo '
                 </div>
                 <div class="col-lg-3" hidden>
                     <div class="md-form m-0 p-0">
-                        <input type="text" id="id_lichtaikham" name="id_lichtaikham" class="form-control" data-toggle="modal" value="<?php echo $dulieu['id_lichtaikham'] ?>" required readonly>
+                        <input type="text" id="id_lichtaikham" name="id_lichtaikham" class="form-control" data-toggle="modal" value="<?php echo $maphieu ?>" required readonly>
                         <label for="id_lichtaikham">Mã phiếu</label>
                     </div>
                 </div>
@@ -60,6 +60,7 @@ echo '
             <label for="noidung" class="active">Nội dung</label>
         </div>
         <div class="d-flex justify-content-end">
+            <a class="btn btn-primary btn-rounded btn-sm" id="hoanthanh" onclick="hoanthanh('<?php echo $maphieu ?>','<?php echo $dulieu['id_lichtaikham'] ?>')">HOÀN THÀNH</a>
             <input type="submit" name="capnhatlich-bacsi" id="capnhatlich-bacsi" 
                 class="btn btn-success btn-rounded btn-sm" value="CẬP NHẬT">
             <a class="btn btn-danger btn-rounded btn-sm canhgiua" data-toggle="modal" data-target="#frameModalTopInfoDemo-03-<?php echo $dulieu['id_lichtaikham'] ?>" data-backdrop="false">XÓA</a>
