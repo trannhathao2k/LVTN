@@ -3,10 +3,6 @@ include("../config.php");
 include("../autoload.php");
 session_start();
 
-if(!$_SESSION['bacsi']) {
-    header("location:./index.php");
-}
-
 $tongphi = "SELECT * FROM temp, dichvu WHERE temp.id_dv = dichvu.id_dichvu";
 $query_tongphi = mysqli_query($mysqli, $tongphi);
 $tong = 0;

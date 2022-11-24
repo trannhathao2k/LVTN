@@ -569,6 +569,7 @@ else {
       }
       else {
         document.querySelector('#sdtkh').style.borderBottom = '2px solid #ced4da';
+        document.getElementById('register').disabled = false;
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -606,6 +607,7 @@ else {
     function checkEmail() {
       var email = document.getElementById('emailkh');
       var checkEmail = document.getElementById('check-email');
+      document.getElementById('register').disabled = false;
 
       function validatEemail(x) {
         var atposition = x.indexOf("@");

@@ -1,70 +1,79 @@
 <?php
-    if(!$_SESSION['bacsi']) {
+    if(!isset($_SESSION['bacsi'])) {
         header("location:../index.php");
     }
+
+    $MaBS = $_SESSION['bacsi']['id_bs'];
 ?>
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body" >
-                <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">THÔNG TIN KHÁCH HÀNG</h5>
+                <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">LỊCH TÁI KHÁM CỦA KHÁCH HÀNG</h5>
                 <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                     <colgroup>
-                        <col width="10%" span="1">
-                        <col width="20%" span="1">
-                        <col width="10%" span="2">
-                        <col width="20%" span="1">
-                        <col width="10%" span="2">
-                        <col width="20%" span="1">
+                        <col width="30" span="1">
+                        <col width="125" span="1">
+                        <col width="125" span="1">
+                        <col width="100" span="1">
+                        <col width="150" span="1">
+                        <col width="125" span="1">
+                        <col width="300" span="1">
+                        <col width="100" span="1">
+                        <col width="50" span="1">
                     </colgroup>
                     <thead>
                         <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
-                            <th class="font-weight-bold">Ảnh đại diện
+                            <th>STT</th>
+                            <th class="font-weight-bold">Mã phiếu
                             </th>
                             <th class="font-weight-bold">Tên khách hàng
                             </th>
-                            <th class="font-weight-bold">Giới tính
+                            <th class="font-weight-bold">Ngày khám bệnh
                             </th>
-                            <th class="font-weight-bold">Tuổi
+                            <th class="font-weight-bold">Tổng chi phí
                             </th>
-                            <th class="font-weight-bold">Email</th>
-                            <th class="font-weight-bold">Số điện thoại</th>
-                            <th class="font-weight-bold">Địa chỉ
-                            </th>
-                            <th class="font-weight-bold">Hạng thành viên
-                            </th>
+                            <th class="font-weight-bold">Tiêu đề</th>
+                            <th class="font-weight-bold">Nội dung</th>
+                            <th class="font-weight-bold">Ngày tái khám</th>
                             <th>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $khachhang = "SELECT * FROM khachhang";
-                        $query_kh = mysqli_query($mysqli, $khachhang);
-                        while($row_kh = mysqli_fetch_array($query_kh)) {
+                        $stt = 1;
+                        $lichtaikham = "SELECT * FROM lichtaikham, phieukhambenh WHERE lichtaikham.maphieu = phieukhambenh.maphieu AND phieukhambenh.id_bs = $MaBS AND lichtaikham.trangthai = 0 ORDER BY lichtaikham.ngaytaikham ASC";
+                        $query_lichtaikham = mysqli_query($mysqli, $lichtaikham);
+                        while($row_lichtaikham = mysqli_fetch_array($query_lichtaikham)) {
                     ?>
                         <tr>
-                            <td class="canhgiua mt-0 mb-0"><img src="../<?php echo $row_kh['anhdaidien_kh'] ?>" width="50px" height="50px"></td>
-                            <td><?php echo $row_kh['hoten_kh'] ?></td>
-                            <td><?php echo $row_kh['gioitinh_kh'] ?></td>
-                            <td><?php echo $row_kh['tuoi_kh'] ?></td>
-                            <td><?php echo $row_kh['email_kh'] ?></td>
-                            <td><?php echo $row_kh['sdt_kh'] ?></td>
-                            <td><?php echo $row_kh['diachi_kh'] ?></td>
-                            <td><?php
-                                if($row_kh['diemtichluy'] < 100) {
-                                    echo '<b style="color: #0099CC">Khách hàng mới <i class="fas fa-user-alt"></i></b>';
-                                }
-                                else if ($row_kh['diemtichluy'] >= 100 && $row_kh['diemtichluy'] < 200 ) {
-                                    echo '<b style="color: #CC0000">Khách hành thân thiết <i class="fas fa-hands-helping"></i></b>';
-                                }
-                                else {
-                                    echo '<b style="color: #FF8800">Khách hàng VIP <i class="fas fa-spa"></i></b>';
-                                }
-                            ?></td>
+                            <?php
+                                $maphieu02 = $row_lichtaikham['maphieu'];
+                                $phieu = "SELECT * FROM phieukhambenh WHERE id_bs = $MaBS AND maphieu = '$maphieu02'";
+                                $query_phieu = mysqli_query($mysqli, $phieu);
+                                $row_phieu = mysqli_fetch_array($query_phieu);
+                            ?>
+                            <td><?php echo $stt++ ?></td>
+                            <td><?php echo $row_phieu['maphieu'] ?></td>
+                            <td><?php echo $row_phieu['tenkhachhang'] ?></td>
+                            <td><?php echo date("d-m-Y h:i:s", strtotime($row_phieu['ngaylapphieu']))?></td>
+                            <td class="red-text font-weight-bold"><?php echo number_format($row_phieu['tongchiphi'], 0, '', '.')  ?> VNĐ</td>
+                            <td><?php echo $row_lichtaikham['tieude'] ?></td>
+                            <td><?php echo $row_lichtaikham['noidung'] ?></td>
                             <td>
-                                <a class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
+                                <?php
+                                    if ($row_lichtaikham['giohen'] == null) {
+                                        echo date("d-m-Y", strtotime($row_lichtaikham['ngaytaikham']));
+                                    }
+                                    else {
+                                        echo date("d-m-Y", strtotime($row_lichtaikham['ngaytaikham'])).' '.$row_lichtaikham['giohen'];
+                                    }
+                                ?>
+                            </td>
+                            <td>
+                                <a href="index-bs.php?route=lichhenkham&maphieu=<?php echo $row_phieu['maphieu'] ?>" class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
                                   <i class="fas fa-arrow-right"></i>
                                 </a>
                             </td>

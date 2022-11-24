@@ -238,3 +238,14 @@
     height: 400px;
     object-fit: cover;
 }
+
+.truonghop-trongrang {
+    height: 75px;
+    width: 180px;
+    font-weight: bold;
+    position: absolute;
+    left: 100px;
+    top: 25px;
+    z-index: 1;
+    text-align: center;
+}

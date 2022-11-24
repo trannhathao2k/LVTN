@@ -3,10 +3,6 @@ include("../config.php");
 include("../autoload.php");
 session_start();
 
-if(!$_SESSION['bacsi']) {
-    header("location:./index.php");
-}
-
 if (isset($_GET['madv']) && isset($_GET['thaotac'])) {
     $madv = $_GET['madv'];
     $thaotac = $_GET['thaotac'];

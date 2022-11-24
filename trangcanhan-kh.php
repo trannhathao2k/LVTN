@@ -265,11 +265,11 @@
                                                   $query_khachhang = mysqli_query($mysqli, $sql_khachhang);
                                                   $row_khachhang = mysqli_fetch_array($query_khachhang);
 
-                                                  if ($row_khachhang['diemtichluy'] < 100) {
+                                                  if ($row_khachhang['diemtichluy'] < 1000) {
                                                     echo "0 VNĐ";
                                                     $giamgia = 0;
                                                   }
-                                                  else if ($row_khachhang['diemtichluy'] >= 100 && $row_khachhang['diemtichluy'] < 300) {
+                                                  else if ($row_khachhang['diemtichluy'] >= 1000 && $row_khachhang['diemtichluy'] < 3000) {
                                                     $giamgia = $row_tongchiphi['tongchiphi'] * 0.05;
                                                     echo number_format($giamgia, 0, '', '.')." VNĐ";
                                                   }
@@ -277,10 +277,9 @@
                                                     $giamgia = $row_tongchiphi['tongchiphi'] * 0.1;
                                                     echo number_format($giamgia, 0, '', '.')." VNĐ";
                                                   }
-                                                }
-                                                
-                                                
-                                            ?></b></h6>
+                                                }    
+                                            ?>
+                                            </b></h6>
                                             <h5 class="title mb-3 font-weight-bold" style="text-align: end;">THÀNH TIỀN: <b class="red-text"><?php
                                               echo number_format($row_tongchiphi['tongchiphi'] - $giamgia, 0, '', '.')." VNĐ";
                                             ?></b></h5>
@@ -414,10 +413,10 @@
                     ?>
                   </strong></h3>
                   <h6 class="mb-4"><?php
-                    if($row_kh['diemtichluy'] < 100) {
+                    if($row_kh['diemtichluy'] < 1000) {
                       echo '<b style="color: #0099CC">Khách hàng mới <i class="fas fa-user-alt"></i></b>';
                     }
-                    else if ($row_kh['diemtichluy'] >= 100 && $row_kh['diemtichluy'] < 200 ) {
+                    else if ($row_kh['diemtichluy'] >= 1000 && $row_kh['diemtichluy'] < 3000 ) {
                       echo '<b style="color: #CC0000">Khách hành thân thiết <i class="fas fa-hands-helping"></i></b>';
                     }
                     else {

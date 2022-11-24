@@ -134,24 +134,24 @@
                                 <div style="z-index: 2;position: relative;">
                                     <img src="../img/Images/mat-1-rang.png" alt="mat-1-rang" width="120px" height="120px">
                                 </div>                              
-                                <div class="bg-primary white-text canhgiua" style="height: 75px;width: 180px;font-weight: bold;position: absolute;left: 100px;top: 25px;z-index: 1">MẤT 1 RĂNG</div>
+                                <div class="bg-primary white-text canhgiua truonghop-trongrang">MẤT 1 RĂNG</div>
                             </div>
                             <div class="col-lg-6 mt-1">
                                 <div style="z-index: 2;position: relative;">
                                     <img src="../img/Images/mat-3-rang-lien-ke.png" alt="mat-3-rang" width="120px" height="120px">
                                 </div>                              
-                                <div class="bg-primary white-text canhgiua" style="height: 75px;width: 180px;font-weight: bold;position: absolute;left: 100px;top: 25px;z-index: 1">MẤT 3 RĂNG LIỀN KỀ</div>
+                                <div class="bg-primary white-text canhgiua truonghop-trongrang">MẤT 3 RĂNG<br/> LIỀN KỀ</div>
                             </div>
                             <div class="col-lg-6 mt-3">
                                 <div style="z-index: 2;position: relative;">
                                     <img src="../img/Images/mat-4-rang-lien-ke.png" alt="mat-4-rang" width="120px" height="120px">
                                 </div>                              
-                                <div class="bg-primary white-text canhgiua" style="height: 75px;width: 180px;font-weight: bold;position: absolute;left: 100px;top: 25px;z-index: 1">MẤT 4 RĂNG LIỀN KỀ</div>
+                                <div class="bg-primary white-text canhgiua truonghop-trongrang">MẤT 4 RĂNG<br/> LIỀN KỀ</div>
                             </div><div class="col-lg-6 mt-3">
                                 <div style="z-index: 2;position: relative;">
                                     <img src="../img/Images/mat-rang-toan-ham-1.png" alt="mat-rang-toan-ham" width="120px" height="120px">
                                 </div>                              
-                                <div class="bg-primary white-text canhgiua" style="height: 75px;width: 180px;font-weight: bold;position: absolute;left: 100px;top: 25px;z-index: 1">MẤT RĂNG TOÀN HÀM</div>
+                                <div class="bg-primary white-text canhgiua truonghop-trongrang">MẤT RĂNG<br/> TOÀN HÀM</div>
                             </div>
                         </div>
                     </div>

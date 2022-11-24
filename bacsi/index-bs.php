@@ -19,7 +19,7 @@
     header("location:../index.php");
   } 
 
-  if(!$_SESSION['bacsi']) {
+  if(!isset($_SESSION['bacsi'])) {
     header("location:../index.php");
   }
 ?>

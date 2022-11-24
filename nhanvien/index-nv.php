@@ -45,7 +45,12 @@
   <link rel="stylesheet" href="../css/dangky/modules/animations-extended.min.css">
   <!-- Your custom styles (optional) -->
   <style>
-    
+    .card.card-cascade .view.gradient-card-header {
+            padding: 1.1rem 1rem;
+        }
+    .card.card-cascade .view {
+        box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    }
   </style>
 </head>
 
@@ -117,16 +122,25 @@
           <div class="card">
               <div class="card-body" >
                   <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">DANH SÁCH THU PHÍ KHÁCH HÀNG</h5>
+                  
                   <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
+                      
                       <colgroup>
-                          <col width="10%" span="1">
-                          <col width="15%" span="2">
-                          <col width="10%" span="2">
-                          <col width="12%" span="1">
-                          <col width="5%" span="1">
+                          <col width="50" span="1">
+                          <col width="150" span="1">
+                          <col width="200" span="1">
+                          <col width="200" span="1">
+                          <col width="200" span="1">
+                          <col width="150" span="1">
+                          <col width="150" span="1">
+                          <col width="50" span="1">
                       </colgroup>
+                      <div style="text-align: right;">
+                        <a class="btn btn-success" onclick="location.reload()">REFREST LIST</a>
+                      </div>
                       <thead>
                           <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
+                              <th>STT</th>
                               <th class="font-weight-bold">Mã phiếu
                               </th>
                               <th class="font-weight-bold">Tên khách hàng
@@ -141,16 +155,15 @@
                       </thead>
                       <tbody>
                       <?php
+                        $stt = 1;
                         $ttphieu = "SELECT * FROM phieukhambenh, bacsi WHERE phieukhambenh.id_bs = bacsi.id_bs ORDER BY phieukhambenh.ngaylapphieu DESC";
                         $query_ttphieu = mysqli_query($mysqli, $ttphieu);
                         while($row_ttphieu = mysqli_fetch_array($query_ttphieu)) {
                       ?>
-                          <tr <?php
-                            // if ($row_ttphieu['trangthaithuphi'] != 0) {
-                            //   echo 'style="background-color: #84ffff"';
-                            // }
-                          ?>>
-                              <td><?php echo $row_ttphieu['maphieu'] ?></td>
+                          <tr>
+                              <td class="text-center"><?php echo $stt++ ?></td>
+                              <td><?php $maphieu = $row_ttphieu['maphieu'];
+                                        echo $maphieu ?></td>
                               <td><?php echo $row_ttphieu['tenkhachhang'] ?></td>
                               <td><?php echo $row_ttphieu['hoten_bs'] ?></td>
                               <td><?php echo $row_ttphieu['ngaylapphieu'] ?></td>
@@ -187,14 +200,16 @@
                                             <div class="col-md-6" style="text-align: left;">
                                                 <p><b>Tên khách hàng: </b> <?php echo $row_ttphieu['tenkhachhang'] ?></p>
                                                 <p><b>Bác sĩ phụ trách: </b> <?php echo $row_ttphieu['hoten_bs'] ?></p>
+                                                <p id="maphieu-<?php echo $maphieu ?>" hidden><?php echo $maphieu ?></p>
                                             </div>
                                             <div class="col-md-6">
                                               <section>
                                                 <?php
-                                                  if ($row_ttphieu['id_kh'] == NULL) {
+                                                  if (($row_ttphieu['id_kh'] == NULL) && ($row_ttphieu['trangthaithuphi'] == 0)) {
                                                     ?>
-                                                      <select id="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-select md-form m-3" searchable="Tìm kiếm..">
-                                                        <option value="0">Chưa có tài khoản</option>
+                                                      <select id="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-select md-form m-3" searchable="Tìm kiếm.."
+                                                       onchange="khuyenmai<?php echo $row_ttphieu['maphieu'] ?>();thanhtien<?php echo $row_ttphieu['maphieu'] ?>()">
+                                                        <option value="NULL">Chưa có tài khoản</option>
                                                         <?php
                                                           $sql_kh = "SELECT * FROM khachhang";
                                                           $query_kh = mysqli_query($mysqli, $sql_kh);
@@ -214,6 +229,9 @@
                                                       <label for="<?php echo $row_ttphieu['id_phieu'] ?>" class="mdb-main-label">Chọn tài khoản</label>
                                                     <?php
                                                   }
+                                                  else if (($row_ttphieu['id_kh'] == NULL) && ($row_ttphieu['trangthaithuphi'] == 1)) {
+                                                    echo 'Không có tài khoản';
+                                                  }
                                                   else {
                                                     $id_kh = $row_ttphieu['id_kh'];
                                                     $sql_thongtinkh = "SELECT * FROM khachhang WHERE id_kh = $id_kh";
@@ -228,9 +246,38 @@
                                                 ?>
                                                 
                                               </section>
+                                              <script>
+                                                function khuyenmai<?php echo $row_ttphieu['maphieu']?>() {
+                                                  var khachhang = document.getElementById('<?php echo $row_ttphieu['id_phieu'] ?>').value;     
+                                                  var xmlhttp = new XMLHttpRequest();
+                                                  xmlhttp.onreadystatechange = function() {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                      document.getElementById('khuyenmai-<?php echo $row_ttphieu['maphieu'] ?>').innerHTML =(this.responseText);
+                                                    }
+                                                  };
+                                                  var maphieu = document.getElementById('maphieu-<?php echo $row_ttphieu['maphieu'] ?>').innerHTML;
+                                                  // document.getElementById('khuyenmai-<php echo $row_ttphieu['maphieu'] ?>').innerHTML = maphieu;
+                                                  xmlhttp.open("GET", "./tongchiphi.php?action=khuyenmai&idkh=" + khachhang + "&maphieu=" + maphieu, true);
+                                                  xmlhttp.send();                                                                                                                                               
+                                                }
+
+                                                function thanhtien<?php echo $row_ttphieu['maphieu']?>() {
+                                                  var khachhang = document.getElementById('<?php echo $row_ttphieu['id_phieu'] ?>').value;
+                                                  var xmlhttp = new XMLHttpRequest();
+                                                  xmlhttp.onreadystatechange = function() {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                      document.getElementById('thanhtien-<?php echo $row_ttphieu['maphieu'] ?>').innerHTML =(this.responseText);
+                                                    }
+                                                  };
+                                                  var maphieu = document.getElementById('maphieu-<?php echo $row_ttphieu['maphieu'] ?>').innerHTML;
+                                                  xmlhttp.open("GET", "./tongchiphi.php?action=thanhtien&idkh=" + khachhang + "&maphieu=" + maphieu, true);
+                                                  xmlhttp.send();                                                                                                                                            
+                                                }
+                                              </script>
                                               
                                               
-                                            </div>                                 
+                                            </div>
+                                            <div id="test-new"></div>                                 
                                         </div>
                                         <hr>
                                         <div class="row">
@@ -251,11 +298,19 @@
                                               ?>
                                             </ul>
                                             <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Tổng phí: <b class="red-text"><?php
-                                              $tongphi = "SELECT * FROM phieukhambenh WHERE maphieu = '$maphieu'";
+                                              $maphieu_new = $row_ttphieu['maphieu'];
+                                              $tongphi = "SELECT * FROM thanhtoan WHERE maphieu = '$maphieu_new'";
                                               $query_tong = mysqli_query($mysqli, $tongphi);
-                                              $row_tongchiphi = mysqli_fetch_array($query_tong);
-                                              echo number_format($row_tongchiphi['tongchiphi'], 0, '', '.');
+                                              $row_tongchiphi = mysqli_fetch_assoc($query_tong);
+                                              echo number_format($row_tongchiphi['tamtinh'], 0, '', '.');
                                             ?> VNĐ</b></h6>
+                                            <h6 class="title mb-3 font-weight-bold" style="text-align: end;">Phí được giảm: <b class="red-text" id="khuyenmai-<?php echo $maphieu ?>"><?php
+                                                echo number_format($row_tongchiphi['khuyenmai'], 0, '', '.');
+                                              ?> VNĐ</b></h6>
+                                            <h5 class="title mb-3 font-weight-bold" style="text-align: end;">THÀNH TIỀN: <b class="red-text" id="thanhtien-<?php echo $maphieu ?>"><?php
+                                              $thanhtien = $row_tongchiphi['tamtinh'] - $row_tongchiphi['khuyenmai'];
+                                              echo number_format($thanhtien, 0, '', '.')." VNĐ";
+                                            ?></b></h5>
                                           </div>
                                           
                                         </div>
@@ -264,7 +319,10 @@
                                     <div class="modal-footer">
                                       <div id="xacnhan"></div>
                                       <?php
-                                        if ($row_tongchiphi['trangthaithuphi'] == 0) {
+                                        $ktra = "SELECT * FROM phieukhambenh WHERE maphieu = '$maphieu'";
+                                        $query_ktra = mysqli_query($mysqli, $ktra);
+                                        $row_ktra = mysqli_fetch_array($query_ktra);
+                                        if ($row_ktra['trangthaithuphi'] == 0) {
                                           ?>
                                             <button type="button" class="btn btn-sm btn-rounded btn-success waves-effect" data-toggle="modal" data-target="#frameModalTopInfoDemo-<?php echo $maphieu ?>" data-backdrop="false" >Xác nhận đã thanh toán</button>
                                           <?php
@@ -285,10 +343,10 @@
                                               <div class="modal-body">
                                                 <div class="row d-flex justify-content-center align-items-center">
 
-                                                  <p class="pt-3 pr-2">Bạn chắc chắn đã nhận đủ tiền phí khám chữa răng ?</p>
+                                                  <p class="pt-3 pr-2">Bạn chắc chắn đã nhận đủ phí khám chữa răng ?</p>
 
                                                   <?php $maphieu02 = $row_ttphieu['id_phieu'] ?>
-                                                  <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#frameModalTopInfoDemo-02-<?php echo $maphieu ?>" data-backdrop="false" onclick='xacnhan("<?php echo $maphieu02 ?>", "<?php echo $MaNV ?>")'>Có, tôi đã nhận đủ</a>
+                                                  <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#frameModalTopInfoDemo-02-<?php echo $maphieu ?>" data-backdrop="false" onclick="xacnhan('<?php echo $maphieu02 ?>', '<?php echo $MaNV ?>')">Có, tôi đã nhận đủ</a>
                                                   <a type="button" class="btn btn-outline-success btn-sm waves-effect" data-dismiss="modal">Không, tôi chưa nhận</a>
 
                                                 </div>
@@ -311,8 +369,8 @@
 
                                                   <p class="pt-3 pr-2">Bạn có muốn in hóa đơn cho khách hàng ?</p>
 
-                                                  <?php $maphieu02 = $row_ttphieu['id_phieu'] ?>
-                                                  <a type="button" class="btn btn-info btn-sm" onclick='xacnhan("<?php echo $maphieu02 ?>", "<?php echo $MaNV ?>");openPrint("<?php echo $maphieu ?>");'>Có, giúp tôi in</a>
+                                                  
+                                                  <a type="button" class="btn btn-info btn-sm" onclick='openPrint("<?php echo $maphieu ?>");'>Có, giúp tôi in</a>
                                                   <a type="button" class="btn btn-outline-info btn-sm waves-effect" data-dismiss="modal" onclick="location.reload()">Không cần in hóa đơn</a>                                             
                                                 </div>
                                               </div>
@@ -360,17 +418,17 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script src="../js/dangky/jquery-3.4.1.min.js"></script>
+  <script src="../js/nhanvien/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="../js/dangky/popper.min.js"></script>
+  <script type="text/javascript" src="../js/nhanvien/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="../js/dangky/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/nhanvien/bootstrap.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="../js/dangky/mdb.min.js"></script>
+  <script type="text/javascript" src="../js/nhanvien/mdb.min.js"></script>
   <!-- Custom scripts -->
-  <script type="text/javascript" src="../js/dangky/addons/datatables.min.js"></script>
+  <script type="text/javascript" src="../js/nhanvien/addons/datatables.min.js"></script>
   <!-- DataTables Select  -->
-  <script type="text/javascript" src="../js/dangky/addons/datatables-select.min.js"></script>
+  <script type="text/javascript" src="../js/nhanvien/addons/datatables-select.min.js"></script>
   <!-- Custom scripts -->
   <script>
 
@@ -426,11 +484,13 @@
   </script>
   <script>
     function xacnhan(maphieu, manv) {
+      
       var taiKhoan = document.getElementById(maphieu).value;
+      // document.getElementById('test-new').innerHTML = 'Hello';
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("xacnhan").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            document.getElementById("xacnhan").innerHTML =(this.responseText);
         }
       };
       xmlhttp.open("GET", "xacnhanthanhtoan.php?maphieu=" + maphieu + "&manv=" + manv + "&taikhoan=" + taiKhoan, true);

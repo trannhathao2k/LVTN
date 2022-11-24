@@ -88,7 +88,7 @@
 
             <!-- Avatar -->
             <div class="avatar z-depth-1-half mb-4">
-              <img src="../<?php echo $row_bs['anhdaidien_bs'] ?>" class="rounded-circle" alt="Avatar">
+              <img src="../<?php echo $row_bs['anhdaidien_bs'] ?>" class="rounded-circle" style="overflow: hidden;" alt="Avatar" height="150px" width="150px">
             </div>
 
             <div class="card-body pt-0 mt-0">
@@ -132,48 +132,74 @@
                 </a>
                 <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                   <colgroup>
-                    <col width="10%" span="1">
-                    <col width="20%" span="4">
-                    <col width="10%" span="1">
+                    <col width="50" span="1">
+                    <col width="150" span="4">
+                    <col width="300" span="1">
+                    <col width="100" span="1">
+                    <col width="50" span="1">
                   </colgroup>
                     <thead>
                     <tr class="light-blue darken-4 font-weight-bold" style="color: white;">
+                      <th>STT</th>
                       <th class="font-weight-bold">Mã phiếu
                       </th>
                       <th class="font-weight-bold">Tên khách hàng
                       </th>
                       <th class="font-weight-bold">Ngày khám bệnh
                       </th>
-                      <th class="font-weight-bold">Tổng chi phí
+                      <th class="font-weight-bold">Ngày tái khám
                       </th>
-                      <th class="font-weight-bold">Trạng thái thu phí
+                      <th class="font-weight-bold">Dịch vụ</th>
+                      <th class="font-weight-bold">Số lần tái khám còn lại
                       </th>
-                      <th class="font-weight-bold">
+                      <th>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
+                      $stt = 1;
                       $MaBS = $_SESSION['bacsi']['id_bs'];
-                      $phieu = "SELECT * FROM phieukhambenh WHERE id_bs = $MaBS ORDER BY trangthaithuphi DESC";
+                      $phieu = "SELECT DISTINCT phieukhambenh.maphieu, phieukhambenh.tenkhachhang, phieukhambenh.ngaylapphieu
+                                FROM phieukhambenh, lichtaikham 
+                                WHERE phieukhambenh.maphieu = lichtaikham.maphieu AND phieukhambenh.id_bs = $MaBS AND lichtaikham.trangthai = 0 ORDER BY ngaytaikham DESC";
                       $query_phieu = mysqli_query($mysqli, $phieu);
                       while($row_phieu = mysqli_fetch_array($query_phieu)) {
                         ?>
                           <tr>
+                            <td class="text-center"><?php echo $stt++ ?></td>
                             <td><?php echo $row_phieu['maphieu'] ?></td>
                             <td><?php echo $row_phieu['tenkhachhang'] ?></td>
                             <td><?php echo $row_phieu['ngaylapphieu'] ?></td>
-                            <td class="red-text font-weight-bold"><?php echo number_format($row_phieu['tongchiphi'], 0, '', '.')?> VNĐ</td>                      
                             <td><?php
-                              if ($row_phieu['trangthaithuphi'] == 0) {
-                                echo '<button type="button" class="btn btn-sm btn-outline-deep-orange waves-effect mt-0 mb-0" style="width: 120px">Chờ thu phí</button>';;
-                              }
-                              else {
-                                echo '<button type="button" class="btn btn-sm btn-outline-success waves-effect mt-0 mb-0" style="width: 120px">Đã thu phí</button>';
-                              }
+                              $maphieu03 = $row_phieu['maphieu'];
+                              $sql_ngaygannhat = "SELECT MIN(ngaytaikham) ngaygannhat FROM lichtaikham WHERE maphieu = '$maphieu03' AND trangthai = 0";
+                              $query_ngaygannhat = mysqli_query($mysqli, $sql_ngaygannhat);
+                              $row_ngaygannhat = mysqli_fetch_assoc($query_ngaygannhat);
+                              echo $row_ngaygannhat['ngaygannhat'];
                             ?></td>
                             <td>
-                              <a class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
+                              <ul>
+                                <?php
+                                  $sql_dichvu = "SELECT * FROM phieukhambenh, dichvu, dichvuduocchidinh 
+                                                WHERE phieukhambenh.maphieu = dichvuduocchidinh.maphieu 
+                                                      AND dichvu.id_dichvu = dichvuduocchidinh.id_dichvu
+                                                      AND phieukhambenh.maphieu = '$maphieu03'";
+                                  $query_dichvu = mysqli_query($mysqli, $sql_dichvu);
+                                  while($row_dichvu = mysqli_fetch_assoc($query_dichvu)) {
+                                    echo '<li>'.$row_dichvu['ten_dichvu'].'</li>';
+                                  }
+                                ?>
+                              </ul>                             
+                            </td>
+                            <td class="text-center"><?php
+                              $sql_solantaikham = "SELECT COUNT(*) solan FROM lichtaikham WHERE maphieu = '$maphieu03' AND trangthai = 0";
+                              $query_solantaikham = mysqli_query($mysqli, $sql_solantaikham);
+                              $row_solantaikham = mysqli_fetch_assoc($query_solantaikham);
+                              echo $row_solantaikham['solan'];
+                            ?></td>
+                            <td class="text-center">
+                              <a href="index-bs.php?route=lichhenkham&maphieu=<?php echo $row_phieu['maphieu'] ?>" class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
                                 <i class="fas fa-arrow-right"></i>
                               </a>
                             </td>

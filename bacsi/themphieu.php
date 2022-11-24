@@ -39,6 +39,9 @@ while($row_dichvu = mysqli_fetch_array($query_dichvu)) {
 $capnhat = "UPDATE phieukhambenh SET tongchiphi = $tongphi WHERE maphieu = '$maphieu'";
 $mysqli->query($capnhat);
 
+$tamtinh = "INSERT INTO thanhtoan VALUES (null, '$maphieu', $tongphi, 0)";
+$mysqli->query($tamtinh);
+
 echo '<meta http-equiv="refresh" content="0;url=index-bs.php?route=trangcanhan">';
 
 ?>
