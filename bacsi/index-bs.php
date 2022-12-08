@@ -70,10 +70,10 @@
 
             <!-- Simple link -->
             <li>
-              <a href="index-bs.php?route=trangcanhan" class="collapsible-header waves-effect">Phiếu khám bệnh</a>
+              <a href="index-bs.php?route=trangcanhan" class="collapsible-header waves-effect">Trang chủ</a>
             </li>
             <li>
-              <a href="index-bs.php?route=khachhang" class="collapsible-header waves-effect">Thông tin khách hàng</a>
+              <a href="index-bs.php?route=khachhang" class="collapsible-header waves-effect">Lịch tái khám của khách hàng</a>
             </li>
 
           </ul>
@@ -125,7 +125,7 @@
     <!-- Copyright -->
     <div class="footer-copyright py-3 text-center">
       <div class="container-fluid">
-        © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+        © 2022 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> Nha khoa TQueen </a>
 
       </div>
     </div>

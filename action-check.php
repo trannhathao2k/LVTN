@@ -23,6 +23,23 @@ if(isset($_GET['action'])) {
         }
         // echo $email;
     }
+    else if ($action == 'checkUname') {
+        if (isset($_GET['uname'])) {
+            $uname = $_GET['uname'];
+        }
+        else {
+            $uname = null;
+        }
+
+        $sql_uname = "SELECT * FROM khachhang WHERE username_kh = '$uname'";
+        $query_uname = mysqli_query($mysqli, $sql_uname);
+        if(mysqli_num_rows($query_uname) != 0) {
+            echo '<p style="color: red; font-size: 12px;">Tên đăng nhập đã tồn tại trong hệ thống</p>';
+        }
+        else {
+            echo '<p style="color: green; font-size: 12px;">Tên đăng nhập hợp lệ</p>';
+        }
+    }
     else if ($action == 'checkNumberPhone') {
         if (isset($_GET['numberPhone'])) {
             $numberPhone = $_GET['numberPhone'];

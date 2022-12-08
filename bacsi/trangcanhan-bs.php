@@ -51,16 +51,55 @@
                               $id_kh = $phieu['id_kh'];
                               $sql_khachhang = "SELECT * FROM khachhang WHERE id_kh = $id_kh";
                               $query_kh = mysqli_query($mysqli, $sql_khachhang);
-                              $khachhang = mysqli_fetch_array($query_kh);
-                              echo 'Đã có tài khoản: '.$khachhang['hoten_kh'].' - '.$khachhang['sdt_kh'].' - '.$khachhang['email_kh'];
+                              if (mysqli_num_rows($query_kh) == 0) {
+                                echo 'Không có tài khoản';
+                              }
+                              else {
+                                $khachhang = mysqli_fetch_array($query_kh);
+                                echo ''.$khachhang['hoten_kh'].' - '.$khachhang['sdt_kh'].' - '.$khachhang['email_kh'].'</p>';
+                              }
+                              
                             }
-                          ?></p>
+                          ?>
+                          <p>
+                            <?php
+                              if (isset($_GET['idlich'])) {
+                                echo '<hr><p><b>Thời gian hẹn: </b>';
+                                $id_lich = $_GET['idlich'];
+                                $sql_lichhen = "SELECT * FROM lichtaikham WHERE id_lichtaikham = $id_lich";
+                                $query_lichhen = mysqli_query($mysqli, $sql_lichhen);
+                                $lichhen = mysqli_fetch_array($query_lichhen);
+                                if ($lichhen['giohen'] != NULL) {
+                                  echo date("d-m-Y", strtotime($lichhen['ngaytaikham'])).' - '.date("h:i", strtotime($lichhen['giohen']));
+                                }
+                                else {
+                                  echo date("d-m-Y", strtotime($lichhen['ngaytaikham']));
+                                }
+                                echo '</p>';
+                                echo '<p><b>Tiêu đề: </b>'.$lichhen['tieude'].'</p>';
+                                echo '<p><b>Nội dung: </b>'.$lichhen['noidung'].'</p>';
+                              }
+                            ?>
+                          </p>
                         <?php
                       }
                       ?>
                       <div style="text-align: right;">
-                        <a class="btn btn-rounded success-color-dark waves-effect btn-sm white-text" href="./index-bs.php?route=lichhenkham&maphieu=<?php echo $maphieu ?>">THÊM LỊCH HẸN</a>
-                        <a class="btn btn-rounded primary-color-dark waves-effect btn-sm" onclick='ketthuc("<?php echo $maphieu ?>")'>KẾT THÚC PHIÊN LÀM VIỆC</a>
+                        <a class="btn btn-rounded success-color waves-effect btn-sm white-text" href="./index-bs.php?route=lichhenkham&maphieu=<?php echo $maphieu ?>">QUẢN LÝ LỊCH HẸN</a>
+                        <?php
+                          if (isset($_GET['idlich'])) {
+                            $id_lich02 = $_GET['idlich'];
+                            ?>
+                              <a class="btn btn-rounded primary-color-dark waves-effect btn-sm" onclick="hoanthanh('<?php echo $maphieu ?>', '<?php echo $id_lich02 ?>')">HOÀN THÀNH TÁI KHÁM</a>
+                              <a class="btn btn-rounded danger-color waves-effect btn-sm" onclick="dongphien('<?php echo $maphieu ?>')">ĐÓNG PHIÊN LÀM VIỆC</a>
+                            <?php
+                          }
+                          else {
+                            ?>
+                            <a class="btn btn-rounded primary-color-dark waves-effect btn-sm" onclick="dongphien('<?php echo $maphieu ?>')">HOÀN THÀNH KHÁM CHỮA</a>
+                            <?php
+                          }
+                        ?>
                       </div>
                       <div id="ketthuc"></div>
                       
@@ -222,3 +261,26 @@
     <!-- End section: Thông tin cá nhân bác sĩ -->
 
   </div>
+  <script>
+    function hoanthanh(maphieu, id_lich) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("ketthuc").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/hoanthanh.php?maphieu=" + maphieu + "&idlich=" + id_lich, true);
+        xmlhttp.send();
+    }
+
+    function dongphien(maphieu) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("ketthuc").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/dongphien.php?maphieu=" + maphieu, true);
+        xmlhttp.send();
+    }
+  </script>

@@ -303,7 +303,7 @@ else {
 
                       <div class="col-md-3">
                         <div class="md-form mb-0 mt-4">
-                          <input type="text" name="tuoikh" id="tuoikh" class="form-control" oninput="checkBirthDay()" <?php
+                          <input type="number" name="tuoikh" id="tuoikh" min="1900" max="2022" class="form-control" oninput="checkBirthDay()" <?php
                                   if ($dangnhap) { 
                                     echo 'value="'.$khachhang['tuoi_kh'].'"'; 
                                   }
@@ -350,7 +350,7 @@ else {
                                   echo ' checked';
                                 }
                                 }
-                              ?>>
+                              ?> onclick="document.getElementById('check-gioitinh-input').innerHTML = 1">
                               <label for="nam" class="form-check-label">Nam</label>
                               <input class="form-check-input" type="radio" id="nu" name="gioitinh" value="Nu" <?php
                                 if ($dangnhap) {
@@ -358,7 +358,7 @@ else {
                                     echo ' checked';
                                   }
                                 }                               
-                              ?>>
+                              ?> onclick="document.getElementById('check-gioitinh-input').innerHTML = 1">
                               <label for="nu" class="form-check-label">Nữ</label>
                             </div>
                           </div>
@@ -372,7 +372,7 @@ else {
                       <!-- First column -->
                       <div class="col-md-12">
                         <div class="md-form mb-0">
-                          <textarea type="text" name="diachikh" id="diachikh" class="md-textarea form-control validate" rows="3"><?php
+                          <textarea type="text" name="diachikh" id="diachikh" class="md-textarea form-control" rows="3" required><?php
                                   if ($dangnhap) { 
                                     echo $khachhang['diachi_kh']; 
                                   }
@@ -449,31 +449,49 @@ else {
 
   </script>
   <script>
+    // function kiemtra() {
+    //   var uname = document.getElementById('check-uname-input').innerHTML;
+    //   var passwd = document.getElementById('check-passwd-input').innerHTML;
+    //   var name = document.getElementById('check-name-input').innerHTML;
+    //   var confirmPass = document.getElementById('check-confirmPass-input').innerHTML;
+    //   var numberPhone = document.getElementById('check-numberPhone-input').innerHTML;
+    //   var birthDay = document.getElementById('check-birthDay-input').innerHTML;
+    //   var email = document.getElementById('check-email-input').innerHTML;
+    //   var gioitinh = document.getElementById('check-gioitinh-input').innerHTML;
+    //   var khachhang = document.getElementById('check-khachhang-input').innerHTML;
+    //   if ((uname == 1) && (passwd == 1) && (name == 1) && (confirmPass == 1) 
+    //       && (numberPhone == 1) && (birthDay == 1) && (email == 1) && (gioitinh == 1) && (khachhang == 1)) {
+    //     document.getElementById('register').disabled = false;
+    //   }
+    //   else {
+    //     document.getElementById('register').disabled = true;        
+    //   } 
+    // }
+
     //Kiem tra UserName
     function checkUserName() {
       var uname = document.getElementById('uname');
       var checkUserName = document.getElementById('check-uname');
-      var enoughRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "i");
+      var enoughRegex = new RegExp("(?=.{8,}).*", "g");
 
       if (uname.value.length == 0) {
         checkUserName.innerHTML = `<p style="color: red; font-size: 12px;">Tên đăng nhập không được để trống</p>`;
         document.querySelector('#uname').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (uname.value.length > 30) {
         checkUserName.innerHTML = `<p style="color: red; font-size: 12px;">Tên đăng nhập phải chứa ít nhất 8 ký tự, tối đa 30 ký tự</p>`;
         document.querySelector('#uname').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
-      }
-      else if (enoughRegex.test(uname.value)) {
-        checkUserName.innerHTML = `<p style="color: green; font-size: 12px;">Tên đăng nhập hợp lệ</p>`;
-        document.querySelector('#uname').style.borderBottom = '2px solid green';
-        document.getElementById('register').disabled = false;
       }
       else {
-        checkUserName.innerHTML = `<p style="color: red; font-size: 12px;">Tên đăng nhập phải chứa ít nhất 8 ký tự, tối đa 30 ký tự</p>`;
-        document.querySelector('#uname').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
+        document.querySelector('#uname').style.borderBottom = '2px solid #ced4da';
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("check-uname").innerHTML =(this.responseText);
+          }
+        };
+        xmlhttp.open("GET", "action-check.php?action=checkUname&uname=" + uname.value, true);
+        xmlhttp.send();
       }
     }
 
@@ -486,22 +504,18 @@ else {
       if (passwd.value.length == 0) {
         checkPassword.innerHTML = `<p style="color: red; font-size: 12px;">Mật khẩu không được để trống</p>`;
         document.querySelector('#passwd').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (passwd.value.length > 16) {
         checkPassword.innerHTML = `<p style="color: red; font-size: 12px;">Mật khẩu phải chứa ít nhất 8 ký tự, tối đa 16 ký tự</p>`;
         document.querySelector('#passwd').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (enoughRegex.test(passwd.value)) {
         checkPassword.innerHTML = `<p style="color: green; font-size: 12px;">Mật khẩu hợp lệ</p>`;
         document.querySelector('#passwd').style.borderBottom = '2px solid green';
-        document.getElementById('register').disabled = false;
       }
       else {
         checkPassword.innerHTML = `<p style="color: red; font-size: 12px;">Mật khẩu phải chứa ít nhất 8 ký tự, tối đa 16 ký tự</p>`;
         document.querySelector('#passwd').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
     }
 
@@ -514,12 +528,10 @@ else {
       if (name.value.length == 0) {
         checkPassword.innerHTML = `<p style="color: red; font-size: 12px;">Họ tên không được để trống</p>`;
         document.querySelector('#hotenkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else {
         checkPassword.innerHTML = `<p style="color: green; font-size: 12px;">Họ tên hợp lệ</p>`;
         document.querySelector('#hotenkh').style.borderBottom = '2px solid green';
-        document.getElementById('register').disabled = false;
       }
     }
 
@@ -532,17 +544,14 @@ else {
       if (confirmPass.value.length == 0) {
         checkConfirmPass.innerHTML = `<p style="color: red; font-size: 12px;">Ô này không được để trống</p>`;
         document.querySelector('#confirmPass').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (passwd.value == confirmPass.value) {
         checkConfirmPass.innerHTML = `<p style="color: green; font-size: 12px;">Mật khẩu xác nhận trùng khớp</p>`;
         document.querySelector('#confirmPass').style.borderBottom = '2px solid green';
-        document.getElementById('register').disabled = false;
       }
       else {
         checkConfirmPass.innerHTML = `<p style="color: red; font-size: 12px;">Mật khẩu xác nhận chưa trùng khớp</p>`;
         document.querySelector('#confirmPass').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
     }
 
@@ -555,21 +564,17 @@ else {
       if (numberPhone.value.length == 0) {
         checkNumberPhone.innerHTML = `<p style="color: red; font-size: 12px;">Họ tên không được để trống</p>`;
         document.querySelector('#sdtkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (numberPhone.value.length != 10) {
         checkNumberPhone.innerHTML = `<p style="color: red; font-size: 12px;">Số điện thoại phải có 10 số</p>`;
         document.querySelector('#sdtkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (vnf_regex.test(numberPhone.value) == false) {
         checkNumberPhone.innerHTML = `<p style="color: red; font-size: 12px;">Dữ liệu nhập vào có ký tự không phải số hoặc đầu số chưa đúng (09, 03, 07, 08, 05)</p>`;
         document.querySelector('#sdtkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else {
         document.querySelector('#sdtkh').style.borderBottom = '2px solid #ced4da';
-        document.getElementById('register').disabled = false;
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -590,24 +595,20 @@ else {
       if (birthDay.value.length == 0) {
         checkBirthDay.innerHTML = `<p style="color: red; font-size: 12px;">Năm sinh không được để trống</p>`;
         document.querySelector('#tuoikh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (vnf_regex.test(birthDay.value) == false) {
         checkBirthDay.innerHTML = `<p style="color: red; font-size: 12px;">Năm sinh phải là số và có 4 chữ số</p>`;
         document.querySelector('#tuoikh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else {
         checkBirthDay.innerHTML = `<p style="color: green; font-size: 12px;">Năm sinh hợp lệ</p>`;
         document.querySelector('#tuoikh').style.borderBottom = '2px solid green';
-        document.getElementById('register').disabled = false;
       }
     }
 
     function checkEmail() {
       var email = document.getElementById('emailkh');
-      var checkEmail = document.getElementById('check-email');
-      document.getElementById('register').disabled = false;
+      var checkEmail = document.getElementById('check-email')
 
       function validatEemail(x) {
         var atposition = x.indexOf("@");
@@ -621,12 +622,10 @@ else {
       if (email.value.length == 0) {
         checkEmail.innerHTML = `<p style="color: red; font-size: 12px;">Email không được để trống</p>`;
         document.querySelector('#emailkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else if (validatEemail(email.value) == false) {
         checkEmail.innerHTML = `<p style="color: red; font-size: 12px;">Email phải có định dạng abc@gmail.com</p>`;
         document.querySelector('#emailkh').style.borderBottom = '2px solid red';
-        document.getElementById('register').disabled = true;
       }
       else {
         document.querySelector('#emailkh').style.borderBottom = '2px solid #ced4da';

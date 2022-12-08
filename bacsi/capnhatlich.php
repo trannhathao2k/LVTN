@@ -60,7 +60,7 @@ echo '
             <label for="noidung" class="active">Nội dung</label>
         </div>
         <div class="d-flex justify-content-end">
-            <a class="btn btn-primary btn-rounded btn-sm" id="hoanthanh" onclick="hoanthanh('<?php echo $maphieu ?>','<?php echo $dulieu['id_lichtaikham'] ?>')">HOÀN THÀNH</a>
+            <a class="btn btn-primary btn-rounded btn-sm" id="hoanthanh" onclick="mophienlamviec('<?php echo $maphieu ?>','<?php echo $dulieu['id_lichtaikham'] ?>')">HOÀN THÀNH</a>
             <input type="submit" name="capnhatlich-bacsi" id="capnhatlich-bacsi" 
                 class="btn btn-success btn-rounded btn-sm" value="CẬP NHẬT">
             <a class="btn btn-danger btn-rounded btn-sm canhgiua" data-toggle="modal" data-target="#frameModalTopInfoDemo-03-<?php echo $dulieu['id_lichtaikham'] ?>" data-backdrop="false">XÓA</a>

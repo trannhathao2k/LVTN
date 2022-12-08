@@ -62,7 +62,7 @@
                         <div class="step-content grey lighten-3">
                             <p>Chỉ định dịch vụ:</p>
                             <ul><?php
-                                $sql_dsdichvu = "SELECT * FROM dichvuduocchidinh, dichvu WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND maphieu = '$maphieu'";
+                                $sql_dsdichvu = "SELECT * FROM dichvuduocchidinh, dichvu WHERE dichvuduocchidinh.id_dichvu = dichvu.id_dichvu AND dichvuduocchidinh.maphieu = '$maphieu'";
                                 $query_dsdichvu = mysqli_query($mysqli, $sql_dsdichvu);
                                 while($ds_dichvu = mysqli_fetch_array($query_dsdichvu)) {
                                     ?>
@@ -81,10 +81,19 @@
                         if (mysqli_num_rows($query_taikham) != 0) {
                             while($lichtaikham = mysqli_fetch_array($query_taikham)) {
                             ?>
-                            <li onclick="capnhat<?php echo $lichtaikham['id_lichtaikham'] ?>(<?php echo '\''.$maphieu.'\', \''.++$stt.'\'' ?>);themchongio<?php echo $lichtaikham['id_lichtaikham'] ?>()" class="<?php if ($lichtaikham['trangthai'] == 1) {
+                            <li class="<?php if ($lichtaikham['trangthai'] == 1) {
                                 echo 'active';
                                 $checkFinish++;
-                            } ?>" id="dulieu-<?php echo $lichtaikham['id_lichtaikham'] ?>" style="display: block;">
+                            } ?>" <?php
+                                if ($lichtaikham['trangthai'] == 0) {
+                                    ?>
+                                        onclick="capnhat<?php echo $lichtaikham['id_lichtaikham'] ?>(<?php echo '\''.$maphieu.'\', \''.++$stt.'\'' ?>);themchongio<?php echo $lichtaikham['id_lichtaikham'] ?>()"
+                                    <?php
+                                }
+                                else {
+                                    $stt++;
+                                }
+                            ?> id="dulieu-<?php echo $lichtaikham['id_lichtaikham'] ?>" style="display: block;">
                                 <a>
                                     <span class="circle"><?php echo $stt; ?></span>
                                     <span class="label"><?php echo $lichtaikham['tieude'] ?> &nbsp;&nbsp;<i style="font-size: 14px;font-weight: 400;"><?php if($lichtaikham['giohen'] != NULL) {
@@ -302,7 +311,8 @@
                     </div>
                     <div id="loadPage"></div>
                     <li id="li-kt-02" style="display: block;" class="<?php
-                        if (($checkFinish != 1) && ($checkFinish == $stt)) {
+                        // $checkFinish != 1
+                        if (($checkFinish == $stt)) {
                             echo 'active';
                         }
                     ?>">
@@ -370,14 +380,14 @@
         xmlhttp.send();
     }
 
-    function hoanthanh(maphieu, id_phieu) {
+    function mophienlamviec(maphieu, id_lich) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("loadPage").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
             }
         };
-        xmlhttp.open("GET", "./lichtrinh/hoanthanh.php?maphieu=" + maphieu + "&idphieu=" + id_phieu, true);
+        xmlhttp.open("GET", "./lichtrinh/mophienlamviec.php?maphieu=" + maphieu + "&idlich=" + id_lich, true);
         xmlhttp.send();
     }
 

@@ -766,7 +766,7 @@
           }
           else if (thongKeTheo == "thongKeThang") {
             document.getElementById('donvithoigian').innerHTML = "Ngày";
-            nameLabel = 'TÀI KHOẢN THEO NGÀY';
+            nameLabel = 'LƯỢT TRUY CẬP THEO THÁNG';
             var nameDay = 1;       
             
             <?php

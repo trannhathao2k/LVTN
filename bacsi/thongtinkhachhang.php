@@ -10,6 +10,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body" >
+                <div id="loadPage02"></div>
                 <h5 class="font-weight-bold white-text bg-info p-3 mt-0" style="text-align: center;">LỊCH TÁI KHÁM CỦA KHÁCH HÀNG</h5>
                 <table id="dtMaterialDesignExample" class="table table-striped table-responsive" style="border: 1px solid #01579b;" cellspacing="0" width="100%">
                     <colgroup>
@@ -73,7 +74,7 @@
                                 ?>
                             </td>
                             <td>
-                                <a href="index-bs.php?route=lichhenkham&maphieu=<?php echo $row_phieu['maphieu'] ?>" class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Xem chi tiết">
+                                <a class="badge cyan canhgiua" style="width: 25px; height: 25px" data-toggle="tooltip" data-placement="right" title="Mở phiên khám bệnh" onclick="mophienlamviec('<?php echo $row_lichtaikham['maphieu'] ?>', '<?php echo $row_lichtaikham['id_lichtaikham'] ?>')">
                                   <i class="fas fa-arrow-right"></i>
                                 </a>
                             </td>
@@ -86,5 +87,17 @@
             </div>
         </div>
     </div>
-    
 </div>
+
+<script>
+    function mophienlamviec(maphieu, id_lich) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("loadPage02").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "./lichtrinh/mophienlamviec.php?maphieu=" + maphieu + "&idlich=" + id_lich, true);
+        xmlhttp.send();
+    }
+</script>

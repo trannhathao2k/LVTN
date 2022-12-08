@@ -29,7 +29,7 @@ while($row_dichvu = mysqli_fetch_array($query_dichvu)) {
     $phidv = $row_dichvu['phi_dichvu'];
     $soluong = $row_dichvu['soluong_dv'];
 
-    $themdichvu = "INSERT INTO dichvuduocchidinh VALUES (null, '$maphieu', $madv, $phidv, $soluong)";
+    $themdichvu = "INSERT INTO dichvuduocchidinh VALUES ('$maphieu', $madv, $phidv, $soluong)";
     $mysqli->query($themdichvu);
     $tongphi += $phidv * $soluong;
 }
