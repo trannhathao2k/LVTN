@@ -142,7 +142,7 @@
                             $lichhen = "SELECT * FROM lichhentruoc, bacsi WHERE lichhentruoc.id_bs = bacsi.id_bs AND id_kh = $MaKH";
                             $query_lichhen = mysqli_query($mysqli, $lichhen);
                             
-                            if (mysqli_num_rows($query_lichhen) == NULL) {
+                            if (mysqli_num_rows($query_lichhen) == 0) {
                               ?><td colspan="6">Bạn chưa đặt lịch hẹn trước</td><?php
                             }
                             else {
@@ -154,7 +154,7 @@
                             <td><?php echo $row_lichhen['hoten_bs'] ?></td>
                             <td><?php echo $row_lichhen['loinhan'] ?></td>
                             <td class="canhgiua">
-                              <a class="badge cyan canhgiua" style="width: 25px; height: 25px" onclick="capnhatlichhen(<?php echo $MaKH ?>)" data-placement="right" title="Cập nhật lịch hẹn">
+                              <a class="badge cyan canhgiua" style="width: 25px; height: 25px" href="./index.php#datlich" data-placement="right" title="Cập nhật lịch hẹn">
                                 <i class="far fa-edit"></i>
                               </a>
                             </td>

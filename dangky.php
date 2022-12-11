@@ -562,7 +562,7 @@ else {
       var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
 
       if (numberPhone.value.length == 0) {
-        checkNumberPhone.innerHTML = `<p style="color: red; font-size: 12px;">Họ tên không được để trống</p>`;
+        checkNumberPhone.innerHTML = `<p style="color: red; font-size: 12px;">Số điện thoại không được để trống</p>`;
         document.querySelector('#sdtkh').style.borderBottom = '2px solid red';
       }
       else if (numberPhone.value.length != 10) {

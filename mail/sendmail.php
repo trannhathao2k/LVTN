@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 class Mailer {
-    public function mailxacnhan($mailkhachhang, $tenkhachhang, $maxacnhan) {
+    public function mailxacnhan($mailkhachhang, $tenkhachhang, $maxacnhan, $tendangnhap) {
         try {
             $mail = new PHPMailer(true);
             //Server settings
@@ -44,6 +44,7 @@ class Mailer {
             $mail->Body    = 'Xin chào '.$tenkhachhang.'!<br/>
                             Bạn đã quên mật khẩu cho tài khoản của mình ?<br/>
                             Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.<br/><br/>
+                            Tên đăng nhập của tài khoản này là: '.$tendangnhap.'<br/><br/>
                             Vui lòng nhập mã xác nhận: '.$maxacnhan.'<br/>
                             Nhập tại trang chúng tôi hoặc theo link dưới đây:<br/>http://localhost/web-nha-khoa/matkhaumoi.php?email='.$mailkhachhang.'.<br/>
                             Cảm ơn quý khách đã sử dụng dịch vụ tại phòng khám chúng tôi.';

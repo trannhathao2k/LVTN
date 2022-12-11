@@ -70,7 +70,7 @@
                                 $query_lichhen = mysqli_query($mysqli, $sql_lichhen);
                                 $lichhen = mysqli_fetch_array($query_lichhen);
                                 if ($lichhen['giohen'] != NULL) {
-                                  echo date("d-m-Y", strtotime($lichhen['ngaytaikham'])).' - '.date("h:i", strtotime($lichhen['giohen']));
+                                  echo date("d-m-Y", strtotime($lichhen['ngaytaikham'])).' - '.date("H:i", strtotime($lichhen['giohen']));
                                 }
                                 else {
                                   echo date("d-m-Y", strtotime($lichhen['ngaytaikham']));

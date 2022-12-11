@@ -792,7 +792,7 @@
           <div class="col-md-6 mb-1 text-center">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/TidRG-baYi8" 
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/86-SgSRoc8w" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
@@ -803,7 +803,7 @@
           <div class="col-md-6 mb-1 text-center">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/uR5Jq0UDd2A" title="YouTube video player" 
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/CFWfVaS_oHc" title="YouTube video player" 
                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 

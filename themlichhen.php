@@ -45,7 +45,7 @@ if (isset($_POST['themlichhen'])) {
     $check = "SELECT * FROM lichhentruoc WHERE id_kh = $MaKH";
     $query_check = mysqli_query($mysqli, $check);
     if(mysqli_num_rows($query_check) == 0) {
-        $sql_themlichhen = "INSERT INTO lichhentruoc VALUES (null,$MaKH,'$date', $bacsi,'$ngaykham','$giokham','$loinhan')";
+        $sql_themlichhen = "INSERT INTO lichhentruoc VALUES (null,$MaKH,$bacsi,'$date','$ngaykham','$giokham','$loinhan')";
         $mysqli->query($sql_themlichhen);
 
         NotificationAndGoto("Đặt lịch hẹn thành công!","./trangcanhan-kh.php");

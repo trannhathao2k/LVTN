@@ -202,11 +202,11 @@ tr.woocommerce-table__line-item.order_item strong.product-quantity {
         <th colspan="2" style="text-align:left; padding:5px;font-weight: bold;border:1px solid #333;">Giảm giá</th>
         <td style="padding:5px;font-weight: bold;"><?php
           if ($thongtin['id_kh'] != 0) {
-            if ($thongtin_kh['diemtichluy'] < 100) {
+            if ($thongtin_kh['diemtichluy'] < 1000) {
               echo "0 (Không áp dụng ưu đãi)";
               $giamgia = 0;
             }
-            else if ($thongtin_kh['diemtichluy'] >= 100 && $thongtin_kh['diemtichluy'] < 300) {
+            else if ($thongtin_kh['diemtichluy'] >= 1000 && $thongtin_kh['diemtichluy'] < 3000) {
               $giamgia = $tongchiphi * 0.05;
               echo number_format($giamgia, 0, '', '.')." VNĐ<br><small style='font-weight: 100'>(5% cho khách hàng thân thiết)</small>";
             }

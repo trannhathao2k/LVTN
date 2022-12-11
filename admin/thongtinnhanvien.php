@@ -48,7 +48,7 @@
                                             ?>
                                                 <tr>
                                                     <td><?php echo $row_nv['id_nv'] ?></td>
-                                                    <td><img src="<?php echo $row_nv['anhdaidien_nv']?>" width="40px" height="40px"></td>
+                                                    <td><img src="../<?php echo $row_nv['anhdaidien_nv']?>" width="40px" height="40px"></td>
                                                     <td><?php echo $row_nv['hoten_nv'] ?></td>
                                                     <td><?php echo $row_nv['username_nv'] ?></td>                                               
                                                     <td><?php echo $row_nv['sdt_nv'] ?></td>
@@ -57,7 +57,7 @@
                                                     <td><?php echo $row_nv['namsinh'] ?></td>
                                                     <td><?php echo $row_nv['diachi_nv'] ?></td>
                                                     <td>
-                                                        <a class="badge bg-info canhgiua" style="width: 25px; height: 25px;float: left;"  title="Xem danh sách các ca khám bệnh của nhân viên"><i class="fas fa-arrow-right"></i></a>
+                                                        <a class="badge bg-info canhgiua" style="width: 25px; height: 25px;float: left;" href="./index-admin.php?route-admin=themnhanvien&manv=<?php echo $row_nv['id_nv'] ?>" title="Xem danh sách các ca khám bệnh của nhân viên"><i class="fas fa-arrow-right"></i></a>
                                                         <a class="badge bg-danger canhgiua" style="width: 25px; height: 25px; float: right;" title="Xóa" onclick="XoaNV(<?php echo $row_nv['id_nv'] ?>)"><i class="far fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr> 

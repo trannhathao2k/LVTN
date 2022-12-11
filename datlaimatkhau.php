@@ -49,6 +49,7 @@ if(isset($_GET['action'])) {
         $query_tenkh = mysqli_query($mysqli, $sql_tenkh);
         $row_tenkh = mysqli_fetch_array($query_tenkh);
         $tenkh = $row_tenkh['hoten_kh'];
+        $tendangnhap = $row_tenkh['username_kh'];
 
         $maxacnhan = generatePassword();
 
@@ -57,7 +58,7 @@ if(isset($_GET['action'])) {
         echo '<meta http-equiv="refresh" content="0;url=matkhaumoi.php?email='.$email.'">';
 
         $mail = new Mailer();
-        $mail->mailxacnhan($email, $tenkh, $maxacnhan);
+        $mail->mailxacnhan($email, $tenkh, $maxacnhan, $tendangnhap);
     }
 }
 

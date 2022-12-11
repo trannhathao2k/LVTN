@@ -46,7 +46,7 @@
                                     <?php
                                         $bacsi = "SELECT * FROM bacsi";
                                         $queue_bacsi = mysqli_query($mysqli, $bacsi);
-                                        while($row_bs = mysqli_fetch_array($queue_bacsi)){
+                                        while($row_bs = mysqli_fetch_assoc($queue_bacsi)){
                                             ?>
                                                 <tr>
                                                     <td><?php echo $row_bs['id_bs'] ?></td>
@@ -60,7 +60,7 @@
                                                     <td><?php echo $row_bs['kinhnghiem'] ?></td>
                                                     <td><?php echo $row_bs['gioithieu'] ?></td>
                                                     <td>
-                                                        <a class="badge bg-info canhgiua" style="width: 25px; height: 25px;float: left;"  title="Xem danh sách các ca khám bệnh của bác sĩ"><i class="fas fa-arrow-right"></i></a>
+                                                        <a class="badge bg-info canhgiua" style="width: 25px; height: 25px;float: left;" href="./index-admin.php?route-admin=thembacsi&mabs=<?php echo $row_bs['id_bs'] ?>" title="Xem danh sách các ca khám bệnh của bác sĩ"><i class="fas fa-arrow-right"></i></a>
                                                         <a class="badge bg-danger canhgiua" style="width: 25px; height: 25px; float: right;" title="Xóa" onclick="XoaBS(<?php echo $row_bs['id_bs'] ?>)"><i class="far fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr> 

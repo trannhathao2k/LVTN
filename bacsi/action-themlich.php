@@ -46,28 +46,16 @@ if(isset($_POST['capnhatlich-bacsi'])) {
                     noidung = '$noidung',
                     ngaytaikham = '$ngaykham',
                     giohen = '$giokham'
-                WHERE id_lichtaikham = $id_lichtaikham";
-    // echo $sql_capnhatlichhen;
+                WHERE maphieu = '$id_lichtaikham'";
+
     $mysqli->query($sql_capnhatlichhen);
-    $sql_maphieu = "SELECT * FROM lichtaikham WHERE id_lichtaikham = $id_lichtaikham";
-    $query_maphieu = mysqli_query($mysqli, $sql_maphieu);
-    $row_maphieu = mysqli_fetch_array($query_maphieu);
-    $maphieu = $row_maphieu['maphieu'];
-    // echo $sql_maphieu;
+    // $sql_maphieu = "SELECT * FROM lichtaikham WHERE id_lichtaikham = $id_lichtaikham";
+    // $query_maphieu = mysqli_query($mysqli, $sql_maphieu);
+    // $row_maphieu = mysqli_fetch_array($query_maphieu);
+    // $maphieu = $row_maphieu['maphieu'];
 
-    NotificationAndGoto("Cập nhật lịch khám thành công!","./index-bs.php?route=lichhenkham&maphieu=$maphieu");
-    // echo $sql_themlichhen;
+    // echo $sql_capnhatlichhen;
 
-    // NotificationAndGoback("UPDATE lichtaikham
-    //            SET tieude = '1',
-    //                 noidung = '2',
-    //               ngaytaikham = '3',
-    //                  giohen = '4'
-    //             WHERE maphieu = '5'");
-    // echo "UPDATE lichtaikham
-    // SET tieude = '1',
-    //      noidung = '2',
-    //    ngaytaikham = '3',
-    //       giohen = '4'
-    //  WHERE maphieu = '5'!";
+    NotificationAndGoto("Cập nhật lịch khám thành công!","./index-bs.php?route=lichhenkham&maphieu=$id_lichtaikham");
+
 }
